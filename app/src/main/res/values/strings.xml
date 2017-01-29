@@ -12,7 +12,7 @@
     <string name="news">Feed</string>
     <string name="trending">Trending</string>
     <string name="profile">Profile</string>
-    <string name="country_prompt">Choose a country</string>
+    <string name="usertype">User Type</string>
 
     <string-array name="account_type_spinner">
         <item>Student/Guardian</item>

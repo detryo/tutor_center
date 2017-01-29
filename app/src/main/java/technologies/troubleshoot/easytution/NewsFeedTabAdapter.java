@@ -43,7 +43,7 @@ public class NewsFeedTabAdapter extends FragmentPagerAdapter {
             return context.getString(R.string.trending);
         }
         else {
-            return context.getString(R.string.profil);
+            return context.getString(R.string.profile);
         }
     }
 

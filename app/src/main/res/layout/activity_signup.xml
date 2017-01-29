@@ -76,19 +76,15 @@
             android:id="@+id/RadioBtn_AccountType_id"
             android:layout_below="@+id/Signup_Password_ReEnter_EditText_id"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"/>
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Student/Guardian"/>
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Student"/>
-
-        </RadioGroup>
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/account_type_spinner"
+            android:prompt="@string/usertype"
+            android:layout_below="@+id/Signup_Password_ReEnter_EditText_id"/>
 
         <EditText
             android:id="@+id/Signup_Institute_EditText_id"
@@ -96,7 +92,7 @@
             android:layout_height="wrap_content"
             android:hint="Re-Enter Password"
             android:inputType="textPassword"
-            android:layout_below="@id/RadioBtn_AccountType_id" />
+            android:layout_below="@id/spinner1" />
 
         <Button
             android:id="@+id/nextToCategoryBtn_id"
