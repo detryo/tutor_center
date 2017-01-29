@@ -28,7 +28,7 @@
             android:layout_marginBottom="10dp"
             android:inputType="textEmailAddress"
             android:hint="Email"
-            android:textColorHint="#ffffff" />
+            android:textColorHint="@color/colorAccent" />
 
         <EditText
             android:id="@+id/passwordEditText_id"
@@ -37,7 +37,7 @@
             android:layout_below="@+id/usernameEditText_id"
             android:layout_marginBottom="15dp"
             android:hint="Password"
-            android:textColorHint="#ffffff"
+            android:textColorHint="@color/colorAccent"
             android:inputType="textPassword" />
 
         <Button
@@ -47,12 +47,13 @@
             android:layout_below="@+id/passwordEditText_id"
             android:text="Login" />
 
-        <Button
+        <TextView
             android:id="@+id/newAccountBtn_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
             android:text="CREATE NEW ACCOUNT" />
 
     </RelativeLayout>
