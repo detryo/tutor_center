@@ -11,5 +11,11 @@
     <string name="LogOut_Button">Log Out</string>
     <string name="news">Feed</string>
     <string name="trending">Trending</string>
-    <string name="profil">Profile</string>
+    <string name="profile">Profile</string>
+    <string name="country_prompt">Choose a country</string>
+
+    <string-array name="account_type_spinner">
+        <item>Student/Guardian</item>
+        <item>Teacher</item>
+    </string-array>
 </resources>
