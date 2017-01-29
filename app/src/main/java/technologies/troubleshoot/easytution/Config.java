@@ -1,7 +1,7 @@
 package technologies.troubleshoot.easytution;
 
 /**
- * Created by xubi on 30-Dec-16.
+ * Created by xubi and kaizer on 30-Dec-16.
  */
 
 public class Config {
