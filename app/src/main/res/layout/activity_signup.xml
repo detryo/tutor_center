@@ -5,7 +5,7 @@
     android:background="@drawable/signup"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="40"
@@ -19,7 +19,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     </RelativeLayout>
-
+-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -37,12 +37,21 @@
             android:maxLength="29" />
 
         <EditText
+            android:id="@+id/Signup_Phone_EditText_id"
+            android:layout_below="@+id/Signup_Username_EditText_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone NUmber"
+            android:maxLength="29" />
+
+
+        <EditText
             android:id="@+id/Signup_Email_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:layout_below="@id/Signup_Username_EditText_id"
+            android:layout_below="@id/Signup_Phone_EditText_id"
             android:maxLength="63"/>
 
         <EditText
@@ -63,12 +72,37 @@
             android:layout_below="@id/Signup_Password_EditText_id"
             android:maxLength="30"/>
 
+        <RadioGroup
+            android:id="@+id/RadioBtn_AccountType_id"
+            android:layout_below="@+id/Signup_Password_ReEnter_EditText_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Student/Guardian"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Student"/>
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/Signup_Institute_EditText_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Re-Enter Password"
+            android:inputType="textPassword"
+            android:layout_below="@id/RadioBtn_AccountType_id" />
+
         <Button
             android:id="@+id/nextToCategoryBtn_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
             android:layout_marginBottom="20dp"
             android:text="Next" />
 
