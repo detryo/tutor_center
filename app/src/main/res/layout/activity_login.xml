@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40"
+        android:orientation="vertical">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="60"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/usernameEditText_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:inputType="textEmailAddress"
+            android:hint="Email"
+            android:textColorHint="#ffffff" />
+
+        <EditText
+            android:id="@+id/passwordEditText_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/usernameEditText_id"
+            android:layout_marginBottom="15dp"
+            android:hint="Password"
+            android:textColorHint="#ffffff"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/loginBtn_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/passwordEditText_id"
+            android:text="Login" />
+
+        <Button
+            android:id="@+id/newAccountBtn_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:text="CREATE NEW ACCOUNT" />
+
+    </RelativeLayout>
+
+</LinearLayout>

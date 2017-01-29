@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/user_imageView_id"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher"
+        android:contentDescription="" />
+
+    <LinearLayout
+        android:id="@+id/header_linearLayout_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/user_imageView_id"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/news_username_textView_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="GED Center"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/news_date_time_textView_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/news_content_textView_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_linearLayout_id"
+        android:paddingTop="25dp"
+        android:hint="placeHolder"/>
+
+</RelativeLayout>
