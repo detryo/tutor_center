@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,8 +29,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD="password";
 
-    Button loginBtn, newAccountBtn;
-    String email, password, username;
+    Button loginBtn;
+    TextView newAccountBtn;
+    String email, password;
     EditText idEditText, passwordEditText;
 
     @Override
@@ -47,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //Attaching all the widgets to their corresponding view id.
         loginBtn = (Button) findViewById(R.id.loginBtn_id);
-        newAccountBtn = (Button) findViewById(R.id.newAccountBtn_id);
+        newAccountBtn = (TextView) findViewById(R.id.newAccountBtn_id);
         idEditText = (EditText) findViewById(R.id.usernameEditText_id);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText_id);
 
