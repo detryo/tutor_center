@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,6 +46,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     RequestQueue requestQueue;
     Spinner userType;
     ArrayAdapter spinnerAdapter;
+    String user_type;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,7 +66,17 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userType.setAdapter(spinnerAdapter);
 
+        userType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                user_type = (String) adapterView.getItemAtPosition(i);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -115,7 +127,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             String rePass = reEnteredPassEditText.getText().toString().trim();
             String institute = instituteName.getText().toString().trim();
             String phone = phoneNumber.getText().toString().trim();
-            String user_type = userType.toString().trim();
+
 
             //condition for validation error message;
             if (username.trim().equals("")){
@@ -143,7 +155,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 //Toast.makeText(SignupActivity.this, "Password Doesn't Match", Toast.LENGTH_LONG).show();
             }
             else
-                registerUser(username, password, email, rePass, institute,phone,user_type);
+                registerUser(username, password, email, rePass, institute,phone, user_type);
         }
 
     }
