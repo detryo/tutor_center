@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -34,10 +36,15 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_EMAIL = "email";
+    public static final String KEY_USERTYPE = "user_type";
+    public static final String KEY_INSTITUTE = "institute";
+    public static final String KEY_PHONE = "phone";
 
     Button nextBtn;
-    EditText userEditText, emailEditText, passwordEditText, reEnteredPassEditText;
+    EditText userEditText, emailEditText, passwordEditText, reEnteredPassEditText, phoneNumber,instituteName;
     RequestQueue requestQueue;
+    Spinner userType;
+    ArrayAdapter spinnerAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,12 +56,22 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         emailEditText = (EditText) findViewById(R.id.Signup_Email_EditText_id);
         passwordEditText = (EditText) findViewById(R.id.Signup_Password_EditText_id);
         reEnteredPassEditText = (EditText) findViewById(R.id.Signup_Password_ReEnter_EditText_id);
+        phoneNumber = (EditText) findViewById(R.id.Signup_Phone_EditText_id);
+        instituteName = (EditText) findViewById(R.id.Signup_Institute_EditText_id);
+        userType = (Spinner) findViewById(R.id.Signup_UserType_Spinner_id);
+
+        spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.account_type_spinner, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        userType.setAdapter(spinnerAdapter);
+
+
+
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         nextBtn.setOnClickListener(this);
     }
 
-    private void registerUser(final String username, final String password, final String email, final String rePass) {
+    private void registerUser(final String username, final String password, final String email, final String rePass, final String institute, final String phone, final String user_type) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
                 new Response.Listener<String>() {
@@ -78,6 +95,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 params.put(KEY_USERNAME, username);
                 params.put(KEY_PASSWORD, password);
                 params.put(KEY_EMAIL, email);
+                params.put(KEY_INSTITUTE, institute);
+                params.put(KEY_PHONE, phone);
+                params.put(KEY_USERTYPE, user_type);
                 return params;
             }
 
@@ -93,6 +113,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             String password = passwordEditText.getText().toString().trim();
             String email = emailEditText.getText().toString().trim();
             String rePass = reEnteredPassEditText.getText().toString().trim();
+            String institute = instituteName.getText().toString().trim();
+            String phone = phoneNumber.getText().toString().trim();
+            String user_type = userType.toString().trim();
 
             //condition for validation error message;
             if (username.trim().equals("")){
@@ -120,7 +143,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 //Toast.makeText(SignupActivity.this, "Password Doesn't Match", Toast.LENGTH_LONG).show();
             }
             else
-                registerUser(username, password, email, rePass);
+                registerUser(username, password, email, rePass, institute,phone,user_type);
         }
 
     }
