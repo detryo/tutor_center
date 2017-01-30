@@ -24,8 +24,7 @@
         </activity>
         <activity
             android:name=".SignupActivity"
-            android:label="@string/signupPage"
-            android:theme="@style/SignupTheme" />
+            android:theme="@style/LoginTheme" />
         <activity
             android:name=".DashBoard"
             android:label="@string/title_activity_news_feed"

@@ -30,7 +30,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     /*
      * All Variables are declared here.
      */
-    private static final String REGISTER_URL = "http://tuition.troubleshoot-tech.com/index.php";
+    private static final String REGISTER_URL = "http://tuition.troubleshoot-tech.com/signup.php";
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_EMAIL = "email";
