@@ -5,31 +5,19 @@
     android:background="@drawable/signup"
     android:orientation="vertical">
 
-    <!--<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="40"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-    </RelativeLayout>
--->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="60"
+        android:layout_weight="85"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:gravity="center_horizontal">
+        android:gravity="center_vertical"
+        >
 
         <EditText
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:id="@+id/Signup_Username_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,72 +25,81 @@
             android:maxLength="29" />
 
         <EditText
+            android:paddingBottom="16dp"
             android:id="@+id/Signup_Phone_EditText_id"
-            android:layout_below="@+id/Signup_Username_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/Signup_Username_EditText_id"
             android:hint="Phone NUmber"
             android:maxLength="29" />
 
 
         <EditText
+            android:paddingBottom="16dp"
             android:id="@+id/Signup_Email_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/Signup_Phone_EditText_id"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:layout_below="@id/Signup_Phone_EditText_id"
-            android:maxLength="63"/>
+            android:maxLength="63" />
 
         <EditText
+            android:paddingBottom="16dp"
             android:id="@+id/Signup_Password_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/Signup_Email_EditText_id"
             android:hint="Password"
             android:inputType="textPassword"
-            android:layout_below="@id/Signup_Email_EditText_id"
-            android:maxLength="30"/>
+            android:maxLength="30" />
 
         <EditText
-            android:id="@+id/Signup_Password_ReEnter_EditText_id"
+            android:paddingBottom="16dp"            android:id="@+id/Signup_Password_ReEnter_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/Signup_Password_EditText_id"
             android:hint="Re-Enter Password"
             android:inputType="textPassword"
-            android:layout_below="@id/Signup_Password_EditText_id"
-            android:maxLength="30"/>
-
-        <RadioGroup
-            android:id="@+id/RadioBtn_AccountType_id"
-            android:layout_below="@+id/Signup_Password_ReEnter_EditText_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/account_type_spinner"
-            android:prompt="@string/usertype"
-            android:layout_below="@+id/Signup_Password_ReEnter_EditText_id"/>
+            android:maxLength="30" />
 
         <EditText
+            android:paddingBottom="16dp"
             android:id="@+id/Signup_Institute_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Re-Enter Password"
-            android:inputType="textPassword"
-            android:layout_below="@id/spinner1" />
+            android:layout_below="@id/Signup_Password_ReEnter_EditText_id"
+            android:hint="Institute Name"
+            android:inputType="textPassword" />
+
+        <Spinner
+            android:layout_marginTop="16dp"
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Signup_Institute_EditText_id"
+            android:entries="@array/account_type_spinner"
+            android:prompt="@string/usertype" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
 
         <Button
             android:id="@+id/nextToCategoryBtn_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"
-            android:text="Next" />
+            android:text="Create Account" />
 
     </RelativeLayout>
+
+
 
 </LinearLayout>
 
