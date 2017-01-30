@@ -8,76 +8,78 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="85"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:gravity="center_vertical"
-        >
+        android:layout_weight="85"
+        android:gravity="center_vertical">
 
         <EditText
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
             android:id="@+id/Signup_Username_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Full Name"
-            android:maxLength="29" />
+            android:maxLength="29"
+            android:inputType="text"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp" />
 
         <EditText
-            android:paddingBottom="16dp"
             android:id="@+id/Signup_Phone_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Signup_Username_EditText_id"
-            android:hint="Phone NUmber"
-            android:maxLength="29" />
+            android:hint="Phone Number"
+            android:maxLength="29"
+            android:inputType="number"
+            android:paddingBottom="16dp" />
 
 
         <EditText
-            android:paddingBottom="16dp"
             android:id="@+id/Signup_Email_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/Signup_Phone_EditText_id"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:maxLength="63" />
+            android:maxLength="63"
+            android:paddingBottom="16dp" />
 
         <EditText
-            android:paddingBottom="16dp"
             android:id="@+id/Signup_Password_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/Signup_Email_EditText_id"
             android:hint="Password"
             android:inputType="textPassword"
-            android:maxLength="30" />
+            android:maxLength="30"
+            android:paddingBottom="16dp" />
 
         <EditText
-            android:paddingBottom="16dp"            android:id="@+id/Signup_Password_ReEnter_EditText_id"
+            android:id="@+id/Signup_Password_ReEnter_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/Signup_Password_EditText_id"
             android:hint="Re-Enter Password"
             android:inputType="textPassword"
-            android:maxLength="30" />
+            android:maxLength="30"
+            android:paddingBottom="16dp" />
 
         <EditText
-            android:paddingBottom="16dp"
             android:id="@+id/Signup_Institute_EditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/Signup_Password_ReEnter_EditText_id"
             android:hint="Institute Name"
-            android:inputType="textPassword" />
+            android:inputType="text"
+            android:paddingBottom="16dp" />
 
         <Spinner
-            android:layout_marginTop="16dp"
-            android:id="@+id/spinner1"
+            android:id="@+id/Signup_UserType_Spinner_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Signup_Institute_EditText_id"
+            android:layout_marginTop="16dp"
             android:entries="@array/account_type_spinner"
             android:prompt="@string/usertype" />
 
@@ -86,9 +88,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="15"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
+        android:layout_marginRight="30dp"
+        android:layout_weight="15">
 
         <Button
             android:id="@+id/nextToCategoryBtn_id"
@@ -98,7 +100,6 @@
             android:text="Create Account" />
 
     </RelativeLayout>
-
 
 
 </LinearLayout>
