@@ -11,6 +11,13 @@
         android:layout_weight="30"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="EASY TUITION"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:gravity="center"/>
+
     </RelativeLayout>
 
     <RelativeLayout
