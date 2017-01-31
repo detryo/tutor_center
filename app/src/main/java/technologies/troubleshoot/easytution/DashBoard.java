@@ -125,17 +125,17 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         if (id == R.id.nav_newsFeed_id) {
             // Handle the camera action
-        } else if (id == R.id.nav_category_id) {
+        } else if (id == R.id.nav_profile_id) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_new_post_id) {
 
         } else if (id == R.id.nav_settings_id) {
 
-        } else if (id == R.id.nav_share) {
+        } /*else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

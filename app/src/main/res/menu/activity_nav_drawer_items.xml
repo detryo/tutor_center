@@ -5,22 +5,25 @@
         <item
             android:id="@+id/nav_newsFeed_id"
             android:icon="@drawable/ic_menu_camera"
-            android:title="NewsFeed" />
+            android:title="News Feed" />
+
         <item
-            android:id="@+id/nav_category_id"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Category" />
-        <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_new_post_id"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="New Post" />
+
+        <item
+            android:id="@+id/nav_profile_id"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Profile" />
+
         <item
             android:id="@+id/nav_settings_id"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/dash_board_app_bar_items" />
     </group>
 
-    <item android:title="Communicate">
+    <!--<item android:title="Communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
@@ -31,6 +34,6 @@
                 android:icon="@drawable/ic_menu_send"
                 android:title="Send" />
         </menu>
-    </item>
+    </item>-->
 
 </menu>
