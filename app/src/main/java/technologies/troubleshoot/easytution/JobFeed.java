@@ -4,11 +4,12 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class NewsFeed extends Fragment {
+public class JobFeed extends Fragment {
 
     public static final String DATA_URL = "http://tuition.troubleshoot-tech.com/newsfeed.php";
     public static final String JSON_ARRAY = "users";
@@ -31,15 +32,15 @@ public class NewsFeed extends Fragment {
     public static String STATUS = "content";
     public static String IMAGE = "name";
 
-    private NewsAdapter newsAdapter;
+    private JobAdapter jobAdapter;
 
     @Override
     public void onStart() {
         super.onStart();
-        getStatus();
+        //getStatus();
     }
 
-    public NewsFeed() {
+    public JobFeed() {
 
     }
 
@@ -55,22 +56,23 @@ public class NewsFeed extends Fragment {
 
 
         //TextView textView;
-        View rootView = inflater.inflate(R.layout.activity_news_feed_layout, container, false);
+        View rootView = inflater.inflate(R.layout.dash_board_job_feed_layout, container, false);
 
-        ArrayList<NewsFeedContent> news = new ArrayList<>();
+        ArrayList<JobFeedContent> job = new ArrayList<>();
 
-        news.add(new NewsFeedContent(R.mipmap.ic_launcher, "GED CENTER", "", "This is to inform you all that" +
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
                 " please insert all necessary information for verification from your profile section. :-)"));
 
-        newsAdapter = new NewsAdapter(getActivity(), news);
-        ListView listView = (ListView) rootView.findViewById(R.id.newsView_newsFeed_ListView_id);
-        listView.setAdapter(newsAdapter);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.newsView_newsFeed_RecyclerView_id);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        jobAdapter = new JobAdapter(getActivity(), job);
+        recyclerView.setAdapter(jobAdapter);
 
         return rootView;
     }
 
 
-    class FetchStatus extends AsyncTask<String, Void, NewsFeedContent[]> {
+    class FetchStatus extends AsyncTask<String, Void, JobFeedContent[]> {
 
 
         public FetchStatus() {
@@ -78,7 +80,7 @@ public class NewsFeed extends Fragment {
         }
 
         @Override
-        protected NewsFeedContent[] doInBackground(String... params) {
+        protected JobFeedContent[] doInBackground(String... params) {
 
 
             // These two need to be declared outside the try/catch
@@ -156,7 +158,7 @@ public class NewsFeed extends Fragment {
             return null;
         }
 
-        private NewsFeedContent[] statusValue(String response) throws JSONException {
+        private JobFeedContent[] statusValue(String response) throws JSONException {
 
 //            Log.v("Response", "value : " + response);
             JSONObject jsonObject = new JSONObject(response);
@@ -164,13 +166,13 @@ public class NewsFeed extends Fragment {
 
 //            Log.v("result", "value : " + result.length());
 
-            NewsFeedContent[] nfc = new NewsFeedContent[result.length()];
+            JobFeedContent[] nfc = new JobFeedContent[result.length()];
 
             for (int i = 0; i < result.length(); i++) {
 
                 JSONObject json = result.getJSONObject(i);
 
-                nfc[i] = new NewsFeedContent(R.mipmap.ic_launcher, json.optString(USER_NAME), json.optString(STATUS_TIME), json.optString(STATUS));
+                nfc[i] = new JobFeedContent(R.mipmap.ic_launcher, json.optString(USER_NAME), json.optInt(STATUS_TIME), json.optString(STATUS));
 
             }
 
@@ -179,13 +181,13 @@ public class NewsFeed extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(NewsFeedContent[] result) {
+        protected void onPostExecute(JobFeedContent[] result) {
 
-            if (result != null) {
+            /*if (result != null) {
                 for(int i = 0; i < result.length; i++)
-                newsAdapter.add(result[i]);
+                jobAdapter.add(result[i]);
 
-            }
+            }*/
         }
     }
 

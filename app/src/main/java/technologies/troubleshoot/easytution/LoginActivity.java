@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         setContentView(R.layout.job_post_layout);
 
-        /*//Attaching all the widgets to their corresponding view id.
+        //Attaching all the widgets to their corresponding view id.
         loginBtn = (Button) findViewById(R.id.loginBtn_id);
         newAccountBtn = (TextView) findViewById(R.id.newAccountBtn_id);
         idEditText = (EditText) findViewById(R.id.usernameEditText_id);
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent newAccountIntent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(newAccountIntent);
             }
-        });*/
+        });
 
     }
 

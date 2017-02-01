@@ -43,6 +43,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         email = preferences.getString(KEY_EMAIL, "");
 
         setContentView(R.layout.activity_nav_drawer_layout);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -124,7 +125,9 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         int id = item.getItemId();
 
         if (id == R.id.nav_newsFeed_id) {
-            // Handle the camera action
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.content_news_feed, new JobFeed())
+                    .commit();
         } else if (id == R.id.nav_category_id) {
 
         } else if (id == R.id.nav_slideshow) {
