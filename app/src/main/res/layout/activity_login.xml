@@ -11,6 +11,13 @@
         android:layout_weight="30"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="EASY TUITION"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:gravity="center"/>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -46,16 +53,41 @@
             android:layout_height="70dp"
             android:layout_below="@+id/passwordEditText_id"
             android:text="Login"
+            android:onClick="btnClicked"
             android:background="@drawable/ic_login_button"/>
 
         <TextView
-            android:id="@+id/newAccountBtn_id"
+            android:id="@+id/newAccountBtn_as_student_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="16dp"
+            android:layout_above="@+id/or_id"
+            android:onClick="btnClicked"
             android:gravity="center"
-            android:text="CREATE NEW ACCOUNT" />
+            android:textColor="#ffffff"
+            android:text="SIGNUP AS STUDENT" />
+
+        <TextView
+            android:id="@+id/or_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/newAccountBtn_as_teacher_id"
+            android:gravity="center"
+            android:text="OR"
+            android:textColor="#ff4444"
+            android:layout_marginBottom="16dp"/>
+
+
+        <TextView
+            android:id="@+id/newAccountBtn_as_teacher_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="btnClicked"
+            android:layout_marginBottom="30dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="SIGNUP AS TEACHER" />
 
     </RelativeLayout>
 
