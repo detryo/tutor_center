@@ -132,8 +132,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.content_news_feed, new JobFeed())
                     .commit();
-        } else if (id == R.id.nav_category_id) {
-
         } else if (id == R.id.nav_new_post_id) {
 
         } else if (id == R.id.nav_settings_id) {
