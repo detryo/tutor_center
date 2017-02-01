@@ -1,9 +1,11 @@
 package technologies.troubleshoot.easytution;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -63,10 +65,41 @@ public class JobFeed extends Fragment {
         job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
                 " please insert all necessary information for verification from your profile section. :-)"));
 
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
+                " please insert all necessary information for verification from your profile section. :-)"));
+
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
+                " please insert all necessary information for verification from your profile section. :-)"));
+
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
+                " please insert all necessary information for verification from your profile section. :-)"));
+
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
+                " please insert all necessary information for verification from your profile section. :-)"));
+
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
+                " please insert all necessary information for verification from your profile section. :-)"));
+
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
+                " please insert all necessary information for verification from your profile section. :-)"));
+
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
+                " please insert all necessary information for verification from your profile section. :-)"));
+
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
+                " please insert all necessary information for verification from your profile section. :-)"));
+
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
+                " please insert all necessary information for verification from your profile section. :-)"));
+
+        Drawable dividerDrawable = ContextCompat.getDrawable(getContext(), R.drawable.divider);
+
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.newsView_newsFeed_RecyclerView_id);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         jobAdapter = new JobAdapter(getActivity(), job);
         recyclerView.setAdapter(jobAdapter);
+
+        recyclerView.addItemDecoration(new ItemDecorator(dividerDrawable));
 
         return rootView;
     }
