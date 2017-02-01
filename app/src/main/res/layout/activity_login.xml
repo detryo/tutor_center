@@ -64,6 +64,7 @@
             android:layout_above="@+id/or_id"
             android:onClick="btnClicked"
             android:gravity="center"
+            android:textColor="#ffffff"
             android:text="SIGNUP AS STUDENT" />
 
         <TextView
@@ -73,6 +74,7 @@
             android:layout_above="@+id/newAccountBtn_as_teacher_id"
             android:gravity="center"
             android:text="OR"
+            android:textColor="#ff4444"
             android:layout_marginBottom="16dp"/>
 
         <TextView
@@ -83,6 +85,7 @@
             android:layout_marginBottom="30dp"
             android:layout_alignParentBottom="true"
             android:gravity="center"
+            android:textColor="#ffffff"
             android:text="SIGNUP AS TEACHER" />
 
     </RelativeLayout>
