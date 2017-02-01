@@ -39,10 +39,15 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         getUserName();
         String email;
 
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.content_news_feed, new JobFeed())
+                .commit();
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         email = preferences.getString(KEY_EMAIL, "");
 
         setContentView(R.layout.activity_nav_drawer_layout);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -57,7 +62,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewEmail)).setText(email);
 
-        // Find the view pager that will allow the user to swipe between fragments
+        /*// Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         // Create an adapter that knows which fragment should be shown on each page
@@ -75,7 +80,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         //   3. Set the tab layout's tab names with the view pager's adapter's titles
         //      by calling onPageTitle()
         tabLayout.setupWithViewPager(viewPager);
-
+*/
     }
 
     private void getUserName() {
@@ -124,18 +129,18 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         int id = item.getItemId();
 
         if (id == R.id.nav_newsFeed_id) {
-            // Handle the camera action
-        } else if (id == R.id.nav_category_id) {
-
-        } else if (id == R.id.nav_slideshow) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.content_news_feed, new JobFeed())
+                    .commit();
+        } else if (id == R.id.nav_new_post_id) {
 
         } else if (id == R.id.nav_settings_id) {
 
-        } else if (id == R.id.nav_share) {
+        } /*else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
