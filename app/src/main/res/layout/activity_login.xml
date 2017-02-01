@@ -77,26 +77,6 @@
             android:textColor="#ff4444"
             android:layout_marginBottom="16dp"/>
 
-        <TextView
-            android:id="@+id/newAccountBtn_as_teacher_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="btnClicked"
-            android:layout_marginBottom="30dp"
-            android:layout_marginBottom="16dp"
-            android:layout_above="@+id/or_id"
-            android:onClick="btnClicked"
-            android:gravity="center"
-            android:text="SIGNUP AS STUDENT" />
-
-        <TextView
-            android:id="@+id/or_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/newAccountBtn_as_teacher_id"
-            android:gravity="center"
-            android:text="OR"
-            android:layout_marginBottom="16dp"/>
 
         <TextView
             android:id="@+id/newAccountBtn_as_teacher_id"
@@ -107,7 +87,7 @@
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:textColor="#ffffff"
-            android:text="SIGNUP AS TEACHER" /> />
+            android:text="SIGNUP AS TEACHER" />
 
     </RelativeLayout>
 
