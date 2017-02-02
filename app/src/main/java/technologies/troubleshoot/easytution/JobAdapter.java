@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,7 +28,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
 
     @Override
     public JobAdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new JobAdapterHolder(inflater.inflate(R.layout.job_post_layout, parent, false));
+        return new JobAdapterHolder(inflater.inflate(R.layout.job_feed_layout, parent, false));
     }
 
     @Override
@@ -41,7 +40,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
         //Corresponding views are populated
         holder.userImage.setImageResource(item.getImageRecourseId());
         holder.titleTextView.setText(item.getJobTitle());
-        holder.salaryTextView.setText(String.valueOf(item.getSalary()));
+        holder.salaryTextView.setText(item.getSalary());
 
         //holder.jobContent.setText(item.getJobContent());
 
@@ -76,7 +75,6 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
             userImage = (ImageView) listItemView.findViewById(R.id.user_pro_pic_id);
             titleTextView = (TextView) listItemView.findViewById(R.id.title_text_view_id);
             salaryTextView = (TextView) listItemView.findViewById(R.id.salary_text_view_id);
-            jobContent = (TextView) listItemView.findViewById(R.id.news_content_textView_id);
 
 
         }

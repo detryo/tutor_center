@@ -8,10 +8,9 @@ public class JobFeedContent {
 
     //All private variables of this class is declared here.
     private int imageResourceId;
-    private String jobTitle, jobContent;
-    private int salary;
+    private String jobTitle, jobContent, salary;
 
-    public JobFeedContent(int imageResourceId, String jobTitle, int salary, String jobContent){
+    public JobFeedContent(int imageResourceId, String jobTitle, String  salary, String jobContent){
 
         this.imageResourceId = imageResourceId;
         this.jobTitle = jobTitle;
@@ -38,7 +37,7 @@ public class JobFeedContent {
 
     }
 
-    public int getSalary(){
+    public String  getSalary(){
 
         return salary;
 
