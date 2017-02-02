@@ -48,7 +48,7 @@
         <item>7 Days</item>
     </string-array>
 
-    <string-array name="teacher_gender_preferred">
+    <string-array name="preferred_teacher_gender">
         <item>Any</item>
         <item>Male</item>
         <item>Female</item>

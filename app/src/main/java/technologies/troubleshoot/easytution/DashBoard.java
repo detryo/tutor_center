@@ -28,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import static technologies.troubleshoot.easytution.LoginActivity.KEY_EMAIL;
 
+
 public class DashBoard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -36,8 +37,8 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         //getUserName();
         String email;
 
-        //Default fragment to be called on app start.
-        getSupportFragmentManager().beginTransaction().add(R.id.content_news_feed, new JobFeedFragment())
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.content_news_feed, new JobFeedFragment())
                 .commit();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -63,7 +64,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         // Create an adapter that knows which fragment should be shown on each page
-        TeacherProfileTabAdapter adapter = new TeacherProfileTabAdapter(this, getSupportFragmentManager());
+        NewsFeedTabAdapter adapter = new NewsFeedTabAdapter(this, getSupportFragmentManager());
 
         // Set the adapter onto the view pager
         viewPager.setAdapter(adapter);
@@ -137,13 +138,9 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         } else if (id == R.id.nav_settings_id) {
 
-        } else if (id == R.id.nav_profile_id) {
+        } /*else if (id == R.id.nav_share) {
 
-            getSupportFragmentManager().beginTransaction()
-            .replace(R.id.content_news_feed, new TeacherProfileFragment())
-                    .commit();
-
-        } /*else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_send) {
 
         }*/
 

@@ -4,17 +4,16 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
  * Created by kaizer on 12/3/16.
  */
 
-public class TeacherProfileTabAdapter extends FragmentStatePagerAdapter {
+public class NewsFeedTabAdapter extends FragmentPagerAdapter {
 
     private Context context;
 
-    public TeacherProfileTabAdapter(Context context, FragmentManager fm) {
+    public NewsFeedTabAdapter(Context context, FragmentManager fm) {
         super(fm);
         this.context = context;
     }
@@ -22,27 +21,34 @@ public class TeacherProfileTabAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0){
-            return new TeacherEducationInfo();
+            return new JobFeedFragment();
+        }
+        else if (position == 1){
+            return new JobFeedFragment();
+        }
+        else if (position == 2) {
+            return new ProfileFragment();
         }
         else {
-            return new TeacherPersonalInfo();
+            return new JobFeedFragment();
         }
-
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         if (position == 0) {
-            return context.getString(R.string.eduInfo);
+            return context.getString(R.string.news);
+        }
+        else if (position == 1) {
+            return context.getString(R.string.trending);
         }
         else {
-            return context.getString(R.string.personalInfo);
+            return context.getString(R.string.profile);
         }
-
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }
