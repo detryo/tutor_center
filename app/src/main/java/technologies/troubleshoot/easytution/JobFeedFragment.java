@@ -25,7 +25,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class JobFeed extends Fragment {
+public class JobFeedFragment extends Fragment {
 
     public static String USER_NAME = "username";
     public static String STATUS = "content";
@@ -51,7 +51,7 @@ public class JobFeed extends Fragment {
         getStatus();
     }
 
-    public JobFeed() {
+    public JobFeedFragment() {
 
     }
 
@@ -65,8 +65,6 @@ public class JobFeed extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
-        //TextView textView;
         View rootView = inflater.inflate(R.layout.dash_board_job_feed_layout, container, false);
 
         ArrayList<JobFeedContent> job = new ArrayList<>();

@@ -34,11 +34,11 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getUserName();
+        //getUserName();
         String email;
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.content_news_feed, new JobFeed())
+                .add(R.id.content_news_feed, new JobFeedFragment())
                 .commit();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -128,9 +128,13 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         if (id == R.id.nav_newsFeed_id) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.content_news_feed, new JobFeed())
+                    .replace(R.id.content_news_feed, new JobFeedFragment())
                     .commit();
         } else if (id == R.id.nav_new_post_id) {
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_news_feed, new JobPostFragment())
+                    .commit();
 
         } else if (id == R.id.nav_settings_id) {
 
