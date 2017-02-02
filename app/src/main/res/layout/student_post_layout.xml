@@ -44,7 +44,7 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/teacher_gender_preferred"
+                    android:entries="@array/preferred_teacher_gender"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:prompt="@string/usertype" />
@@ -110,6 +110,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Any additional information" />
+
+
 
     </LinearLayout>
 
