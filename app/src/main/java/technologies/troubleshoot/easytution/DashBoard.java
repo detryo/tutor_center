@@ -37,8 +37,8 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         //getUserName();
         String email;
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.content_news_feed, new JobFeedFragment())
+        //Default fragment to be called on app start.
+        getSupportFragmentManager().beginTransaction().add(R.id.content_news_feed, new JobFeedFragment())
                 .commit();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);

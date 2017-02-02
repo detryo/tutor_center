@@ -48,7 +48,7 @@ public class JobPostFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.student_post_layout, container, false);
 
-        //postStatus("kaizer@gmail.com", "content", "1st Job Post", "1", "male", "A-level", "English", "5000");
+        postStatus("kaizer@gmail.com", "content", "1st Job Post", "1", "male", "A-level", "English", "5000");
 
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
