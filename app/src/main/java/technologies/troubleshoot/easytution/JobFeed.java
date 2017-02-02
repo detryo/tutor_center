@@ -27,19 +27,28 @@ import java.util.ArrayList;
 
 public class JobFeed extends Fragment {
 
-    public static final String DATA_URL = "http://tuition.troubleshoot-tech.com/newsfeed.php";
-    public static final String JSON_ARRAY = "users";
     public static String USER_NAME = "username";
-    public static String STATUS_TIME = "date_time";
     public static String STATUS = "content";
     public static String IMAGE = "name";
+
+    public static final String DATA_URL = "http://tuition.troubleshoot-tech.com/newsfeed.php";
+    public static final String JSON_ARRAY = "job_post";
+    public static String STATUS_TIME = "date_time";
+    public static String ADDITIONAL_INFO = "content";
+
+    public static String TITLE = "title";
+    public static String DAYS_IN_WEEK = "days_in_week";
+    public static String PREFERRED_TEACHER_GENDER = "preferred_teacher_gender";
+    public static String CLASS = "student_class";
+    public static String PREFERRED_MEDIUM = "preferred_medium";
+    public static String SALARY = "salary";
 
     private JobAdapter jobAdapter;
 
     @Override
     public void onStart() {
         super.onStart();
-        //getStatus();
+        getStatus();
     }
 
     public JobFeed() {
@@ -62,34 +71,7 @@ public class JobFeed extends Fragment {
 
         ArrayList<JobFeedContent> job = new ArrayList<>();
 
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
-                " please insert all necessary information for verification from your profile section. :-)"));
-
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
-                " please insert all necessary information for verification from your profile section. :-)"));
-
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
-                " please insert all necessary information for verification from your profile section. :-)"));
-
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
-                " please insert all necessary information for verification from your profile section. :-)"));
-
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
-                " please insert all necessary information for verification from your profile section. :-)"));
-
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
-                " please insert all necessary information for verification from your profile section. :-)"));
-
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
-                " please insert all necessary information for verification from your profile section. :-)"));
-
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
-                " please insert all necessary information for verification from your profile section. :-)"));
-
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
-                " please insert all necessary information for verification from your profile section. :-)"));
-
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", 5000, "This is to inform you all that" +
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, "GED CENTER", "5000", "This is to inform you all that" +
                 " please insert all necessary information for verification from your profile section. :-)"));
 
         Drawable dividerDrawable = ContextCompat.getDrawable(getContext(), R.drawable.divider);
@@ -193,11 +175,11 @@ public class JobFeed extends Fragment {
 
         private JobFeedContent[] statusValue(String response) throws JSONException {
 
-//            Log.v("Response", "value : " + response);
+            //Log.v("Response", "value : " + response);
             JSONObject jsonObject = new JSONObject(response);
             JSONArray result = jsonObject.getJSONArray(JSON_ARRAY);
 
-//            Log.v("result", "value : " + result.length());
+            //Log.v("result", "value : " + result.length());
 
             JobFeedContent[] nfc = new JobFeedContent[result.length()];
 
@@ -205,7 +187,7 @@ public class JobFeed extends Fragment {
 
                 JSONObject json = result.getJSONObject(i);
 
-                nfc[i] = new JobFeedContent(R.mipmap.ic_launcher, json.optString(USER_NAME), json.optInt(STATUS_TIME), json.optString(STATUS));
+                nfc[i] = new JobFeedContent(R.mipmap.ic_launcher, json.optString(TITLE), json.optString(SALARY), json.optString(ADDITIONAL_INFO));
 
             }
 
@@ -215,12 +197,12 @@ public class JobFeed extends Fragment {
 
         @Override
         protected void onPostExecute(JobFeedContent[] result) {
+            
+            if (result != null) {
 
-            /*if (result != null) {
-                for(int i = 0; i < result.length; i++)
-                jobAdapter.add(result[i]);
+                jobAdapter.itemUpdated(result);
 
-            }*/
+            }
         }
     }
 
