@@ -12,13 +12,14 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitXY"
-            android:src="@drawable/navbarsky"/>
+            android:src="@drawable/navbarsky" />
 
         <EditText
-            android:padding="10dp"
+            android:id="@+id/post_title_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title"/>
+            android:hint="Title"
+            android:padding="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,78 +29,87 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="50"
                 android:layout_height="match_parent"
+                android:layout_weight="50"
                 android:orientation="vertical">
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
+                    android:entries="@array/days_in_a_week"
                     android:paddingBottom="10dp"
-                    android:entries="@array/account_type_spinner"
+                    android:paddingTop="10dp"
                     android:prompt="@string/usertype" />
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
+                    android:entries="@array/teacher_gender_preferred"
                     android:paddingBottom="10dp"
-                    android:entries="@array/account_type_spinner"
+                    android:paddingTop="10dp"
                     android:prompt="@string/usertype" />
 
-                <Spinner
+                <!--<Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:entries="@array/account_type_spinner"
-                    android:prompt="@string/usertype" />
+                    android:entries="@array/preferred_medium"
+                    android:prompt="@string/usertype" />-->
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="50"
                 android:layout_height="match_parent"
+                android:layout_weight="50"
                 android:orientation="vertical">
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
+                    android:entries="@array/class_of_student"
                     android:paddingBottom="10dp"
-                    android:entries="@array/account_type_spinner"
+                    android:paddingTop="10dp"
                     android:prompt="@string/usertype" />
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
+                    android:entries="@array/preferred_medium"
                     android:paddingBottom="10dp"
-                    android:entries="@array/account_type_spinner"
+                    android:paddingTop="10dp"
                     android:prompt="@string/usertype" />
-                <Spinner
+
+                <!--<Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:entries="@array/account_type_spinner"
-                    android:prompt="@string/usertype" />
+                    android:prompt="@string/usertype" />-->
 
             </LinearLayout>
 
         </LinearLayout>
 
         <EditText
+            android:id="@+id/job_salary_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Salary Range"/>
+            android:hint="Salary Range" />
 
         <EditText
+            android:id="@+id/job_address_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Any additional information"/>
+            android:hint="Address" />
+
+        <EditText
+            android:id="@+id/job_content_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Any additional information" />
 
     </LinearLayout>
 

@@ -20,7 +20,6 @@
     </string-array>
 
     <string-array name="class_of_student">
-        <item>Class/Courses</item>
         <item>Class 1</item>
         <item>class 2</item>
         <item>class 3</item>
@@ -35,19 +34,11 @@
     </string-array>
 
     <string-array name="preferred_medium">
-        <item>Category</item>
         <item>English Medium</item>
         <item>Bangla Medium</item>
-        <item>English Version</item>
-        <item>IT</item>
-        <item>Test Preparation</item>
-        <item>Language Learning</item>
-        <item>University Admission Test</item>
-        <item>Arts</item>
     </string-array>
 
     <string-array name="days_in_a_week">
-        <item>Num of Days</item>
         <item>1 Day</item>
         <item>2 Days</item>
         <item>3 Days</item>
@@ -57,8 +48,7 @@
         <item>7 Days</item>
     </string-array>
 
-    <string-array name="preferred_teacher_gender">
-        <item>Tutor Gender</item>
+    <string-array name="teacher_gender_preferred">
         <item>Any</item>
         <item>Male</item>
         <item>Female</item>
