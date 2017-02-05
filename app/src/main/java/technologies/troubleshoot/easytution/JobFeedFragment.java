@@ -43,6 +43,7 @@ public class JobFeedFragment extends Fragment {
     public static String CLASS = "student_class";
     public static String PREFERRED_MEDIUM = "preferred_medium";
     public static String SALARY = "salary";
+    public static String IS_ACTIVE = "isActive";
 
     private JobAdapter jobAdapter;
 

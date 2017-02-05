@@ -36,6 +36,7 @@
                     android:prompt="@string/usertype" />
 
                 <Spinner
+                    android:id="@+id/spinner_category_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:entries="@array/preferred_medium"
@@ -69,6 +70,7 @@
 
                 <Spinner
                     android:layout_width="match_parent"
+                    android:id="@+id/spinner_class_id"
                     android:layout_height="wrap_content"
                     android:entries="@array/class_of_student"
                     android:paddingBottom="10dp"
