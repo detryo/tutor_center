@@ -28,7 +28,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import static technologies.troubleshoot.easytution.LoginActivity.KEY_EMAIL;
 
-
 public class DashBoard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
