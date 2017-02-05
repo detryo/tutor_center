@@ -51,6 +51,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
         holder.subject.setText(item.getSubject());
         holder.location.setText(item.getLocation());
         holder.additionalInfo.setText(item.getJobContent());
+        holder.userName.setText(item.getUserName());
+        holder.dateOfPost.setText(item.getDateOfPost());
 
     }
 
@@ -74,7 +76,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
         private View basicInfo;
         private View detailInfo;
         private ImageView userImage, clickIcon;
-        private TextView titleTextView, salaryTextView, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location, additionalInfo;
+        private TextView titleTextView, salaryTextView, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location, additionalInfo, userName, dateOfPost;
 
         public JobAdapterHolder(View listItemView) {
             super(listItemView);
@@ -92,11 +94,13 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
             preferred_medium = (TextView) listItemView.findViewById(R.id.preferred_medium_job_feed_id);
             classOfStudent = (TextView) listItemView.findViewById(R.id.class_of_student_job_feed_id);
             daysPerWeek = (TextView) listItemView.findViewById(R.id.days_per_week_job_feed_id);
-            dateOfStart = (TextView) listItemView.findViewById(R.id.date_of_job_feed_post_id);
+            dateOfStart = (TextView) listItemView.findViewById(R.id.date_job_feed_id);
             tutorGenderPref = (TextView) listItemView.findViewById((R.id.gender_preference_job_feed_id));
             subject = (TextView) listItemView.findViewById(R.id.subject_jod_feed_id);
             location = (TextView) listItemView.findViewById(R.id.location_job_feed_id);
             additionalInfo = (TextView) listItemView.findViewById(R.id.additional_info_job_feed_id);
+            userName = (TextView) listItemView.findViewById(R.id.post_user_name_job_feed_id);
+            dateOfPost = (TextView) listItemView.findViewById(R.id.date_of_job_feed_post_id);
 
             basicInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
