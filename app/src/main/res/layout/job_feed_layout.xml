@@ -98,8 +98,7 @@
                 <TextView
                     android:id="@+id/preferred_medium_job_feed_id"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp" />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -120,8 +119,7 @@
                 <TextView
                     android:id="@+id/class_of_student_job_feed_id"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp" />
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
@@ -164,8 +162,7 @@
                 <TextView
                     android:id="@+id/date_job_feed_id"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"/>
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
@@ -260,7 +257,7 @@
                 android:gravity="right"
                 android:paddingBottom="5dp"
                 android:paddingLeft="10dp"
-                android:text="Zubi" />
+                android:text="Posted by : Zubi" />
 
             <TextView
                 android:id="@+id/date_of_job_feed_post_id"
