@@ -93,7 +93,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:padding="10dp"
-            android:text="click to select a start date" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="select a start date" />
 
         <CalendarView
             android:id="@+id/calendar_id"

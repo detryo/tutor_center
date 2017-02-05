@@ -75,7 +75,7 @@ public class JobPostFragment extends Fragment {
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
                 month++;
-                calenderText.setText("" + year + "-" + month + "-" + dayOfMonth);
+                calenderText.setText("Selected Date : " + dayOfMonth + "-" + month + "-" + year);
                 calenderText.setVisibility(View.VISIBLE);
                 calendar.setVisibility(View.GONE);
 
