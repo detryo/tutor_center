@@ -37,12 +37,20 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
         //gets item position of the current news.
         JobFeedContent item = job.get(position);
 
+        holder.detailInfo.setVisibility(View.GONE);
+
         //Corresponding views are populated
         holder.userImage.setImageResource(item.getImageRecourseId());
         holder.titleTextView.setText(item.getJobTitle());
         holder.salaryTextView.setText(item.getSalary());
-
-        //holder.jobContent.setText(item.getJobContent());
+        holder.preferred_medium.setText((item.getPreferred_medium()));
+        holder.classOfStudent.setText(item.getClassOfStudent());
+        holder.daysPerWeek.setText(item.getDaysPerWeek());
+        holder.dateOfStart.setText(item.getDateOfStart());
+        holder.tutorGenderPref.setText(item.getTutorGenderPref());
+        holder.subject.setText(item.getSubject());
+        holder.location.setText(item.getLocation());
+        holder.additionalInfo.setText(item.getJobContent());
 
     }
 
@@ -63,9 +71,10 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
 
     class JobAdapterHolder extends RecyclerView.ViewHolder {
 
-        private View container;
-        private ImageView userImage;
-        private TextView titleTextView, salaryTextView, jobContent;
+        private View basicInfo;
+        private View detailInfo;
+        private ImageView userImage, clickIcon;
+        private TextView titleTextView, salaryTextView, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location, additionalInfo;
 
         public JobAdapterHolder(View listItemView) {
             super(listItemView);
@@ -75,7 +84,29 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
             userImage = (ImageView) listItemView.findViewById(R.id.user_pro_pic_id);
             titleTextView = (TextView) listItemView.findViewById(R.id.title_text_view_id);
             salaryTextView = (TextView) listItemView.findViewById(R.id.salary_text_view_id);
+            clickIcon = (ImageView) listItemView.findViewById(R.id.clickButton_id);
 
+            basicInfo = listItemView.findViewById(R.id.job_feed_content_basic_layout_id);
+            detailInfo = listItemView.findViewById(R.id.job_feed_content_detail_layout_id);
+
+            preferred_medium = (TextView) listItemView.findViewById(R.id.preferred_medium_job_feed_id);
+            classOfStudent = (TextView) listItemView.findViewById(R.id.class_of_student_job_feed_id);
+            daysPerWeek = (TextView) listItemView.findViewById(R.id.days_per_week_job_feed_id);
+            dateOfStart = (TextView) listItemView.findViewById(R.id.date_of_job_feed_post_id);
+            tutorGenderPref = (TextView) listItemView.findViewById((R.id.gender_preference_job_feed_id));
+            subject = (TextView) listItemView.findViewById(R.id.subject_jod_feed_id);
+            location = (TextView) listItemView.findViewById(R.id.location_job_feed_id);
+            additionalInfo = (TextView) listItemView.findViewById(R.id.additional_info_job_feed_id);
+
+            basicInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    clickIcon.setVisibility(View.GONE);
+                    detailInfo.setVisibility(View.VISIBLE);
+
+                }
+            });
 
         }
     }
