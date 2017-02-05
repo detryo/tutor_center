@@ -18,4 +18,52 @@
         <item>Student/Guardian</item>
         <item>Teacher</item>
     </string-array>
+
+    <string-array name="class_of_student">
+        <item>Class/Courses</item>
+        <item>Class 1</item>
+        <item>class 2</item>
+        <item>class 3</item>
+        <item>class 4</item>
+        <item>class 5</item>
+        <item>class 6</item>
+        <item>class 7</item>
+        <item>class 8</item>
+        <item>class 9</item>
+        <item>class SSC / O-level</item>
+        <item>class HSC / A=level</item>
+    </string-array>
+
+    <string-array name="preferred_medium">
+        <item>Category</item>
+        <item>English Medium</item>
+        <item>Bangla Medium</item>
+        <item>English Version</item>
+        <item>IT</item>
+        <item>Test Preparation</item>
+        <item>Language Learning</item>
+        <item>University Admission Test</item>
+        <item>Arts</item>
+    </string-array>
+
+    <string-array name="days_in_a_week">
+        <item>Num of Days</item>
+        <item>1 Day</item>
+        <item>2 Days</item>
+        <item>3 Days</item>
+        <item>4 Days</item>
+        <item>5 Days</item>
+        <item>6 Days</item>
+        <item>7 Days</item>
+    </string-array>
+
+    <string-array name="preferred_teacher_gender">
+        <item>Tutor Gender</item>
+        <item>Any</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+
+
 </resources>

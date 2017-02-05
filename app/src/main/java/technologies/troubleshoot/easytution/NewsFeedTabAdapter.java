@@ -21,16 +21,16 @@ public class NewsFeedTabAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0){
-            return new JobFeed();
+            return new JobFeedFragment();
         }
         else if (position == 1){
-            return new JobFeed();
+            return new JobFeedFragment();
         }
         else if (position == 2) {
             return new ProfileFragment();
         }
         else {
-            return new JobFeed();
+            return new JobFeedFragment();
         }
     }
 
