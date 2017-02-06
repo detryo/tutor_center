@@ -18,10 +18,6 @@
                 android:layout_height="wrap_content"
                 android:text="Additional number : " />
 
-            <TextView
-                android:id="@+id/additional_number_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/additional_number_edit_view_id"
@@ -40,11 +36,6 @@
                 android:layout_height="wrap_content"
                 android:text="Detail address : " />
 
-            <TextView
-                android:id="@+id/detail_address_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <EditText
                 android:id="@+id/detail_address_edit_view_id"
                 android:layout_width="match_parent"
@@ -62,13 +53,8 @@
                 android:layout_height="wrap_content"
                 android:text="Nid no/ passport no : " />
 
-            <TextView
-                android:id="@+id/passport_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <EditText
-                android:id="@+id/passport_edit_view_id"
+                android:id="@+id/nid_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -84,11 +70,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FB id : " />
-
-            <TextView
-                android:id="@+id/fb_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/fb_edit_view_id"
@@ -107,11 +88,6 @@
                 android:layout_height="wrap_content"
                 android:text="Linked ID : " />
 
-            <TextView
-                android:id="@+id/linked_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <EditText
                 android:id="@+id/linked_edit_view_id"
                 android:layout_width="match_parent"
@@ -128,11 +104,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Father's name : " />
-
-            <TextView
-                android:id="@+id/father_name_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/father_name_edit_view_id"
@@ -151,11 +122,6 @@
                 android:layout_height="wrap_content"
                 android:text="Mother's name : " />
 
-            <TextView
-                android:id="@+id/mother_name_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <EditText
                 android:id="@+id/mother_name_edit_view_id"
                 android:layout_width="match_parent"
@@ -172,11 +138,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Father's number : " />
-
-            <TextView
-                android:id="@+id/father_number_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/father_number_edit_view_id"
@@ -195,11 +156,6 @@
                 android:layout_height="wrap_content"
                 android:text="Mother's number : " />
 
-            <TextView
-                android:id="@+id/mother_number_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <EditText
                 android:id="@+id/mother_number_edit_view_id"
                 android:layout_width="match_parent"
@@ -216,11 +172,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ref person name : " />
-
-            <TextView
-                android:id="@+id/ref_person_name_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/ref_person_name_edit_view_id"
@@ -239,11 +190,6 @@
                 android:layout_height="wrap_content"
                 android:text="Contact number : " />
 
-            <TextView
-                android:id="@+id/contact_number_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <EditText
                 android:id="@+id/contact_number_edit_view_id"
                 android:layout_width="match_parent"
@@ -260,11 +206,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Relation : " />
-
-            <TextView
-                android:id="@+id/relation_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/relation_edit_view_id"

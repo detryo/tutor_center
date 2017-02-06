@@ -19,11 +19,6 @@
                 android:layout_height="wrap_content"
                 android:text="Last level of study : " />
 
-            <TextView
-                android:id="@+id/last_level_of_study_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <EditText
                 android:id="@+id/last_level_of_study_edit_view_id"
                 android:layout_width="match_parent"
@@ -41,11 +36,6 @@
                 android:layout_height="wrap_content"
                 android:text="Major/Group : " />
 
-            <TextView
-                android:id="@+id/major_group_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <EditText
                 android:id="@+id/major_group_edit_view_id"
                 android:layout_width="match_parent"
@@ -62,11 +52,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Institute Name : " />
-
-            <TextView
-                android:id="@+id/institute_name_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/institute_name_edit_view_id"
@@ -86,11 +71,6 @@
                 android:layout_height="wrap_content"
                 android:text="CGPA : " />
 
-            <TextView
-                android:id="@+id/cgpa_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <EditText
                 android:id="@+id/cgpa_edit_view_id"
                 android:layout_width="match_parent"
@@ -106,12 +86,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Years of passing : " />
-
-            <TextView
-                android:id="@+id/years_of_passing_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:text="Year of passing : " />
 
             <EditText
                 android:id="@+id/years_of_passing_edit_view_id"
@@ -130,13 +105,8 @@
                 android:layout_height="wrap_content"
                 android:text="Curriculam : " />
 
-            <TextView
-                android:id="@+id/curriculam_text_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <EditText
-                android:id="@+id/curriculam_edit_view_id"
+                android:id="@+id/curriculum_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -158,11 +128,6 @@
                     android:layout_height="wrap_content"
                     android:text="From : " />
 
-                <TextView
-                    android:id="@+id/from_text_view_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
                 <EditText
                     android:id="@+id/from_edit_view_id"
                     android:layout_width="match_parent"
@@ -181,11 +146,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TO : " />
-
-                <TextView
-                    android:id="@+id/to_text_view_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
 
                 <EditText
                     android:id="@+id/to_edit_view_id"
