@@ -212,39 +212,39 @@ public class StudentPostFragment extends Fragment {
 
     private void categorySpinnerItemSelected(int position) {
 
-        if (position == 0) {
+        if (position == 1) {
             classListSpinner = getClassData("bmediumclass.json");
-            classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
-            classSpinner.setAdapter(classAdapter);
-        } else if (position == 1) {
-            classListSpinner = getClassData("emediumclass.json");
             classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
             classSpinner.setAdapter(classAdapter);
         } else if (position == 2) {
-            classListSpinner = getClassData("bmediumclass.json");
+            classListSpinner = getClassData("emediumclass.json");
             classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
             classSpinner.setAdapter(classAdapter);
         } else if (position == 3) {
-            classListSpinner = getClassData("madrasa.json");
+            classListSpinner = getClassData("bmediumclass.json");
             classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
             classSpinner.setAdapter(classAdapter);
         } else if (position == 4) {
-            classListSpinner = getClassData("uniadmission.json");
+            classListSpinner = getClassData("madrasa.json");
             classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
             classSpinner.setAdapter(classAdapter);
         } else if (position == 5) {
-            classListSpinner = getClassData("it.json");
+            classListSpinner = getClassData("uniadmission.json");
             classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
             classSpinner.setAdapter(classAdapter);
         } else if (position == 6) {
-            classListSpinner = getClassData("testprep.json");
+            classListSpinner = getClassData("it.json");
             classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
             classSpinner.setAdapter(classAdapter);
         } else if (position == 7) {
-            classListSpinner = getClassData("languagelearning.json");
+            classListSpinner = getClassData("testprep.json");
             classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
             classSpinner.setAdapter(classAdapter);
         } else if (position == 8) {
+            classListSpinner = getClassData("languagelearning.json");
+            classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
+            classSpinner.setAdapter(classAdapter);
+        } else if (position == 9) {
             classListSpinner = getClassData("project_assignment.json");
             classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
             classSpinner.setAdapter(classAdapter);
