@@ -1,6 +1,7 @@
 [
-  {"category":"0","cname":"Medical"},
-  {"category":"1","cname":"University Admission"},
-  {"category":"2","cname":"Engineering"},
-  {"category":"3","cname":"Architecture"}
+  {"category":"0","cname":"Select Type"},
+  {"category":"1","cname":"Medical"},
+  {"category":"2","cname":"University Admission"},
+  {"category":"3","cname":"Engineering"},
+  {"category":"4","cname":"Architecture"}
 ]

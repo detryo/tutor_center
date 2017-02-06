@@ -1,9 +1,10 @@
 [
-  {"category":"0","cname":"IELTS"},
-  {"category":"1","cname":"TOEFL"},
-  {"category":"2","cname":"GMAT"},
-  {"category":"3","cname":"GRE"},
-  {"category":"4","cname":"SAT"},
-  {"category":"5","cname":"GED"},
-  {"category":"6","cname":"Bank Job"}
+  {"category":"0","cname":"Select Test Name"},
+  {"category":"1","cname":"IELTS"},
+  {"category":"2","cname":"TOEFL"},
+  {"category":"3","cname":"GMAT"},
+  {"category":"4","cname":"GRE"},
+  {"category":"5","cname":"SAT"},
+  {"category":"6","cname":"GED"},
+  {"category":"7","cname":"Bank Job"}
 ]

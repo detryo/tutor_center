@@ -1,9 +1,12 @@
 [
-  {"category":"0","cname":"WebDesign"},
-  {"category":"1","cname":"Adobe Illustrator"},
-  {"category":"2","cname":"Adobe Photoshop"},
-  {"category":"3","cname":"Microsoft Office"},
-  {"category":"4","cname":"Drawing"},
-  {"category":"5","cname":"Creative"},
-  {"category":"6","cname":"Photography"}
+  {"category":"0","cname":"Select Course"},
+  {"category":"1","cname":"Web Design"},
+  {"category":"2","cname":"Adobe Illustrator"},
+  {"category":"3","cname":"Adobe Photoshop"},
+  {"category":"4","cname":"Microsoft Office"},
+  {"category":"5","cname":"Drawing"},
+  {"category":"6","cname":"Creative"},
+  {"category":"7","cname":"Photography"},
+  {"category":"8","cname":"php/framework"},
+  {"category":"9","cname":"programming"}
 ]

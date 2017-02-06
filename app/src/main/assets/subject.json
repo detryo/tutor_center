@@ -1,6 +1,7 @@
 [
-{"subject":"0","bangla_medium":"Physics 1st"},
-{"subject":"1","bangla_medium":"Chemistry 1st"},
-{"subject":"2","bangla_medium":"Physics 2nd"},
-{"subject":"3","bangla_medium":"Chemistry 1st"}
+{"subject":"0","subject":"Select Subject"},
+{"subject":"1","subject":"Physics 1st"},
+{"subject":"2","subject":"Chemistry 1st"},
+{"subject":"3","subject":"Physics 2nd"},
+{"subject":"4","subject":"Chemistry 1st"}
 ]

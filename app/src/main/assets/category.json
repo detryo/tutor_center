@@ -1,11 +1,12 @@
 [
-  {"category":"0", "medium":"Bangla Medium"},
-  {"category":"1", "medium":"English Medium"},
-  {"category":"2", "medium":"English Version"},
-  {"category":"3", "medium":"Madrasa Board"},
-  {"category":"4", "medium":"University Admission"},
-  {"category":"5", "medium":"IT"},
-  {"category":"6", "medium":"Test Preparation"},
-  {"category":"7", "medium":"Language Learning"},
-  {"category":"8", "medium":"Project/Assignment"}
+  {"category":"0", "medium":"Select Category"},
+  {"category":"1", "medium":"Bangla Medium"},
+  {"category":"2", "medium":"English Medium"},
+  {"category":"3", "medium":"English Version"},
+  {"category":"4", "medium":"Madrasa Board"},
+  {"category":"5", "medium":"University Admission"},
+  {"category":"6", "medium":"IT"},
+  {"category":"7", "medium":"Test Preparation"},
+  {"category":"8", "medium":"Language Learning"},
+  {"category":"9", "medium":"Project/Assignment"}
 ]
