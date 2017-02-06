@@ -3,12 +3,16 @@ package technologies.troubleshoot.easytution;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,12 +51,19 @@ public class StudentPostFragment extends Fragment {
     public static String PREFERRED_TEACHER_GENDER = "preferred_teacher_gender";
     public static String CLASS = "student_class";
     public static String PREFERRED_MEDIUM = "preferred_medium";
+    public static String SUBJECT = "subject";
+    public static String ADDRESS = "address";
     public static String SALARY = "salary";
 
     CalendarView calendar;
-    Spinner categorySpinner, classSpinner;
-    ArrayList categoryList, classList;
+    Spinner categorySpinner, classSpinner, tutorGenderSpinner, numOfDaysSpinner;
+    ArrayList categoryListSpinner, classListSpinner;
     ArrayAdapter<String> categoryAdapter, classAdapter;
+    String title, numOfDays, tutorGender, category, courses, subjects, dateToStart, salary, additionalInfo;
+    EditText titleEditText, subjectsEditText, salaryEditText, additionalInfoEditText;
+    LinearLayout calenderView;
+    TextView calenderText;
+    Button postBtn;
 
     public StudentPostFragment() {
 
@@ -64,20 +75,71 @@ public class StudentPostFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.student_post_layout, container, false);
 
-        calendar = (CalendarView) rootView.findViewById(R.id.calendar_id);
-        calendar.setVisibility(View.GONE);
+        titleEditText = (EditText) rootView.findViewById(R.id.post_title_id);
+        subjectsEditText = (EditText) rootView.findViewById(R.id.job_post_subject_id);
+        salaryEditText = (EditText) rootView.findViewById(R.id.job_post_salary_id);
+        additionalInfoEditText = (EditText) rootView.findViewById(R.id.job_post_additional_info_id);
+
         categorySpinner = (Spinner) rootView.findViewById(R.id.spinner_category_id);
         classSpinner = (Spinner) rootView.findViewById(R.id.spinner_class_id);
+        numOfDaysSpinner = (Spinner) rootView.findViewById(R.id.numOfDays_job_post_id);
+        tutorGenderSpinner = (Spinner) rootView.findViewById(R.id.tutor_gender_job_post_id);
 
-        /*postStatus("kaizer@gmail.com", "content", "1st Job Post", "1", "male", "A-level", "English", "5000", "2017-02-02");*/
+        calenderView = (LinearLayout) rootView.findViewById(R.id.calender_view_id);
+        calenderText = (TextView) rootView.findViewById(R.id.calender_textView_id);
+        calendar = (CalendarView) rootView.findViewById(R.id.calendar_id);
 
-        final TextView calenderText = (TextView) rootView.findViewById(R.id.calender_textView_id);
+        postBtn = (Button) rootView.findViewById(R.id.job_post_btn_id);
 
-        calenderText.setOnClickListener(new View.OnClickListener() {
+        calendar.setVisibility(View.GONE);
+
+        numOfDaysSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                numOfDays = (String) parent.getItemAtPosition(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        tutorGenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                tutorGender = (String) parent.getItemAtPosition(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                courses = (String) parent.getItemAtPosition(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        calenderView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                calenderText.setVisibility(View.GONE);
+                calenderView.setVisibility(View.GONE);
                 calendar.setVisibility(View.VISIBLE);
 
             }
@@ -88,69 +150,27 @@ public class StudentPostFragment extends Fragment {
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
                 month++;
-                calenderText.setText("" + year + "-" + month + "-" + dayOfMonth);
-                calenderText.setVisibility(View.VISIBLE);
+                dateToStart = "" + year + "-" + month + "-" + dayOfMonth;
+                calenderText.setText(dateToStart);
+                calenderView.setVisibility(View.VISIBLE);
                 calendar.setVisibility(View.GONE);
 
             }
         });
 
-        categoryList = new ArrayList();
-        classList = new ArrayList();
-        
-        categoryList = getData("category.json");
-        categoryAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, categoryList);
+        categoryListSpinner = new ArrayList();
+        classListSpinner = new ArrayList();
+
+        categoryListSpinner = getData("category.json");
+        categoryAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, categoryListSpinner);
         categorySpinner.setAdapter(categoryAdapter);
 
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, android.view.View view, int position, long l) {
 
-                if (position == 0) {
-                    classList = getClassData("bmediumclass.json");
-                    classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classList);
-                    classSpinner.setAdapter(classAdapter);
-                }
-                else if (position == 1) {
-                    classList = getClassData("emediumclass.json");
-                    classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classList);
-                    classSpinner.setAdapter(classAdapter);
-                }
-                else if (position == 2) {
-                    classList = getClassData("bmediumclass.json");
-                    classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classList);
-                    classSpinner.setAdapter(classAdapter);
-                }
-                else if (position == 3) {
-                    classList = getClassData("madrasa.json");
-                    classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classList);
-                    classSpinner.setAdapter(classAdapter);
-                }
-                else if (position == 4) {
-                    classList = getClassData("uniadmission.json");
-                    classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classList);
-                    classSpinner.setAdapter(classAdapter);
-                }
-                else if (position == 5) {
-                    classList = getClassData("it.json");
-                    classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classList);
-                    classSpinner.setAdapter(classAdapter);
-                }
-                else if (position == 6) {
-                    classList = getClassData("testprep.json");
-                    classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classList);
-                    classSpinner.setAdapter(classAdapter);
-                }
-                else if (position == 7) {
-                    classList = getClassData("languagelearning.json");
-                    classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classList);
-                    classSpinner.setAdapter(classAdapter);
-                }
-                else if (position == 8) {
-                    classList = getClassData("project_assignment.json");
-                    classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classList);
-                    classSpinner.setAdapter(classAdapter);
-                }
+                categorySpinnerItemSelected(position);
+                category = (String) adapterView.getItemAtPosition(position);
 
             }
 
@@ -160,16 +180,75 @@ public class StudentPostFragment extends Fragment {
             }
         });
 
+        postBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                title = titleEditText.getText().toString();
+                subjects = subjectsEditText.getText().toString();
+                salary = salaryEditText.getText().toString();
+                additionalInfo = additionalInfoEditText.getText().toString();
+
+                postStatus("kaizer@gmail.com", title, numOfDays, tutorGender, category, courses, subjects, dateToStart, salary, "address", additionalInfo);
+
+                /*Log.v("Fields", " Title : " + title  + " Days : " + numOfDays + " TGender : " + tutorGender + " Category : " + category + " Courses : " + courses + " Sub : " + subjects + " Date : " + dateToStart + " Salary : " + salary + " address : "+ additionalInfo);*/
+
+            }
+        });
+
         return rootView;
+
     }
 
-    private void postStatus(final String email, final String content, final String title, final String days_in_week, final String preferred_teacher_gender, final String student_class, final String preferred_medium, final String salary, final String date_to_start) {
+    private void categorySpinnerItemSelected(int position) {
+
+        if (position == 0) {
+            classListSpinner = getClassData("bmediumclass.json");
+            classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
+            classSpinner.setAdapter(classAdapter);
+        } else if (position == 1) {
+            classListSpinner = getClassData("emediumclass.json");
+            classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
+            classSpinner.setAdapter(classAdapter);
+        } else if (position == 2) {
+            classListSpinner = getClassData("bmediumclass.json");
+            classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
+            classSpinner.setAdapter(classAdapter);
+        } else if (position == 3) {
+            classListSpinner = getClassData("madrasa.json");
+            classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
+            classSpinner.setAdapter(classAdapter);
+        } else if (position == 4) {
+            classListSpinner = getClassData("uniadmission.json");
+            classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
+            classSpinner.setAdapter(classAdapter);
+        } else if (position == 5) {
+            classListSpinner = getClassData("it.json");
+            classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
+            classSpinner.setAdapter(classAdapter);
+        } else if (position == 6) {
+            classListSpinner = getClassData("testprep.json");
+            classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
+            classSpinner.setAdapter(classAdapter);
+        } else if (position == 7) {
+            classListSpinner = getClassData("languagelearning.json");
+            classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
+            classSpinner.setAdapter(classAdapter);
+        } else if (position == 8) {
+            classListSpinner = getClassData("project_assignment.json");
+            classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classListSpinner);
+            classSpinner.setAdapter(classAdapter);
+        }
+
+    }
+
+    private void postStatus(final String email, final String title, final String days_in_week, final String preferred_teacher_gender, final String preferred_medium, final String student_class, final String studentSubject, final String date_to_start, final String salary, final String address, final String content) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DATA_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getActivity(), "Status Updated : Thug LiFe", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Device WARNING : Over Heating!", Toast.LENGTH_LONG).show();
 
                     }
                 },
@@ -183,14 +262,16 @@ public class StudentPostFragment extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put(KEY_EMAIL, email);
-                params.put(ADDITIONAL_INFO, content);
                 params.put(TITLE, title);
                 params.put(DAYS_IN_WEEK, days_in_week);
                 params.put(PREFERRED_TEACHER_GENDER, preferred_teacher_gender);
-                params.put(CLASS, student_class);
                 params.put(PREFERRED_MEDIUM, preferred_medium);
-                params.put(SALARY, salary);
+                params.put(CLASS, student_class);
+                params.put(SUBJECT, studentSubject);
                 params.put(DATE_TO_START, date_to_start);
+                params.put(SALARY, salary);
+                params.put(ADDRESS, address);
+                params.put(ADDITIONAL_INFO, content);
                 return params;
             }
 
@@ -199,9 +280,9 @@ public class StudentPostFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-    private ArrayList<String> getData(String fileName){
-        JSONArray jsonArray=null;
-        ArrayList<String> cList=new ArrayList<String>();
+    private ArrayList<String> getData(String fileName) {
+        JSONArray jsonArray = null;
+        ArrayList<String> cList = new ArrayList<String>();
         try {
             InputStream is = getResources().getAssets().open(fileName);
             int size = is.available();
@@ -209,23 +290,23 @@ public class StudentPostFragment extends Fragment {
             is.read(data);
             is.close();
             String json = new String(data, "UTF-8");
-            jsonArray=new JSONArray(json);
+            jsonArray = new JSONArray(json);
             if (jsonArray != null) {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     cList.add(jsonArray.getJSONObject(i).getString("medium"));
                 }
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }catch (JSONException je){
+        } catch (JSONException je) {
             je.printStackTrace();
         }
         return cList;
     }
 
-    private ArrayList<String> getClassData(String fileName){
-        JSONArray jsonArray=null;
-        ArrayList<String> cList=new ArrayList<String>();
+    private ArrayList<String> getClassData(String fileName) {
+        JSONArray jsonArray = null;
+        ArrayList<String> cList = new ArrayList<String>();
         try {
             InputStream is = getResources().getAssets().open(fileName);
             int size = is.available();
@@ -233,15 +314,15 @@ public class StudentPostFragment extends Fragment {
             is.read(data);
             is.close();
             String json = new String(data, "UTF-8");
-            jsonArray=new JSONArray(json);
+            jsonArray = new JSONArray(json);
             if (jsonArray != null) {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     cList.add(jsonArray.getJSONObject(i).getString("cname"));
                 }
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }catch (JSONException je){
+        } catch (JSONException je) {
             je.printStackTrace();
         }
         return cList;
