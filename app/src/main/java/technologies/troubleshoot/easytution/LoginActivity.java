@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         //setContentView(R.layout.activity_login);
-        setContentView(R.layout.user_profile_educational_info_layout);
+        setContentView(R.layout.teacher_educational_info_layout);
 
         //Attaching all the widgets to their corresponding view id.
         loginBtn = (Button) findViewById(R.id.loginBtn_id);

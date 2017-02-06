@@ -63,7 +63,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         // Create an adapter that knows which fragment should be shown on each page
-        NewsFeedTabAdapter adapter = new NewsFeedTabAdapter(this, getSupportFragmentManager());
+        TeacherProfileTabAdapter adapter = new TeacherProfileTabAdapter(this, getSupportFragmentManager());
 
         // Set the adapter onto the view pager
         viewPager.setAdapter(adapter);
@@ -138,6 +138,10 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         } else if (id == R.id.nav_settings_id) {
 
         } else if (id == R.id.nav_profile_id) {
+
+            getSupportFragmentManager().beginTransaction()
+            .replace(R.id.content_news_feed, new TeacherProfileFragment())
+                    .commit();
 
         } /*else if (id == R.id.nav_send) {
 
