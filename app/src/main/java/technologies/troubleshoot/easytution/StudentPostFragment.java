@@ -188,6 +188,16 @@ public class StudentPostFragment extends Fragment {
                 subjects = subjectsEditText.getText().toString();
                 salary = salaryEditText.getText().toString();
                 additionalInfo = additionalInfoEditText.getText().toString();
+                if (title.trim().equals("")){
+                    titleEditText.setError("Post Title Required!!");
+                }
+                else if (subjects.trim().equals("")){
+                    subjectsEditText.setError("Subject Name Required!!");
+                }
+                else if (salary.trim().equals("")){
+                    salaryEditText.setError("Salary Required!!");
+                }
+
 
                 postStatus("kaizer@gmail.com", title, numOfDays, tutorGender, category, courses, subjects, dateToStart, salary, "address", additionalInfo);
 
@@ -248,14 +258,14 @@ public class StudentPostFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getActivity(), "Device WARNING : Over Heating!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Your Post is Under Review!", Toast.LENGTH_LONG).show();
 
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), "Unable to Post", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getActivity(), "Unable to Post", Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
