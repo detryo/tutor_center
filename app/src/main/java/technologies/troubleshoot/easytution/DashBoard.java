@@ -137,9 +137,9 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         } else if (id == R.id.nav_settings_id) {
 
-        } /*else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_profile_id) {
 
-        } else if (id == R.id.nav_send) {
+        } /*else if (id == R.id.nav_send) {
 
         }*/
 
