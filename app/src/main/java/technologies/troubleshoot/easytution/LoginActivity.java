@@ -23,14 +23,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity {
 
     public static final String LOGIN_URL = "http://tuition.troubleshoot-tech.com/login.php";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD="password";
 
-    Button loginBtn;
-    TextView studentSignUpBtn, teacherSignUpBtn;
+    Button loginBtn, studentSignUpBtn, teacherSignUpBtn;
     String email, password;
     EditText idEditText, passwordEditText;
 
@@ -45,14 +44,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
         }
 
+        //setContentView(R.layout.activity_login);
         setContentView(R.layout.activity_login);
 
         //Attaching all the widgets to their corresponding view id.
         loginBtn = (Button) findViewById(R.id.loginBtn_id);
         idEditText = (EditText) findViewById(R.id.usernameEditText_id);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText_id);
-        studentSignUpBtn = (TextView) findViewById(R.id.newAccountBtn_as_student_id);
-        teacherSignUpBtn = (TextView) findViewById(R.id.newAccountBtn_as_teacher_id);
+        studentSignUpBtn = (Button) findViewById(R.id.newAccountBtn_as_student_id);
+        teacherSignUpBtn = (Button) findViewById(R.id.newAccountBtn_as_teacher_id);
 
     }
 
@@ -109,38 +109,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editor.apply();
     }
 
-    @Override
-    public void onClick(View view) {
-        userLogin();
-    }
-
     public void btnClicked(View view) {
 
         if(view == studentSignUpBtn){
 
             //click listener for (create new Account) Button. clicking this Button makes intent for SignupActivity.
-            studentSignUpBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
                     Intent newAccountIntent = new Intent(LoginActivity.this, SignupActivity.class);
                     startActivity(newAccountIntent);
-                }
-            });
 
         } else if(view == teacherSignUpBtn){
 
             //click listener for (create new Account) Button. clicking this Button makes intent for SignupActivity.
-            teacherSignUpBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
                     Intent newAccountIntent = new Intent(LoginActivity.this, SignupActivity.class);
                     startActivity(newAccountIntent);
-                }
-            });
 
         } else if(view == loginBtn){
 
-            loginBtn.setOnClickListener(this);
+            userLogin();
 
         }
 

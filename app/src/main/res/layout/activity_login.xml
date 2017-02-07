@@ -56,17 +56,19 @@
             android:onClick="btnClicked"
             android:background="@drawable/ic_login_button"/>
 
-        <TextView
+        <Button
             android:id="@+id/newAccountBtn_as_student_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:layout_above="@+id/or_id"
+            android:layout_above="@+id/newAccountBtn_as_teacher_id"
             android:onClick="btnClicked"
             android:gravity="center"
             android:textColor="#ffffff"
-            android:text="SIGNUP AS STUDENT" />
+            android:text="SIGNUP AS STUDENT"
+            android:background="@drawable/singup_student_button"/>
 
+<!--
         <TextView
             android:id="@+id/or_id"
             android:layout_width="match_parent"
@@ -76,9 +78,10 @@
             android:text="OR"
             android:textColor="#ff4444"
             android:layout_marginBottom="16dp"/>
+-->
 
 
-        <TextView
+        <Button
             android:id="@+id/newAccountBtn_as_teacher_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,6 +90,7 @@
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:textColor="#ffffff"
+            android:background="@drawable/singup_teacher_button"
             android:text="SIGNUP AS TEACHER" />
 
     </RelativeLayout>
