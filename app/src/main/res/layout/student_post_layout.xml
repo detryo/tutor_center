@@ -13,6 +13,7 @@
             android:id="@+id/post_title_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textAutoCorrect"
             android:hint="Title"
             android:padding="10dp" />
 
@@ -28,18 +29,22 @@
                 android:orientation="vertical">
 
                 <Spinner
+                    android:id="@+id/numOfDays_job_post_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:entries="@array/days_in_a_week"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp" />
+                    android:paddingTop="10dp"
+                    android:prompt="@string/usertype"/>
 
                 <Spinner
+                    android:id="@+id/spinner_category_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:entries="@array/preferred_medium"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp" />
+                    android:paddingTop="10dp"
+                    android:prompt="@string/usertype" />
 
                 <!--<Spinner
                     android:layout_width="match_parent"
@@ -58,18 +63,22 @@
                 android:orientation="vertical">
 
                 <Spinner
+                    android:id="@+id/tutor_gender_job_post_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:entries="@array/preferred_teacher_gender"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp" />
+                    android:paddingTop="10dp"
+                    android:prompt="@string/usertype" />
 
                 <Spinner
+                    android:id="@+id/spinner_class_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:entries="@array/class_of_student"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp" />
+                    android:paddingTop="10dp"
+                    android:prompt="@string/usertype" />
 
                 <!--<Spinner
                     android:layout_width="match_parent"
@@ -83,13 +92,38 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/calender_textView_id"
+        <EditText
+            android:id="@+id/job_post_subject_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="10dp"
-            android:text="click to select a start date" />
+            android:inputType="textAutoCorrect"
+            android:hint="Subjects"
+            android:padding="10dp" />
+
+        <LinearLayout
+            android:id="@+id/calender_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/calender_textView_id"
+                android:layout_width="0dp"
+                android:layout_weight="80"
+                android:layout_height="wrap_content"
+                android:text="select date to start  "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="20"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_calender" />
+
+        </LinearLayout>
+
 
         <CalendarView
             android:id="@+id/calendar_id"
@@ -99,31 +133,35 @@
         </CalendarView>
 
         <EditText
-            android:id="@+id/job_salary_id"
+            android:id="@+id/job_post_salary_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="Salary Range" />
 
         <EditText
             android:id="@+id/job_address_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPostalAddress"
             android:hint="Address" />
 
         <EditText
-            android:id="@+id/job_content_id"
+            android:id="@+id/job_post_additional_info_id"
             android:layout_width="match_parent"
+            android:inputType="textShortMessage"
             android:layout_height="wrap_content"
             android:hint="Any additional information" />
 
-        <TextView
-            android:background="#0f53c1"
+        <Button
+            android:id="@+id/job_post_btn_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:padding="10dp"
             android:layout_gravity="right"
-            android:text="POST" />
+            android:background="#0f53c1"
+            android:padding="10dp"
+            android:text="POST"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
     </LinearLayout>
 
