@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/Signup_Institute_EditText_id"
             android:layout_marginTop="16dp"
-            android:entries="@array/account_type_spinner"/>
+            android:entries="@array/gender_type"/>
 
     </RelativeLayout>
 
