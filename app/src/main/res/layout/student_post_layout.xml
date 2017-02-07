@@ -34,8 +34,7 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/days_in_a_week"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:prompt="@string/usertype"/>
+                    android:paddingTop="10dp"/>
 
                 <Spinner
                     android:id="@+id/spinner_category_id"
@@ -43,8 +42,7 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/preferred_medium"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:prompt="@string/usertype" />
+                    android:paddingTop="10dp"/>
 
                 <!--<Spinner
                     android:layout_width="match_parent"
@@ -68,8 +66,7 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/preferred_teacher_gender"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:prompt="@string/usertype" />
+                    android:paddingTop="10dp" />
 
                 <Spinner
                     android:id="@+id/spinner_class_id"
@@ -77,8 +74,7 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/class_of_student"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:prompt="@string/usertype" />
+                    android:paddingTop="10dp"/>
 
                 <!--<Spinner
                     android:layout_width="match_parent"
