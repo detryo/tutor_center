@@ -6,8 +6,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <Button
+            android:id="@+id/edit_save_education_info_btn_id"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="right"
+            android:background="@drawable/ic_mode_edit_black_48dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,6 +29,7 @@
             <EditText
                 android:id="@+id/last_level_of_study_edit_view_id"
                 android:layout_width="match_parent"
+                android:inputType="textAutoCorrect"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
@@ -39,6 +47,7 @@
             <EditText
                 android:id="@+id/major_group_edit_view_id"
                 android:layout_width="match_parent"
+                android:inputType="textAutoCorrect"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
@@ -74,6 +83,7 @@
             <EditText
                 android:id="@+id/cgpa_edit_view_id"
                 android:layout_width="match_parent"
+                android:inputType="numberDecimal"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
@@ -91,6 +101,7 @@
             <EditText
                 android:id="@+id/years_of_passing_edit_view_id"
                 android:layout_width="match_parent"
+                android:inputType="date"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
@@ -108,6 +119,7 @@
             <EditText
                 android:id="@+id/curriculum_edit_view_id"
                 android:layout_width="match_parent"
+                android:inputType="textAutoCorrect"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
@@ -131,6 +143,7 @@
                 <EditText
                     android:id="@+id/from_edit_view_id"
                     android:layout_width="match_parent"
+                    android:inputType="date"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
@@ -150,6 +163,7 @@
                 <EditText
                     android:id="@+id/to_edit_view_id"
                     android:layout_width="match_parent"
+                    android:inputType="date"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>

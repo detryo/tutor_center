@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,7 +26,8 @@ import java.util.Map;
 
 public class TeacherEducationInfo extends Fragment {
 
-    private static final String REGISTER_URL = "http://tuition.troubleshoot-tech.com/signup.php";
+    private static final String REGISTER_URL = "http://tuition.troubleshoot-tech.com/teacherEducationInfo.php";
+    public static final String USER_EMAIL = "email";
     public static final String LAST_LEVEL_OF_STUDY = "last_level_study";
     public static final String MAJOR = "major_group";
     public static final String ID_CARD = "id_card";
@@ -37,6 +39,8 @@ public class TeacherEducationInfo extends Fragment {
 
 
     EditText lastLevelOfStudyEditText, majorEditText, cgpaEditText, yearOfPassingEditText, curriculumEditText, fromEditText, toEditText;
+
+    Button editSaveEducationInfoBtn;
 
     @Nullable
     @Override
@@ -50,14 +54,33 @@ public class TeacherEducationInfo extends Fragment {
         curriculumEditText = (EditText) rootView.findViewById(R.id.curriculum_edit_view_id);
         fromEditText = (EditText) rootView.findViewById(R.id.from_edit_view_id);
         toEditText = (EditText) rootView.findViewById(R.id.to_edit_view_id);
+        editSaveEducationInfoBtn = (Button) rootView.findViewById(R.id.edit_save_education_info_btn_id);
 
-        updateEducationInfo(lastLevelOfStudyEditText.getText().toString(), majorEditText.getText().toString(), cgpaEditText.getText().toString(), yearOfPassingEditText.getText().toString(), curriculumEditText.getText().toString(), fromEditText.getText().toString(), toEditText.getText().toString());
+        editSaveEducationInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if ((v.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.ic_mode_edit_black_48dp).getConstantState()))){
+
+                    v.setBackgroundResource(R.drawable.ic_save_black_48dp);
+
+                } else {
+
+                    v.setBackgroundResource(R.drawable.ic_mode_edit_black_48dp);
+
+    /*                updateEducationInfo("mamun@upwork.com", lastLevelOfStudyEditText.getText().toString(), majorEditText.getText().toString(), cgpaEditText.getText().toString(), yearOfPassingEditText.getText().toString(), curriculumEditText.getText().toString(), fromEditText.getText().toString(), toEditText.getText().toString());*/
+
+                }
+
+            }
+        });
+
 
         return rootView;
 
     }
 
-    private void updateEducationInfo(final String last_level_study, final String major_group, final String cgpa, final String year_of_passing, final String curriculum, final String from_year, final String to_year) {
+    private void updateEducationInfo(final String email, final String last_level_study, final String major_group, final String cgpa, final String year_of_passing, final String curriculum, final String from_year, final String to_year) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
                 new Response.Listener<String>() {
@@ -73,11 +96,11 @@ public class TeacherEducationInfo extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
+                params.put(USER_EMAIL, email);
                 params.put(LAST_LEVEL_OF_STUDY, last_level_study);
                 params.put(MAJOR, major_group);
                 //params.put(ID_CARD, id_card);
