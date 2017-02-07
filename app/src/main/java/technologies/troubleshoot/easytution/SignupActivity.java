@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -62,7 +61,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         instituteName = (EditText) findViewById(R.id.Signup_Institute_EditText_id);
         userType = (Spinner) findViewById(R.id.Signup_UserType_Spinner_id);
 
-        spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.account_type_spinner, android.R.layout.simple_spinner_item);
+        spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.gender_type, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userType.setAdapter(spinnerAdapter);
 

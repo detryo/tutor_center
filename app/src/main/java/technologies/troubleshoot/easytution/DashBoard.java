@@ -17,11 +17,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -66,7 +63,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         // Create an adapter that knows which fragment should be shown on each page
-        NewsFeedTabAdapter adapter = new NewsFeedTabAdapter(this, getSupportFragmentManager());
+        TeacherProfileTabAdapter adapter = new TeacherProfileTabAdapter(this, getSupportFragmentManager());
 
         // Set the adapter onto the view pager
         viewPager.setAdapter(adapter);
@@ -135,14 +132,18 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         } else if (id == R.id.nav_new_post_id) {
 
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_news_feed, new StudentPostFragment())
+                    .replace(R.id.content_news_feed, new JobPostFragment())
                     .commit();
 
         } else if (id == R.id.nav_settings_id) {
 
-        } /*else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_profile_id) {
 
-        } else if (id == R.id.nav_send) {
+            getSupportFragmentManager().beginTransaction()
+            .replace(R.id.content_news_feed, new TeacherProfileFragment())
+                    .commit();
+
+        } /*else if (id == R.id.nav_send) {
 
         }*/
 
@@ -184,18 +185,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            String message = null;
-                            if ( error instanceof NetworkError) {
-                                message = "Cannot connect to Internet...Please check your connection!";
-                                Toast.makeText(DashBoard.this, message, Toast.LENGTH_LONG).show();
-                            }
-                            else if (error instanceof NoConnectionError) {
-                                message = "Cannot connect to Internet...Please check your connection!";
-                                Toast.makeText(DashBoard.this, message, Toast.LENGTH_LONG).show();
-                            } else if (error instanceof TimeoutError) {
-                                message = "Connection TimeOut! Please check your internet connection.";
-                                Toast.makeText(DashBoard.this, message, Toast.LENGTH_LONG).show();
-                            }
                             Toast.makeText(DashBoard.this, "Stop using this app", Toast.LENGTH_LONG).show();
                         }
                     });
