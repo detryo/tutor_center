@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class TeacherPersonalInfo extends Fragment {
 
-    private static final String SAVE_PERSONAL_INFO_URL = "http://tuition.troubleshoot-tech.com/teacherPersonalInfos.php";
+    private static final String REGISTER_URL = "http://tuition.troubleshoot-tech.com/teacherPersonalInfos.php";
     public static final String ADDITIONAL_NUMBER = "additional_number";
     public static final String USER_EMAIL = "email";
     public static final String DETAIL_ADDRESS = "detail_address";
@@ -36,7 +36,7 @@ public class TeacherPersonalInfo extends Fragment {
     public static final String FATHER_NAME = "father_name";
     public static final String MOTHER_NAME = "mother_name";
     public static final String FATHER_NUMBER = "father_number";
-    public static final String MOTHER_NUMBER = "mother_number";
+    public static final String MOTHER_NUMBER = "father_number";
     public static final String REF_PERSON_NAME = "ref_person_name";
     public static final String CONTACT_NUMBER = "ref_person_number";
     public static final String RELATION = "ref_person_relation";
@@ -77,7 +77,7 @@ public class TeacherPersonalInfo extends Fragment {
 
                     v.setBackgroundResource(R.drawable.ic_mode_edit_black_48dp);
 
-                    updatePersonalInfo("xyz@gmail.com", additionalNumberEditText.getText().toString(), detailAddressEditText.getText().toString(), nidNoEditText.getText().toString(), fbIdEditText.getText().toString(), linkedId.getText().toString(), fatherNameEditText.getText().toString(), motherNameEditText.getText().toString(), fatherNumberEditText.getText().toString(), motherNumberEditText.getText().toString(), refPersonNameEditText.getText().toString(), contactNumberEditText.getText().toString(), relationEditText.getText().toString());
+                    updatePersonalInfo("xyz@gmail.com", additionalNumberEditText.getText().toString(), detailAddressEditText.getText().toString(), nidNoEditText.getText().toString(), fbIdEditText.getText().toString(), linkedId.getText().toString(), fatherNameEditText.getText().toString(), motherNameEditText.getText().toString(), fatherNumberEditText.getText().toString(), motherNumberEditText.getText().toString(), refPersonNameEditText.getText().toString(), contactNumberEditText.getText().toString(), refPersonNameEditText.getText().toString());
 
                 }
 
@@ -90,7 +90,7 @@ public class TeacherPersonalInfo extends Fragment {
 
     private void updatePersonalInfo(final String email, final String additional_number, final String detail_address, final String nid_no, final String fb_id, final String linkedin_id, final String father_name, final String mother_name, final String father_number, final String mother_number, final String ref_person_name, final String ref_person_number, final String ref_person_relation) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, SAVE_PERSONAL_INFO_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
