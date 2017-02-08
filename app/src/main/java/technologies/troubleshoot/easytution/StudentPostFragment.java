@@ -258,7 +258,7 @@ public class StudentPostFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getActivity(), "Your Post is Under Review!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Device WARNING : Over heating!", Toast.LENGTH_LONG).show();
 
                     }
                 },
