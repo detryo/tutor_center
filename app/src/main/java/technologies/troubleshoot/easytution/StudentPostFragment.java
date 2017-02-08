@@ -199,7 +199,7 @@ public class StudentPostFragment extends Fragment {
                 }
 
 
-                postStatus("kaizer@gmail.com", title, numOfDays, tutorGender, category, courses, subjects, dateToStart, salary, "address", additionalInfo);
+                postStatus("xyz@gmail.com", title, numOfDays, tutorGender, category, courses, subjects, dateToStart, salary, "address", additionalInfo);
 
                 /*Log.v("Fields", " Title : " + title  + " Days : " + numOfDays + " TGender : " + tutorGender + " Category : " + category + " Courses : " + courses + " Sub : " + subjects + " Date : " + dateToStart + " Salary : " + salary + " address : "+ additionalInfo);*/
 
