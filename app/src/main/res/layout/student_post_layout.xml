@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp">
@@ -13,8 +14,8 @@
             android:id="@+id/post_title_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoCorrect"
             android:hint="Title"
+            android:inputType="textAutoCorrect"
             android:padding="10dp" />
 
         <LinearLayout
@@ -34,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/days_in_a_week"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"/>
+                    android:paddingTop="10dp" />
 
                 <Spinner
                     android:id="@+id/spinner_category_id"
@@ -42,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/preferred_medium"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"/>
+                    android:paddingTop="10dp" />
 
                 <!--<Spinner
                     android:layout_width="match_parent"
@@ -63,8 +64,7 @@
                 <Spinner
                     android:id="@+id/tutor_gender_job_post_id"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/preferred_teacher_gender"
+                    android:layout_height="wrap_content" android:entries="@array/preferred_teacher_gender"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp" />
 
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/class_of_student"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp"/>
+                    android:paddingTop="10dp" />
 
                 <!--<Spinner
                     android:layout_width="match_parent"
@@ -92,8 +92,8 @@
             android:id="@+id/job_post_subject_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoCorrect"
             android:hint="Subjects"
+            android:inputType="textAutoCorrect"
             android:padding="10dp" />
 
         <LinearLayout
@@ -107,15 +107,15 @@
             <TextView
                 android:id="@+id/calender_textView_id"
                 android:layout_width="0dp"
-                android:layout_weight="80"
                 android:layout_height="wrap_content"
+                android:layout_weight="80"
                 android:text="select date to start  "
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <ImageView
                 android:layout_width="0dp"
-                android:layout_weight="20"
                 android:layout_height="wrap_content"
+                android:layout_weight="20"
                 android:src="@drawable/ic_action_calender" />
 
         </LinearLayout>
@@ -132,22 +132,22 @@
             android:id="@+id/job_post_salary_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Salary Range" />
+            android:hint="Salary Range"
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/job_address_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPostalAddress"
-            android:hint="Address" />
+            android:hint="Address"
+            android:inputType="textPostalAddress" />
 
         <EditText
             android:id="@+id/job_post_additional_info_id"
             android:layout_width="match_parent"
-            android:inputType="textShortMessage"
             android:layout_height="wrap_content"
-            android:hint="Any additional information" />
+            android:hint="Any additional information"
+            android:inputType="textShortMessage" />
 
         <Button
             android:id="@+id/job_post_btn_id"
