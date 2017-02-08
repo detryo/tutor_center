@@ -4,17 +4,17 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_newsFeed_id"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/news_32"
             android:title="News Feed" />
 
         <item
             android:id="@+id/nav_new_post_id"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/post_office_48"
             android:title="New Post" />
 
         <item
             android:id="@+id/nav_profile_id"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/user_48"
             android:title="Profile" />
 
         <item
@@ -34,7 +34,7 @@
 
             <item
                 android:id="@+id/nav_phone_admin_id"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/phone_call"
                 android:title="Call Admin" />
 
             <!--<item
