@@ -1,6 +1,8 @@
 package technologies.troubleshoot.easytution;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +19,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,15 +38,15 @@ public class TeacherEducationInfo extends Fragment {
     public static final String MAJOR = "major_group";
     public static final String ID_CARD = "id_card";
     public static final String CGPA = "cgpa";
-    public static final String YEAR_OF_PASSING = "years_of_passing";
+    public static final String YEAR_OF_PASSING = "year_of_passing";
     public static final String CURRICULUM = "curriculam";
-    public static final String FORM_DATE = "year_form";
+    public static final String FROM_DATE = "year_from";
     public static final String TO_DATE = "year_to";
 
 
     EditText lastLevelOfStudyEditText, majorEditText, cgpaEditText, yearOfPassingEditText, curriculumEditText, fromEditText, toEditText;
 
-    Button editSaveEducationInfoBtn;
+    Button editEducationInfoBtn, saveEducationInfoBtn;
 
     @Nullable
     @Override
@@ -54,23 +60,28 @@ public class TeacherEducationInfo extends Fragment {
         curriculumEditText = (EditText) rootView.findViewById(R.id.curriculum_edit_view_id);
         fromEditText = (EditText) rootView.findViewById(R.id.from_edit_view_id);
         toEditText = (EditText) rootView.findViewById(R.id.to_edit_view_id);
-        editSaveEducationInfoBtn = (Button) rootView.findViewById(R.id.edit_save_education_info_btn_id);
 
-        editSaveEducationInfoBtn.setOnClickListener(new View.OnClickListener() {
+        editEducationInfoBtn = (Button) rootView.findViewById(R.id.edit_education_info_btn_id);
+        saveEducationInfoBtn = (Button) rootView.findViewById(R.id.save_education_info_btn_id);
+
+        fetchEducationInfo();
+        setEditTextEnableOrDisable(false);
+
+        editEducationInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if ((v.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.ic_mode_edit_black_48dp).getConstantState()))){
+                setEditTextEnableOrDisable(true);
 
-                    v.setBackgroundResource(R.drawable.ic_save_black_48dp);
+            }
+        });
 
-                } else {
+        saveEducationInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                    v.setBackgroundResource(R.drawable.ic_mode_edit_black_48dp);
-
-    /*                updateEducationInfo("mamun@upwork.com", lastLevelOfStudyEditText.getText().toString(), majorEditText.getText().toString(), cgpaEditText.getText().toString(), yearOfPassingEditText.getText().toString(), curriculumEditText.getText().toString(), fromEditText.getText().toString(), toEditText.getText().toString());*/
-
-                }
+                updateEducationInfo("mamun@upwork.com", lastLevelOfStudyEditText.getText().toString(), majorEditText.getText().toString(), cgpaEditText.getText().toString(), yearOfPassingEditText.getText().toString(), curriculumEditText.getText().toString(), fromEditText.getText().toString(), toEditText.getText().toString());
+                setEditTextEnableOrDisable(false);
 
             }
         });
@@ -86,7 +97,7 @@ public class TeacherEducationInfo extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getContext(), "Successfully Registered", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Successfully Updated", Toast.LENGTH_LONG).show();
                         /*Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(i);*/
                     }
@@ -107,7 +118,7 @@ public class TeacherEducationInfo extends Fragment {
                 params.put(CGPA, cgpa);
                 params.put(YEAR_OF_PASSING, year_of_passing);
                 params.put(CURRICULUM, curriculum);
-                params.put(FORM_DATE, from_year);
+                params.put(FROM_DATE, from_year);
                 params.put(TO_DATE, to_year);
                 return params;
             }
@@ -115,6 +126,68 @@ public class TeacherEducationInfo extends Fragment {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
+    }
+
+    private void fetchEducationInfo(){
+
+        String email = "mamun@upwork.com";
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        //email = preferences.getString(KEY_EMAIL, "");
+        String url = Config.FETCH_EDUCATION_INFO_URL + email;
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                showJSON(response);
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Connection error", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
+
+    }
+
+    private void showJSON(String response){
+
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
+            JSONObject json = result.getJSONObject(0);
+
+            lastLevelOfStudyEditText.setText(json.getString(LAST_LEVEL_OF_STUDY));
+            majorEditText.setText(json.getString(MAJOR));
+            cgpaEditText.setText(json.getString(CGPA));
+            yearOfPassingEditText.setText(json.getString(YEAR_OF_PASSING));
+            curriculumEditText.setText(json.getString(CURRICULUM));
+            fromEditText.setText(json.getString(FROM_DATE));
+            toEditText.setText(json.getString(TO_DATE));
+
+            /*Log.v("Result", " " + additionalNumber);*/
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //set the username -- that is fetched from database
+        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewUserName)).setText(name);*/
+
+    }
+
+    private void setEditTextEnableOrDisable(boolean state){
+
+        lastLevelOfStudyEditText.setEnabled(state);
+        majorEditText.setEnabled(state);
+        cgpaEditText.setEnabled(state);
+        yearOfPassingEditText.setEnabled(state);
+        curriculumEditText.setEnabled(state);
+        fromEditText.setEnabled(state);
+        toEditText.setEnabled(state);
+
     }
 
 }
