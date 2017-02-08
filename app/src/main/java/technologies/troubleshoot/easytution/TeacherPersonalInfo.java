@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class TeacherPersonalInfo extends Fragment {
 
-    private static final String REGISTER_URL = "http://tuition.troubleshoot-tech.com/teacherPersonalInfo.php";
+    private static final String REGISTER_URL = "http://tuition.troubleshoot-tech.com/teacherPersonalInfos.php";
     public static final String ADDITIONAL_NUMBER = "additional_number";
     public static final String USER_EMAIL = "email";
     public static final String DETAIL_ADDRESS = "detail_address";
@@ -77,7 +77,7 @@ public class TeacherPersonalInfo extends Fragment {
 
                     v.setBackgroundResource(R.drawable.ic_mode_edit_black_48dp);
 
-                    updatePersonalInfo("mamun@upwork.com", additionalNumberEditText.getText().toString(), detailAddressEditText.getText().toString(), nidNoEditText.getText().toString(), fbIdEditText.getText().toString(), linkedId.getText().toString(), fatherNameEditText.getText().toString(), motherNameEditText.getText().toString(), fatherNumberEditText.getText().toString(), motherNumberEditText.getText().toString(), refPersonNameEditText.getText().toString(), contactNumberEditText.getText().toString(), refPersonNameEditText.getText().toString());
+                    updatePersonalInfo("xyz@gmail.com", additionalNumberEditText.getText().toString(), detailAddressEditText.getText().toString(), nidNoEditText.getText().toString(), fbIdEditText.getText().toString(), linkedId.getText().toString(), fatherNameEditText.getText().toString(), motherNameEditText.getText().toString(), fatherNumberEditText.getText().toString(), motherNumberEditText.getText().toString(), refPersonNameEditText.getText().toString(), contactNumberEditText.getText().toString(), refPersonNameEditText.getText().toString());
 
                 }
 

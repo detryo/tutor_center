@@ -80,7 +80,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Face Book id : " />
+                android:text="Face Book ID : " />
 
             <EditText
                 android:id="@+id/fb_edit_view_id"
@@ -158,7 +158,7 @@
                 android:id="@+id/father_number_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -230,7 +230,7 @@
                 android:id="@+id/relation_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="text" />
 
         </LinearLayout>
 
