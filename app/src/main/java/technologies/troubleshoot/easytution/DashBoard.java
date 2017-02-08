@@ -133,14 +133,17 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         } else if (id == R.id.nav_new_post_id) {
 
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_news_feed, new JobPostFragment())
+                    .replace(R.id.content_news_feed, new StudentPostFragment())
                     .commit();
 
-        } else if (id == R.id.nav_settings_id) {
+        } else if (id == R.id.nav_profile_id) {
+            getSupportFragmentManager().beginTransaction()
+            .replace(R.id.content_news_feed, new TeacherProfileFragment())
+                    .commit();
 
-        } /*else if (id == R.id.nav_share) {
+        } /*else if (id == R.id.nav_settings_id) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_profile_id) {
 
         }*/
 

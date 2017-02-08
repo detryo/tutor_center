@@ -13,10 +13,12 @@
     <string name="trending">Trending</string>
     <string name="profile">Profile</string>
     <string name="usertype">User Type</string>
+    <string name="eduInfo">Education</string>
+    <string name="personalInfo">Personal</string>
 
-    <string-array name="account_type_spinner">
-        <item>Student/Guardian</item>
-        <item>Teacher</item>
+    <string-array name="gender_type">
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
 
     <string-array name="class_of_student">
