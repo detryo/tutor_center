@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,6 +65,7 @@ public class StudentPostFragment extends Fragment {
     LinearLayout calenderView;
     TextView calenderText;
     Button postBtn;
+    ScrollView scrollView;
 
     public StudentPostFragment() {
 
@@ -74,6 +76,10 @@ public class StudentPostFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View rootView = inflater.inflate(R.layout.student_post_layout, container, false);
+
+        /*scrollView = (ScrollView) rootView.findViewById(R.id.scrollView_id);
+
+        scrollView.setAlpha((float) 0.3);*/
 
         titleEditText = (EditText) rootView.findViewById(R.id.post_title_id);
         subjectsEditText = (EditText) rootView.findViewById(R.id.job_post_subject_id);
