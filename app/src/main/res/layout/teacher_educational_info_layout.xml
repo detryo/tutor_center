@@ -10,47 +10,49 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/edit_save_education_info_btn_id"
+            android:id="@+id/edit_education_info_btn_id"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="right"
             android:background="@drawable/ic_mode_edit_black_48dp"/>
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal">-->
 
-            <TextView
+           <!-- <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Last level of study : " />
+                android:text="Last level of study : " />-->
 
             <EditText
+                android:hint="Last level of study"
                 android:id="@+id/last_level_of_study_edit_view_id"
                 android:layout_width="match_parent"
                 android:inputType="textAutoCorrect"
                 android:layout_height="wrap_content" />
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal">-->
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Major/Group : " />
+                android:text="Major/Group : " />-->
 
             <EditText
                 android:id="@+id/major_group_edit_view_id"
                 android:layout_width="match_parent"
+                android:hint="Major/Group"
                 android:inputType="textAutoCorrect"
                 android:layout_height="wrap_content" />
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
         <!--<LinearLayout
             android:layout_width="match_parent"
@@ -70,59 +72,62 @@
         </LinearLayout>-->
 
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal">-->
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CGPA : " />
+                android:text="CGPA : " />-->
 
             <EditText
+                android:hint="CGPA"
                 android:id="@+id/cgpa_edit_view_id"
                 android:layout_width="match_parent"
                 android:inputType="numberDecimal"
                 android:layout_height="wrap_content" />
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal">-->
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Year of passing : " />
+                android:text="Year of passing : " />-->
 
             <EditText
+                android:hint="Year of passing"
                 android:id="@+id/years_of_passing_edit_view_id"
                 android:layout_width="match_parent"
                 android:inputType="date"
                 android:layout_height="wrap_content" />
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal">-->
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Curriculam : " />
+                android:text="Curriculam : " />-->
 
             <EditText
+                android:hint="Curriculam"
                 android:id="@+id/curriculum_edit_view_id"
                 android:layout_width="match_parent"
                 android:inputType="textAutoCorrect"
                 android:layout_height="wrap_content" />
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -190,6 +195,13 @@
                 />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/save_education_info_btn_id"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="right"
+            android:background="@drawable/ic_save_black_48dp" />
 
     </LinearLayout>
 
