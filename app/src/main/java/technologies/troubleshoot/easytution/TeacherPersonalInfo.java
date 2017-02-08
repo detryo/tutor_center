@@ -1,8 +1,11 @@
 package technologies.troubleshoot.easytution;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +34,8 @@ import java.util.Map;
 public class TeacherPersonalInfo extends Fragment {
 
     private static final String SAVE_PERSONAL_INFO_URL = "http://tuition.troubleshoot-tech.com/teacherPersonalInfos.php";
+   // private static final String FETCH_PERSONAL_INFO_URL = "http://tuition.troubleshoot-tech.com/showteacherpersonalinfo.php?email=";
+
     public static final String ADDITIONAL_NUMBER = "additional_number";
     public static final String USER_EMAIL = "email";
     public static final String DETAIL_ADDRESS = "detail_address";
@@ -41,9 +50,9 @@ public class TeacherPersonalInfo extends Fragment {
     public static final String CONTACT_NUMBER = "ref_person_number";
     public static final String RELATION = "ref_person_relation";
 
-    EditText additionalNumberEditText, detailAddressEditText, nidNoEditText, fbIdEditText, linkedId, fatherNameEditText, motherNameEditText, fatherNumberEditText, motherNumberEditText, refPersonNameEditText, contactNumberEditText, relationEditText;
+    EditText additionalNumberEditText, detailAddressEditText, nidNoEditText, fbIdEditText, linkedIdEditText, fatherNameEditText, motherNameEditText, fatherNumberEditText, motherNumberEditText, refPersonNameEditText, contactNumberEditText, relationEditText;
 
-    Button editSavePersonalInfoBtn;
+    Button editPersonalInfoBtn, savePersonalInfoBtn;
 
     @Nullable
     @Override
@@ -54,7 +63,7 @@ public class TeacherPersonalInfo extends Fragment {
         detailAddressEditText = (EditText) rootView.findViewById(R.id.detail_address_edit_view_id);
         nidNoEditText = (EditText) rootView.findViewById(R.id.nid_edit_view_id);
         fbIdEditText = (EditText) rootView.findViewById(R.id.fb_edit_view_id);
-        linkedId = (EditText) rootView.findViewById(R.id.linked_edit_view_id);
+        linkedIdEditText = (EditText) rootView.findViewById(R.id.linked_edit_view_id);
         fatherNameEditText = (EditText) rootView.findViewById(R.id.father_name_edit_view_id);
         motherNameEditText = (EditText) rootView.findViewById(R.id.mother_name_edit_view_id);
         fatherNumberEditText = (EditText) rootView.findViewById(R.id.father_number_edit_view_id);
@@ -63,28 +72,50 @@ public class TeacherPersonalInfo extends Fragment {
         contactNumberEditText = (EditText) rootView.findViewById(R.id.contact_number_edit_view_id);
         relationEditText = (EditText) rootView.findViewById(R.id.relation_edit_view_id);
 
-        editSavePersonalInfoBtn = (Button) rootView.findViewById(R.id.edit_save_personal_info_btn_id);
+        editPersonalInfoBtn = (Button) rootView.findViewById(R.id.edit_personal_info_btn_id);
+        savePersonalInfoBtn = (Button) rootView.findViewById(R.id.save_personal_info_btn_id);
 
-        editSavePersonalInfoBtn.setOnClickListener(new View.OnClickListener() {
+        fetchPersonalInfo();
+        setEditTextEnableOrDisable(false);
+
+        editPersonalInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if ((v.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.ic_mode_edit_black_48dp).getConstantState()))){
+                setEditTextEnableOrDisable(true);
 
-                    v.setBackgroundResource(R.drawable.ic_save_black_48dp);
+            }
+        });
 
-                } else {
+        savePersonalInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                    v.setBackgroundResource(R.drawable.ic_mode_edit_black_48dp);
+                updatePersonalInfo("xyz@gmail.com", additionalNumberEditText.getText().toString(), detailAddressEditText.getText().toString(), nidNoEditText.getText().toString(), fbIdEditText.getText().toString(), linkedIdEditText.getText().toString(), fatherNameEditText.getText().toString(), motherNameEditText.getText().toString(), fatherNumberEditText.getText().toString(), motherNumberEditText.getText().toString(), refPersonNameEditText.getText().toString(), contactNumberEditText.getText().toString(), relationEditText.getText().toString());
 
-                    updatePersonalInfo("xyz@gmail.com", additionalNumberEditText.getText().toString(), detailAddressEditText.getText().toString(), nidNoEditText.getText().toString(), fbIdEditText.getText().toString(), linkedId.getText().toString(), fatherNameEditText.getText().toString(), motherNameEditText.getText().toString(), fatherNumberEditText.getText().toString(), motherNumberEditText.getText().toString(), refPersonNameEditText.getText().toString(), contactNumberEditText.getText().toString(), relationEditText.getText().toString());
-
-                }
+                setEditTextEnableOrDisable(false);
 
             }
         });
 
         return rootView;
+
+    }
+
+    private void setEditTextEnableOrDisable(boolean state){
+
+        additionalNumberEditText.setEnabled(state);
+        detailAddressEditText.setEnabled(state);
+        nidNoEditText.setEnabled(state);
+        fbIdEditText.setEnabled(state);
+        linkedIdEditText.setEnabled(state);
+        fatherNameEditText.setEnabled(state);
+        motherNameEditText.setEnabled(state);
+        fatherNumberEditText.setEnabled(state);
+        motherNumberEditText.setEnabled(state);
+        refPersonNameEditText.setEnabled(state);
+        contactNumberEditText.setEnabled(state);
+        relationEditText.setEnabled(state);
 
     }
 
@@ -94,7 +125,7 @@ public class TeacherPersonalInfo extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getContext(), "Successfully Registered", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Successfully Updated", Toast.LENGTH_LONG).show();
                         /*Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(i);*/
                     }
@@ -102,7 +133,7 @@ public class TeacherPersonalInfo extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Update Failed", Toast.LENGTH_LONG).show();
                     }
                 })
         {
@@ -130,5 +161,59 @@ public class TeacherPersonalInfo extends Fragment {
         requestQueue.add(stringRequest);
     }
 
+    private void fetchPersonalInfo(){
+
+        String email = "xyz@gmail.com";
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        //email = preferences.getString(KEY_EMAIL, "");
+        String url = Config.FETCH_PERSONAL_INFO_URL + email;
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                showJSON(response);
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Connection error", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
+
+    }
+
+    private void showJSON(String response){
+
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
+            JSONObject json = result.getJSONObject(0);
+
+            additionalNumberEditText.setText(json.getString(ADDITIONAL_NUMBER));
+            detailAddressEditText.setText(json.getString(DETAIL_ADDRESS));
+            nidNoEditText.setText(json.getString(N_ID));
+            fbIdEditText.setText(json.getString(FB_ID));
+            linkedIdEditText.setText(json.getString(LINKED_ID));
+            fatherNameEditText.setText(json.getString(FATHER_NAME));
+            motherNameEditText.setText(json.getString(MOTHER_NAME));
+            fatherNumberEditText.setText(json.getString(FATHER_NUMBER));
+            motherNumberEditText.setText(json.getString(FATHER_NUMBER));
+            refPersonNameEditText.setText(json.getString(REF_PERSON_NAME));
+            contactNumberEditText.setText(json.getString(CONTACT_NUMBER));
+            relationEditText.setText(json.getString(RELATION));
+
+            /*Log.v("Result", " " + additionalNumber);*/
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //set the username -- that is fetched from database
+        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewUserName)).setText(name);*/
+
+    }
 
 }

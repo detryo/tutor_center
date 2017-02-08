@@ -9,230 +9,264 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+    <Button
+        android:id="@+id/edit_personal_info_btn_id"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="right"
+        android:background="@drawable/ic_mode_edit_black_48dp" />
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">-->
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Additional number : " />-->
+
+
+        <EditText
+            android:id="@+id/additional_number_edit_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Additional number"
+            android:inputType="number" />
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">-->
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detail address : " />-->
+
+        <EditText
+            android:id="@+id/detail_address_edit_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Detail address"
+            android:inputType="textPostalAddress" />
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">-->
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nid no/ passport no : " />-->
+
+        <EditText
+            android:id="@+id/nid_edit_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nid no/ passport no"
+            android:inputType="text" />
+
+    <!--</LinearLayout>-->
+
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">-->
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Face Book ID : " />-->
+
+        <EditText
+            android:id="@+id/fb_edit_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="FaceBook ID"
+            android:inputType="text" />
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">-->
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Linked ID : " />-->
+
+        <EditText
+            android:id="@+id/linked_edit_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Linked ID"
+            android:inputType="text" />
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">-->
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Father's name : " />-->
+
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Parent's Information : "
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+        <EditText
+            android:id="@+id/father_name_edit_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Father's name"
+            android:inputType="text" />
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">-->
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mother's name : " />-->
+
+        <EditText
+            android:id="@+id/mother_name_edit_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mother's name"
+            android:inputType="text" />
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">-->
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Father's number : " />-->
+
+        <EditText
+            android:id="@+id/father_number_edit_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Father's number"
+            android:inputType="number" />
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">-->
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mother's number : " />-->
+
+        <EditText
+            android:id="@+id/mother_number_edit_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mother's number"
+            android:inputType="number" />
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">-->
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ref person name : " />-->
+
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reference person : "
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+        <EditText
+            android:id="@+id/ref_person_name_edit_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ref person name"
+            android:inputType="text" />
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">-->
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact number : " />-->
+
+        <EditText
+            android:id="@+id/contact_number_edit_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contact number"
+            android:inputType="number" />
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">-->
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Relation : " />-->
+
+        <EditText
+            android:id="@+id/relation_edit_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Relation"
+            android:inputType="text" />
+
+        <!--</LinearLayout>-->
+
         <Button
-            android:id="@+id/edit_save_personal_info_btn_id"
+            android:id="@+id/save_personal_info_btn_id"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="right"
-            android:background="@drawable/ic_mode_edit_black_48dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Additional number : " />
-
-
-            <EditText
-                android:id="@+id/additional_number_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Detail address : " />
-
-            <EditText
-                android:id="@+id/detail_address_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPostalAddress" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nid no/ passport no : " />
-
-            <EditText
-                android:id="@+id/nid_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Face Book ID : " />
-
-            <EditText
-                android:id="@+id/fb_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Linked ID : " />
-
-            <EditText
-                android:id="@+id/linked_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Father's name : " />
-
-            <EditText
-                android:id="@+id/father_name_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mother's name : " />
-
-            <EditText
-                android:id="@+id/mother_name_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Father's number : " />
-
-            <EditText
-                android:id="@+id/father_number_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mother's number : " />
-
-            <EditText
-                android:id="@+id/mother_number_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ref person name : " />
-
-            <EditText
-                android:id="@+id/ref_person_name_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contact number : " />
-
-            <EditText
-                android:id="@+id/contact_number_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Relation : " />
-
-            <EditText
-                android:id="@+id/relation_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-
-        </LinearLayout>
+            android:background="@drawable/ic_save_black_48dp" />
 
     </LinearLayout>
 
