@@ -44,14 +44,6 @@
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"/>
 
-                <!--<Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:entries="@array/preferred_medium"
-                    android:prompt="@string/usertype" />-->
-
             </LinearLayout>
 
             <LinearLayout
@@ -75,14 +67,6 @@
                     android:entries="@array/class_of_student"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"/>
-
-                <!--<Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:entries="@array/account_type_spinner"
-                    android:prompt="@string/usertype" />-->
 
             </LinearLayout>
 
