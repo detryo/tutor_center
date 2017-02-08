@@ -4,12 +4,13 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
  * Created by kaizer on 12/3/16.
  */
 
-public class TeacherProfileTabAdapter extends FragmentPagerAdapter {
+public class TeacherProfileTabAdapter extends FragmentStatePagerAdapter {
 
     private Context context;
 
