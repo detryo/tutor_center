@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     Button loginBtn, studentSignUpBtn, teacherSignUpBtn;
     String email, password;
     EditText idEditText, passwordEditText;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,11 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.passwordEditText_id);
         studentSignUpBtn = (Button) findViewById(R.id.newAccountBtn_as_student_id);
         teacherSignUpBtn = (Button) findViewById(R.id.newAccountBtn_as_teacher_id);
+
+        progressBar = (ProgressBar) findViewById(R.id.login_progress_view_id);
+
+        progressBar.setVisibility(View.GONE);
+
 
     }
 
@@ -125,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
 
         } else if(view == loginBtn){
 
+            progressBar.setVisibility(View.VISIBLE);
             userLogin();
 
         }

@@ -11,6 +11,12 @@
         android:layout_weight="30"
         android:orientation="vertical">
 
+
+        <ProgressBar
+            android:id="@+id/login_progress_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,6 +61,7 @@
             android:text="Login"
             android:onClick="btnClicked"
             android:background="@drawable/ic_login_button"/>
+
 
         <Button
             android:id="@+id/newAccountBtn_as_student_id"
