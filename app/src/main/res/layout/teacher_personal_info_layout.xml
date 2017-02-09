@@ -9,12 +9,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <Button
-        android:id="@+id/edit_personal_info_btn_id"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="right"
-        android:background="@drawable/ic_mode_edit_black_48dp" />
+        <Button
+            android:id="@+id/edit_personal_info_btn_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#33b5e5"
+            android:layout_gravity="right"
+            android:text="Edit"/>
 
     <!--<LinearLayout
         android:layout_width="match_parent"
@@ -263,10 +264,11 @@
 
         <Button
             android:id="@+id/save_personal_info_btn_id"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00c851"
             android:layout_gravity="right"
-            android:background="@drawable/ic_save_black_48dp" />
+            android:text="SAVE"/>
 
     </LinearLayout>
 
