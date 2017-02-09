@@ -9,12 +9,8 @@ public class Config {
     public static final String FETCH_PERSONAL_INFO_URL = "http://tuition.troubleshoot-tech.com/showteacherpersonalinfo.php?email=";
     public static final String FETCH_EDUCATION_INFO_URL = "http://tuition.troubleshoot-tech.com/showteachereducationinfo.php?email=";
     public static final String FETCH_STUDENT_INFO_URL = "http://tuition.troubleshoot-tech.com/showstudentinfo.php?email=";
-    public static final String KEY_NAME = "name";
-    //public static final String KEY_ID = "id";
-    //public static final String KEY_EMAIL = "email";
-    //public static final String KEY_PASSWORD = "password";
-    //public static final String KEY_BLOODGROUP = "blood_group";
-    //public static final String KEY_PROFILEPIC = "profile_pic";
+    public static final String KEY_NAME = "username";
+    public static final String KEY_USERTYPE = "user_type";
 
     public static final String JSON_ARRAY = "result";
 }

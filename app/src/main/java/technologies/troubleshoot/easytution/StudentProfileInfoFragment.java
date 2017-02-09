@@ -127,7 +127,7 @@ public class StudentProfileInfoFragment extends Fragment{
 
         String email = "smk@gmail.com";
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        //email = preferences.getString(KEY_EMAIL, "");
+        //email = preferences.getString(SP_EMAIL, "");
         String url = Config.FETCH_STUDENT_INFO_URL + email;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override

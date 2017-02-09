@@ -1,5 +1,6 @@
 package technologies.troubleshoot.easytution;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -11,9 +12,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,23 +27,24 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import static technologies.troubleshoot.easytution.LoginActivity.KEY_EMAIL;
+import static technologies.troubleshoot.easytution.LoginActivity.SP_EMAIL;
+import static technologies.troubleshoot.easytution.LoginActivity.SP_USERNAME;
+import static technologies.troubleshoot.easytution.LoginActivity.SP_USERTYPE;
 
 
 public class DashBoard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    String userType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getUserName();
-        String email;
+
+        getUserDetail();
 
         //Default fragment to be called on app start.
         getSupportFragmentManager().beginTransaction().add(R.id.content_news_feed, new JobFeedFragment())
                 .commit();
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        email = preferences.getString(KEY_EMAIL, "");
 
         setContentView(R.layout.activity_nav_drawer_layout);
 
@@ -58,7 +60,20 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewEmail)).setText(email);
+        /*if (userType.equals("teacher")){
+
+            Menu menu =navigationView.getMenu();
+
+            MenuItem target = menu.findItem(R.id.nav_new_post_id);
+
+            target.setVisible(false);
+
+        }*/
+
+        /*if (userType.equals("teacher"))
+        navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(false);*/
+
+        //((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewEmail)).setText(email);
 
         /*// Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -81,10 +96,10 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 */
     }
 
-    private void getUserName() {
+    private void getUserDetail() {
 
-        FetchUserName fetchUserName = new FetchUserName();
-        fetchUserName.execute();
+        FetchUserDetail fetchUserDetail = new FetchUserDetail();
+        fetchUserDetail.execute();
 
     }
 
@@ -98,27 +113,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         }
     }
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.dash_board_app_bar_items, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -137,9 +132,23 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                     .commit();
 
         } else if (id == R.id.nav_profile_id) {
-            getSupportFragmentManager().beginTransaction()
-            .replace(R.id.content_news_feed, new StudentProfileInfoFragment())
-                    .commit();
+
+            /*Log.v("User Type : ", "" + userType);*/
+
+            if (userType.equals("student")){
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_news_feed, new StudentProfileInfoFragment())
+                        .commit();
+
+            } else if(userType.equals("teacher")){
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_news_feed, new TeacherProfileFragment())
+                        .commit();
+
+            }
+
 
         } else if (id == R.id.nav_log_out_id) {
 
@@ -161,20 +170,9 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         return true;
     }
 
-    public void onLogout(View view) {
-        SharedPreferences sp = getSharedPreferences("informme", 0);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean("isLoggedIn", false);
-        editor.apply();
+    class FetchUserDetail extends AsyncTask<Void, Void, Void>{
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    class FetchUserName extends AsyncTask<Void, Void, Void>{
-
-        public FetchUserName() {
+        public FetchUserDetail() {
             super();
         }
 
@@ -183,7 +181,10 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
             String email;
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            email = preferences.getString(KEY_EMAIL, "");
+            email = preferences.getString(SP_EMAIL, "");
+
+            Log.v("2 Email :", " " + email);
+
             String url = Config.DATA_URL+email;
             StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
                 @Override
@@ -212,6 +213,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                 JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
                 JSONObject json = result.getJSONObject(0);
                 name = json.getString(Config.KEY_NAME);
+                userType = json.getString(Config.KEY_USERTYPE);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -219,6 +221,10 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             //set the username -- that is fetched from database
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewUserName)).setText(name);
+            if (userType.equals("teacher"))
+            navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(false);
+
+
 
         }
 

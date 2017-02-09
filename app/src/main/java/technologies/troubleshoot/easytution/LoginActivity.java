@@ -2,13 +2,17 @@ package technologies.troubleshoot.easytution;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -19,6 +23,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +34,11 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
 
     public static final String LOGIN_URL = "http://tuition.troubleshoot-tech.com/login.php";
+    public static final String SP_EMAIL = "email";
     public static final String KEY_EMAIL = "email";
+    public static final String SP_USERNAME = "username";
+    public static final String KEY_USERNAME = "username";
+    public static final String SP_USERTYPE = "user_type";
     public static final String KEY_USERTYPE = "user_type";
     public static final String KEY_PASSWORD = "password";
 
@@ -59,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.login_progress_view_id);
 
         progressBar.setVisibility(View.GONE);
-
 
     }
 
@@ -102,6 +113,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void openProfile() {
+
+        //getUserDetail();
         Intent intent = new Intent(this, DashBoard.class);
         saveUserEmail();
         startActivity(intent);
@@ -111,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
     private void saveUserEmail() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(KEY_EMAIL, email);
+        editor.putString(SP_EMAIL, email);
         editor.apply();
     }
 
@@ -119,9 +132,30 @@ public class LoginActivity extends AppCompatActivity {
     private void saveUserType(String userType) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(KEY_USERTYPE, userType);
+        editor.putString(SP_USERTYPE, userType);
         editor.apply();
     }
+
+    /*private void getUserDetail() {
+
+        String url = Config.DATA_URL + email;
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                showJSON(response);
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(LoginActivity.this, "LogIn Activity error", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+
+    }*/
 
     public void btnClicked(View view) {
 
@@ -146,6 +180,28 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
-
     }
+
+   /* private void showJSON(String response) {
+        String userType = "", userName = "";
+
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
+            JSONObject json = result.getJSONObject(0);
+            userName = json.getString(KEY_USERNAME);
+            userType = json.getString(KEY_USERTYPE);
+
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString(SP_USERNAME, userName);
+            editor.apply();
+
+            saveUserType(userType);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }*/
 }
