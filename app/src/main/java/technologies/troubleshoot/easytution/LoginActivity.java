@@ -89,6 +89,8 @@ public class LoginActivity extends AppCompatActivity {
                             editor.apply();
                             openProfile();
                         } else {
+                            progressBar.setVisibility(View.GONE);
+                            loginBtn.setVisibility(View.VISIBLE);
                             Toast.makeText(LoginActivity.this, "Invalid email ID or Password", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -136,27 +138,6 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    /*private void getUserDetail() {
-
-        String url = Config.DATA_URL + email;
-        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                showJSON(response);
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this, "LogIn Activity error", Toast.LENGTH_LONG).show();
-                    }
-                });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
-
-    }*/
-
     public void btnClicked(View view) {
 
         if (view == studentSignUpBtn) {
@@ -175,6 +156,7 @@ public class LoginActivity extends AppCompatActivity {
 
         } else if (view == loginBtn) {
 
+            loginBtn.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
             userLogin();
 
