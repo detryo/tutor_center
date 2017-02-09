@@ -20,8 +20,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.content.Context.TELECOM_SERVICE;
-import static technologies.troubleshoot.easytution.LoginActivity.KEY_EMAIL;
+import static technologies.troubleshoot.easytution.LoginActivity.SP_EMAIL;
 
 /**
  * Created by kaizer on 2/2/17.
@@ -117,7 +116,7 @@ public class JobPostFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put(KEY_EMAIL, email);
+                params.put(SP_EMAIL, email);
                 params.put(ADDITIONAL_INFO, content);
                 params.put(TITLE, title);
                 params.put(DAYS_IN_WEEK, days_in_week);

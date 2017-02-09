@@ -4,15 +4,18 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +37,7 @@ public class JobFeedFragment extends Fragment {
     public static final String DATA_URL = "http://tuition.troubleshoot-tech.com/newsfeed.php";
     public static final String JSON_ARRAY = "job_post";
     public static String STATUS_TIME = "date_time";
+    public static String POST_ID = "post_id";
     public static String ADDITIONAL_INFO = "content";
     public static String DATE_TO_START = "date_to_start";
 
@@ -56,6 +60,19 @@ public class JobFeedFragment extends Fragment {
 
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.dash_board_app_bar_items, menu);
+    }
+
+
     private void getStatus() {
 
         FetchStatus status = new FetchStatus();
@@ -64,13 +81,27 @@ public class JobFeedFragment extends Fragment {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.action_refresh){
+            getStatus();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.dash_board_job_feed_layout, container, false);
 
         ArrayList<JobFeedContent> job = new ArrayList<>();
 
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, " ", " ", " ", " ", " ", " ", " ", " ", " ", " "));
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "));
 
         Drawable dividerDrawable = ContextCompat.getDrawable(getContext(), R.drawable.divider);
 
@@ -184,7 +215,7 @@ public class JobFeedFragment extends Fragment {
 
                 JSONObject json = result.getJSONObject(i);
 
-                nfc[i] = new JobFeedContent(R.mipmap.ic_launcher, json.optString(TITLE), json.optString(SALARY), json.optString(PREFERRED_MEDIUM), json.optString(CLASS), json.optString(DAYS_IN_WEEK), json.optString(DATE_TO_START), json.optString(PREFERRED_TEACHER_GENDER), "physics", "Dhaka", json.optString(ADDITIONAL_INFO));
+                nfc[i] = new JobFeedContent(R.mipmap.ic_launcher, json.optString(TITLE), json.optString(SALARY), json.optString(PREFERRED_MEDIUM), json.optString(CLASS), json.optString(DAYS_IN_WEEK), json.optString(DATE_TO_START), json.optString(PREFERRED_TEACHER_GENDER), "physics", "Dhaka", json.optString(ADDITIONAL_INFO), json.optString(POST_ID));
 
 
             }

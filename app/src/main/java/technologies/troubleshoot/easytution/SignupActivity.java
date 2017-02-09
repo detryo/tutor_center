@@ -1,7 +1,9 @@
 package technologies.troubleshoot.easytution;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -37,38 +39,45 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_USERTYPE = "user_type";
+    public static final String KEY_USERGENDER = "gender";
     public static final String KEY_INSTITUTE = "institute";
     public static final String KEY_PHONE = "phone";
 
     Button nextBtn;
     EditText userEditText, emailEditText, passwordEditText, reEnteredPassEditText, phoneNumber,instituteName;
     RequestQueue requestQueue;
-    Spinner userType;
+    Spinner gender;
     ArrayAdapter spinnerAdapter;
-    String user_type;
+    String user_gender, user_type;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_signup);
         //Attaching all widgets to their corresponding viewID;
         nextBtn = (Button) findViewById(R.id.nextToCategoryBtn_id);
+
         userEditText = (EditText) findViewById(R.id.Signup_Username_EditText_id);
         emailEditText = (EditText) findViewById(R.id.Signup_Email_EditText_id);
         passwordEditText = (EditText) findViewById(R.id.Signup_Password_EditText_id);
         reEnteredPassEditText = (EditText) findViewById(R.id.Signup_Password_ReEnter_EditText_id);
         phoneNumber = (EditText) findViewById(R.id.Signup_Phone_EditText_id);
         instituteName = (EditText) findViewById(R.id.Signup_Institute_EditText_id);
-        userType = (Spinner) findViewById(R.id.Signup_UserType_Spinner_id);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        user_type = preferences.getString(KEY_USERTYPE, "");
+
+        gender = (Spinner) findViewById(R.id.Signup_UserType_Spinner_id);
 
         spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.gender_type, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        userType.setAdapter(spinnerAdapter);
+        gender.setAdapter(spinnerAdapter);
 
-        userType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                user_type = (String) adapterView.getItemAtPosition(i);
+                user_gender = (String) adapterView.getItemAtPosition(i);
             }
 
             @Override
@@ -82,7 +91,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         nextBtn.setOnClickListener(this);
     }
 
-    private void registerUser(final String username, final String password, final String email, final String rePass, final String institute, final String phone, final String user_type) {
+    private void registerUser(final String username, final String password, final String email, final String institute, final String phone, final String user_type, final String gender) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
                 new Response.Listener<String>() {
@@ -109,6 +118,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 params.put(KEY_INSTITUTE, institute);
                 params.put(KEY_PHONE, phone);
                 params.put(KEY_USERTYPE, user_type);
+                params.put(KEY_USERGENDER, gender);
                 return params;
             }
 
@@ -126,7 +136,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             String rePass = reEnteredPassEditText.getText().toString().trim();
             String institute = instituteName.getText().toString().trim();
             String phone = phoneNumber.getText().toString().trim();
-
 
             //condition for validation error message;
             if (username.trim().equals("")){
@@ -154,7 +163,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 //Toast.makeText(SignupActivity.this, "Password Doesn't Match", Toast.LENGTH_LONG).show();
             }
             else
-                registerUser(username, password, email, rePass, institute,phone, user_type);
+                registerUser(username, password, email, institute, phone, user_type, user_gender);
         }
 
     }
