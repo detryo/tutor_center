@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -75,6 +76,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
         private View detailInfo;
         private ImageView userImage, clickIcon;
         private TextView titleTextView, salaryTextView, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location, additionalInfo;
+        private Button interestBtn;
 
         public JobAdapterHolder(View listItemView) {
             super(listItemView);
@@ -97,6 +99,28 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
             subject = (TextView) listItemView.findViewById(R.id.subject_jod_feed_id);
             location = (TextView) listItemView.findViewById(R.id.location_job_feed_id);
             additionalInfo = (TextView) listItemView.findViewById(R.id.additional_info_job_feed_id);
+            interestBtn = (Button) listItemView.findViewById(R.id.interest_btn_id);
+
+            interestBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    clickIcon.setVisibility(View.VISIBLE);
+                    detailInfo.setVisibility(View.GONE);
+
+                }
+            });
+
+            detailInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    clickIcon.setVisibility(View.VISIBLE);
+                    detailInfo.setVisibility(View.GONE);
+
+
+                }
+            });
 
             basicInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
