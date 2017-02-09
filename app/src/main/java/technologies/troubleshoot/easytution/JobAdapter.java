@@ -8,8 +8,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by kaizer on 11/24/16.
@@ -17,13 +27,20 @@ import java.util.ArrayList;
 
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder> {
 
+    private static final String INTERESTED_URL = "http://tuition.troubleshoot-tech.com/interestedList.php";
+    public static final String USER_EMAIL = "email";
+    public static final String USER_NAME = "username";
+    public static final String POST_ID = "post_id";
+
     private LayoutInflater inflater;
     private ArrayList<JobFeedContent> job;
+    private Activity context;
 
     public JobAdapter(Activity context, ArrayList<JobFeedContent> job) {
 
         inflater = LayoutInflater.from(context);
         this.job = job;
+        this.context = context;
 
     }
 
@@ -52,6 +69,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
         holder.subject.setText(item.getSubject());
         holder.location.setText(item.getLocation());
         holder.additionalInfo.setText(item.getJobContent());
+        holder.setPostId(item.getPostId());
 
     }
 
@@ -77,6 +95,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
         private ImageView userImage, clickIcon;
         private TextView titleTextView, salaryTextView, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location, additionalInfo;
         private Button interestBtn;
+        private String postId;
 
         public JobAdapterHolder(View listItemView) {
             super(listItemView);
@@ -107,6 +126,9 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
 
                     clickIcon.setVisibility(View.VISIBLE);
                     detailInfo.setVisibility(View.GONE);
+                    //use sharedpreference for email.
+                    //use sharedpreference for username.
+                    showInterest("xyz@gmail.com", "xyz", postId);
 
                 }
             });
@@ -132,6 +154,40 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
                 }
             });
 
+        }
+
+        private void showInterest(final String email, final String username, final String post_id) {
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, INTERESTED_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(context, "Successfully Requested", Toast.LENGTH_LONG).show();
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context, "No Internet Connection", Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put(USER_EMAIL, email);
+                    params.put(USER_NAME, username);
+                    params.put(POST_ID, post_id);
+                    return params;
+                }
+
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(context);
+            requestQueue.add(stringRequest);
+        }
+
+        public void setPostId(String postId) {
+            this.postId = postId;
         }
     }
 }

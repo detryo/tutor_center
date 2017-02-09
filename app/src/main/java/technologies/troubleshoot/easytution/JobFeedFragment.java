@@ -1,6 +1,5 @@
 package technologies.troubleshoot.easytution;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -17,7 +16,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +37,7 @@ public class JobFeedFragment extends Fragment {
     public static final String DATA_URL = "http://tuition.troubleshoot-tech.com/newsfeed.php";
     public static final String JSON_ARRAY = "job_post";
     public static String STATUS_TIME = "date_time";
+    public static String POST_ID = "post_id";
     public static String ADDITIONAL_INFO = "content";
     public static String DATE_TO_START = "date_to_start";
 
@@ -102,7 +101,7 @@ public class JobFeedFragment extends Fragment {
 
         ArrayList<JobFeedContent> job = new ArrayList<>();
 
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, " ", " ", " ", " ", " ", " ", " ", " ", " ", " "));
+        job.add(new JobFeedContent(R.mipmap.ic_launcher, " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "));
 
         Drawable dividerDrawable = ContextCompat.getDrawable(getContext(), R.drawable.divider);
 
@@ -216,7 +215,7 @@ public class JobFeedFragment extends Fragment {
 
                 JSONObject json = result.getJSONObject(i);
 
-                nfc[i] = new JobFeedContent(R.mipmap.ic_launcher, json.optString(TITLE), json.optString(SALARY), json.optString(PREFERRED_MEDIUM), json.optString(CLASS), json.optString(DAYS_IN_WEEK), json.optString(DATE_TO_START), json.optString(PREFERRED_TEACHER_GENDER), "physics", "Dhaka", json.optString(ADDITIONAL_INFO));
+                nfc[i] = new JobFeedContent(R.mipmap.ic_launcher, json.optString(TITLE), json.optString(SALARY), json.optString(PREFERRED_MEDIUM), json.optString(CLASS), json.optString(DAYS_IN_WEEK), json.optString(DATE_TO_START), json.optString(PREFERRED_TEACHER_GENDER), "physics", "Dhaka", json.optString(ADDITIONAL_INFO), json.optString(POST_ID));
 
 
             }

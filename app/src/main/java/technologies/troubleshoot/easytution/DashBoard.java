@@ -141,9 +141,18 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             .replace(R.id.content_news_feed, new TeacherProfileFragment())
                     .commit();
 
-        } /*else if (id == R.id.nav_settings_id) {
+        } else if (id == R.id.nav_log_out_id) {
 
-        } else if (id == R.id.nav_profile_id) {
+            SharedPreferences sp = getSharedPreferences("informme", 0);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putBoolean("isLoggedIn", false);
+            editor.apply();
+
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+
+        } /*else if (id == R.id.nav_profile_id) {
 
         }*/
 

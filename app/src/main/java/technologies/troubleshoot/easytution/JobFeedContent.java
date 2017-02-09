@@ -8,9 +8,9 @@ public class JobFeedContent {
 
     //All private variables of this class is declared here.
     private int imageResourceId;
-    private String jobTitle, jobContent, salary, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location;
+    private String jobTitle, jobContent, salary, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location, postId;
 
-    public JobFeedContent(int imageResourceId, String jobTitle, String  salary, String preferred_medium, String classOfStudent, String daysPerWeek, String dateOfStart, String tutorGenderPref, String subject, String location, String jobContent){
+    public JobFeedContent(int imageResourceId, String jobTitle, String  salary, String preferred_medium, String classOfStudent, String daysPerWeek, String dateOfStart, String tutorGenderPref, String subject, String location, String jobContent, String postId){
 
         this.imageResourceId = imageResourceId;
         this.jobTitle = jobTitle;
@@ -23,6 +23,7 @@ public class JobFeedContent {
         this.subject = subject;
         this.location = location;
         this.jobContent = jobContent;
+        this.postId = postId;
 
 
     }
@@ -82,5 +83,9 @@ public class JobFeedContent {
 
     public String getLocation() {
         return location;
+    }
+
+    public String getPostId() {
+        return postId;
     }
 }
