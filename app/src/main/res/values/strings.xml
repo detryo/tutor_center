@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EasyTution</string>
+    <string name="app_name">TUTOR CENTER</string>
     <string name="signupPage">Signup</string>
 
     <string name="title_activity_news_feed">TuitionFeed</string>
@@ -15,6 +15,8 @@
     <string name="usertype">User Type</string>
     <string name="eduInfo">Education</string>
     <string name="personalInfo">Personal</string>
+    <string name="latest_tuition">News Feed</string>
+    <string name="student_post_btn">POST</string>
 
     <string-array name="gender_type">
         <item>Male</item>

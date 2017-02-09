@@ -5,7 +5,7 @@
         <item
             android:id="@+id/nav_newsFeed_id"
             android:icon="@drawable/news_32"
-            android:title="News Feed" />
+            android:title="@string/latest_tuition" />
 
         <item
             android:id="@+id/nav_new_post_id"
@@ -24,7 +24,7 @@
 
         <item
             android:id="@+id/nav_payment_id"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/payment_icon"
             android:title="Payment" />
 
     </group>
@@ -45,6 +45,17 @@
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Send" />-->
+        </menu>
+    </item>
+
+    <item android:title="">
+        <menu>
+
+            <item
+                android:id="@+id/nav_log_out_id"
+                android:icon="@drawable/exit_icon"
+                android:title="LOG OUT" />
+
         </menu>
     </item>
 

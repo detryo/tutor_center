@@ -156,7 +156,7 @@
             android:layout_gravity="right"
             android:background="#0f53c1"
             android:padding="10dp"
-            android:text="POST"
+            android:text="@string/student_post_btn"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
     </LinearLayout>

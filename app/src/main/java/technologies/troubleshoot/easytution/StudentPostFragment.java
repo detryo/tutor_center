@@ -3,7 +3,6 @@ package technologies.troubleshoot.easytution;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static technologies.troubleshoot.easytution.LoginActivity.KEY_EMAIL;
+import static technologies.troubleshoot.easytution.LoginActivity.SP_EMAIL;
 
 /**
  * Created by kaizer on 2/2/17.
@@ -277,7 +276,7 @@ public class StudentPostFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put(KEY_EMAIL, email);
+                params.put(SP_EMAIL, email);
                 params.put(TITLE, title);
                 params.put(DAYS_IN_WEEK, days_in_week);
                 params.put(PREFERRED_TEACHER_GENDER, preferred_teacher_gender);

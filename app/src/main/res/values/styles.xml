@@ -19,6 +19,8 @@
     <!-- Base activity_signup theme. -->
     <style name="SignupTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -31,8 +33,8 @@
 
     <!-- Style for a tab that displays a category name -->
     <style name="CategoryTab" parent="Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">@color/colorPrimaryDark</item>
-        <item name="tabSelectedTextColor">@color/colorPrimary</item>
+        <item name="tabIndicatorColor">#ffab00</item>
+        <item name="tabSelectedTextColor">#fff</item>
         <item name="tabTextAppearance">@style/CategoryTabTextAppearance</item>
     </style>
 
