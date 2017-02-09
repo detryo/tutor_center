@@ -98,7 +98,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         }
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dash_board_app_bar_items, menu);
@@ -118,7 +118,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
