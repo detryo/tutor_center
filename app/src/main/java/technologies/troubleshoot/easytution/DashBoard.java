@@ -138,7 +138,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         } else if (id == R.id.nav_profile_id) {
             getSupportFragmentManager().beginTransaction()
-            .replace(R.id.content_news_feed, new TeacherProfileFragment())
+            .replace(R.id.content_news_feed, new StudentProfileInfoFragment())
                     .commit();
 
         } else if (id == R.id.nav_log_out_id) {
