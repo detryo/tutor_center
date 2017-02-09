@@ -48,4 +48,15 @@
         </menu>
     </item>
 
+    <item android:title="">
+        <menu>
+
+            <item
+                android:id="@+id/nav_log_out_id"
+                android:icon="@drawable/exit_icon"
+                android:title="LOG OUT" />
+
+        </menu>
+    </item>
+
 </menu>
