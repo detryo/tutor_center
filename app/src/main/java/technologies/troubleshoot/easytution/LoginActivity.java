@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,7 +27,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public static final String LOGIN_URL = "http://tuition.troubleshoot-tech.com/login.php";
     public static final String KEY_EMAIL = "email";
-    public static final String KEY_PASSWORD="password";
+    public static final String KEY_USERTYPE = "user_type";
+    public static final String KEY_PASSWORD = "password";
 
     Button loginBtn, studentSignUpBtn, teacherSignUpBtn;
     String email, password;
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //see if the user is logged in shared memory
         //then redirect to dashboard
-        if(getSharedPreferences("informme", 0).getBoolean("isLoggedIn", false)){
+        if (getSharedPreferences("informme", 0).getBoolean("isLoggedIn", false)) {
             Intent intent = new Intent(this, DashBoard.class);
             startActivity(intent);
         }
@@ -67,33 +67,32 @@ public class LoginActivity extends AppCompatActivity {
         email = idEditText.getText().toString().trim();
         password = passwordEditText.getText().toString().trim();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,LOGIN_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if(response.trim().equals("success")){
+                        if (response.trim().equals("success")) {
                             SharedPreferences sp = getSharedPreferences("informme", 0);
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putBoolean("isLoggedIn", true);
                             editor.apply();
                             openProfile();
-                        }
-                        else{
-                            Toast.makeText(LoginActivity.this,"Invalid email ID or Password",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Invalid email ID or Password", Toast.LENGTH_LONG).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this,error.toString(),Toast.LENGTH_LONG ).show();
+                        Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
-                }){
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<String,String>();
-                map.put(KEY_EMAIL,email);
-                map.put(KEY_PASSWORD,password);
+                Map<String, String> map = new HashMap<String, String>();
+                map.put(KEY_EMAIL, email);
+                map.put(KEY_PASSWORD, password);
                 return map;
             }
         };
@@ -102,35 +101,45 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void openProfile(){
+    private void openProfile() {
         Intent intent = new Intent(this, DashBoard.class);
         saveUserEmail();
         startActivity(intent);
     }
 
     //This method saves user Email address on SharedPreference, for later use on other activity.
-    private void saveUserEmail(){
+    private void saveUserEmail() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(KEY_EMAIL, email);
         editor.apply();
     }
 
+    //This method saves user Type (Student/Teacher)on SharedPreference, for later use on other activity/fragment.
+    private void saveUserType(String userType) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(KEY_USERTYPE, userType);
+        editor.apply();
+    }
+
     public void btnClicked(View view) {
 
-        if(view == studentSignUpBtn){
+        if (view == studentSignUpBtn) {
 
             //click listener for (create new Account) Button. clicking this Button makes intent for SignupActivity.
-                    Intent newAccountIntent = new Intent(LoginActivity.this, SignupActivity.class);
-                    startActivity(newAccountIntent);
+            saveUserType("student");
+            Intent newAccountIntent = new Intent(LoginActivity.this, SignupActivity.class);
+            startActivity(newAccountIntent);
 
-        } else if(view == teacherSignUpBtn){
+        } else if (view == teacherSignUpBtn) {
 
             //click listener for (create new Account) Button. clicking this Button makes intent for SignupActivity.
-                    Intent newAccountIntent = new Intent(LoginActivity.this, SignupActivity.class);
-                    startActivity(newAccountIntent);
+            saveUserType("teacher");
+            Intent newAccountIntent = new Intent(LoginActivity.this, SignupActivity.class);
+            startActivity(newAccountIntent);
 
-        } else if(view == loginBtn){
+        } else if (view == loginBtn) {
 
             progressBar.setVisibility(View.VISIBLE);
             userLogin();

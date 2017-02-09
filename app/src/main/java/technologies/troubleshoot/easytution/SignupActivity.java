@@ -1,15 +1,19 @@
 package technologies.troubleshoot.easytution;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,6 +24,8 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import static technologies.troubleshoot.easytution.LoginActivity.KEY_EMAIL;
 
 
 /**
@@ -46,11 +52,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     RequestQueue requestQueue;
     Spinner gender;
     ArrayAdapter spinnerAdapter;
-    String user_gender, user_type = "student";
+    String user_gender, user_type;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_signup);
         //Attaching all widgets to their corresponding viewID;
         nextBtn = (Button) findViewById(R.id.nextToCategoryBtn_id);
@@ -61,6 +68,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         reEnteredPassEditText = (EditText) findViewById(R.id.Signup_Password_ReEnter_EditText_id);
         phoneNumber = (EditText) findViewById(R.id.Signup_Phone_EditText_id);
         instituteName = (EditText) findViewById(R.id.Signup_Institute_EditText_id);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        user_type = preferences.getString(KEY_USERTYPE, "");
 
         gender = (Spinner) findViewById(R.id.Signup_UserType_Spinner_id);
 
