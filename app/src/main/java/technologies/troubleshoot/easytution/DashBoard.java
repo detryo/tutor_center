@@ -60,18 +60,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /*if (userType.equals("teacher")){
-
-            Menu menu =navigationView.getMenu();
-
-            MenuItem target = menu.findItem(R.id.nav_new_post_id);
-
-            target.setVisible(false);
-
-        }*/
-
-        /*if (userType.equals("teacher"))
-        navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(false);*/
 
         //((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewEmail)).setText(email);
 
@@ -133,8 +121,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         } else if (id == R.id.nav_profile_id) {
 
-            /*Log.v("User Type : ", "" + userType);*/
-
             if (userType.equals("student")){
 
                 getSupportFragmentManager().beginTransaction()
@@ -182,8 +168,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             String email;
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             email = preferences.getString(SP_EMAIL, "");
-
-            Log.v("2 Email :", " " + email);
 
             String url = Config.DATA_URL+email;
             StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
