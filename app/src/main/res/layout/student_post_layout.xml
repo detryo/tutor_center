@@ -159,6 +159,11 @@
             android:text="@string/student_post_btn"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
+        <ProgressBar
+            android:id="@+id/student_post_progress_bar_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </ScrollView>

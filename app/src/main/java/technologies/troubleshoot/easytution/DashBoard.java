@@ -25,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.InetAddress;
+
 public class DashBoard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     String userType;
@@ -38,6 +40,10 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         if (!(getSharedPreferences("informme", 0).getBoolean("isLoggedIn", false))) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+        } else {
+
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            userType = preferences.getString(Config.SP_USERTYPE, "");
         }
 
     }
@@ -105,19 +111,19 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         } else if (id == R.id.nav_profile_id) {
 
-            if (userType.equals("student")){
+                if (userType.equals("student")) {
 
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_news_feed, new StudentProfileInfoFragment())
-                        .commit();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_news_feed, new StudentProfileInfoFragment())
+                            .commit();
 
-            } else if(userType.equals("teacher")){
+                } else if (userType.equals("teacher")) {
 
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_news_feed, new TeacherProfileFragment())
-                        .commit();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_news_feed, new TeacherProfileFragment())
+                            .commit();
 
-            }
+                }
 
 
         } else if (id == R.id.nav_log_out_id) {
@@ -167,7 +173,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(DashBoard.this, "Stop using this app", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DashBoard.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -206,5 +212,15 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
     }
 
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
 
 }

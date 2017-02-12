@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -54,7 +55,11 @@ public class JobFeedFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        getStatus();
+
+        if (isInternetAvailable()){
+            getStatus();
+        }
+
     }
 
     public JobFeedFragment() {
@@ -87,13 +92,26 @@ public class JobFeedFragment extends Fragment {
         int id = item.getItemId();
 
         if (id == R.id.action_refresh){
-            getStatus();
+
+            if (isInternetAvailable()){
+                getStatus();
+            }
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -204,7 +222,6 @@ public class JobFeedFragment extends Fragment {
 
         private JobFeedContent[] statusValue(String response) throws JSONException {
 
-            //Log.v("Response", "value : " + response);
             JSONObject jsonObject = new JSONObject(response);
             JSONArray result = jsonObject.getJSONArray(JSON_ARRAY);
 

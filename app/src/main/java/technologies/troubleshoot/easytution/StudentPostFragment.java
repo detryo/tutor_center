@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -65,6 +66,7 @@ public class StudentPostFragment extends Fragment {
     LinearLayout calenderView;
     TextView calenderText;
     Button postBtn;
+    ProgressBar progressBar;
 
     public StudentPostFragment() {
 
@@ -96,6 +98,10 @@ public class StudentPostFragment extends Fragment {
         calendar = (CalendarView) rootView.findViewById(R.id.calendar_id);
 
         postBtn = (Button) rootView.findViewById(R.id.job_post_btn_id);
+
+        progressBar = (ProgressBar) rootView.findViewById(R.id.student_post_progress_bar_id);
+
+        progressBar.setVisibility(View.GONE);
 
         calendar.setVisibility(View.GONE);
 
@@ -190,22 +196,42 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                progressBar.setVisibility(View.VISIBLE);
+                postBtn.setVisibility(View.GONE);
+
                 title = titleEditText.getText().toString();
                 subjects = subjectsEditText.getText().toString();
                 salary = salaryEditText.getText().toString();
                 address = addressEditText.getText().toString();
                 additionalInfo = additionalInfoEditText.getText().toString();
+
                 if (title.trim().equals("")){
+
                     titleEditText.setError("Post Title Required!!");
+                    progressBar.setVisibility(View.GONE);
+                    postBtn.setVisibility(View.VISIBLE);
+
                 }
                 else if (subjects.trim().equals("")){
+
                     subjectsEditText.setError("Subject Name Required!!");
+                    progressBar.setVisibility(View.GONE);
+                    postBtn.setVisibility(View.VISIBLE);
+
                 }
                 else if (salary.trim().equals("")){
+
                     salaryEditText.setError("Salary Required!!");
+                    progressBar.setVisibility(View.GONE);
+                    postBtn.setVisibility(View.VISIBLE);
+
                 }
                 else if (address.trim().equals("")){
+
                     addressEditText.setError("Address Required!!");
+                    progressBar.setVisibility(View.GONE);
+                    postBtn.setVisibility(View.VISIBLE);
+
                 }
 
                 String email;
@@ -213,6 +239,9 @@ public class StudentPostFragment extends Fragment {
                 email = preferences.getString(Config.SP_EMAIL, "");
 
                 postStatus(email, title, numOfDays, tutorGender, category, courses, subjects, dateToStart, salary, address, additionalInfo);
+
+                progressBar.setVisibility(View.GONE);
+                postBtn.setVisibility(View.VISIBLE);
 
                 /*Log.v("Fields", " Title : " + title  + " Days : " + numOfDays + " TGender : " + tutorGender + " Category : " + category + " Courses : " + courses + " Sub : " + subjects + " Date : " + dateToStart + " Salary : " + salary + " address : "+ additionalInfo);*/
 
