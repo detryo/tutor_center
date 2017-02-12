@@ -3,6 +3,7 @@ package technologies.troubleshoot.easytution;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,7 +11,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -26,8 +26,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.net.InetAddress;
 
 public class DashBoard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -144,6 +142,14 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_news_feed, new SettingsFragment())
                     .commit();
+
+        } else if(id == R.id.nav_phone_admin_id){
+
+            String phone = "01776368588";
+
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            callIntent.setData(Uri.parse("tel:" + phone));
+            startActivity(callIntent);
 
         }
 
