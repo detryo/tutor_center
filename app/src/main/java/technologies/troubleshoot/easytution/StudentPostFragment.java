@@ -1,6 +1,8 @@
 package technologies.troubleshoot.easytution;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -33,8 +35,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static technologies.troubleshoot.easytution.LoginActivity.SP_EMAIL;
-
 /**
  * Created by kaizer on 2/2/17.
  */
@@ -45,6 +45,7 @@ public class StudentPostFragment extends Fragment {
     /*public static final String JSON_ARRAY = "job_post";*/
     public static String DATE_TO_START = "date_to_start";
     public static String ADDITIONAL_INFO = "content";
+    public static String KEY_EMAIL = "email";
 
     public static String TITLE = "title";
     public static String DAYS_IN_WEEK = "days_in_week";
@@ -59,12 +60,11 @@ public class StudentPostFragment extends Fragment {
     Spinner categorySpinner, classSpinner, tutorGenderSpinner, numOfDaysSpinner;
     ArrayList categoryListSpinner, classListSpinner;
     ArrayAdapter<String> categoryAdapter, classAdapter;
-    String title, numOfDays, tutorGender, category, courses, subjects, dateToStart, salary, additionalInfo;
-    EditText titleEditText, subjectsEditText, salaryEditText, additionalInfoEditText;
+    String title, numOfDays, tutorGender, category, courses, subjects, dateToStart, salary, additionalInfo, address;
+    EditText titleEditText, subjectsEditText, salaryEditText, additionalInfoEditText, addressEditText;
     LinearLayout calenderView;
     TextView calenderText;
     Button postBtn;
-    ScrollView scrollView;
 
     public StudentPostFragment() {
 
@@ -84,6 +84,7 @@ public class StudentPostFragment extends Fragment {
         subjectsEditText = (EditText) rootView.findViewById(R.id.job_post_subject_id);
         salaryEditText = (EditText) rootView.findViewById(R.id.job_post_salary_id);
         additionalInfoEditText = (EditText) rootView.findViewById(R.id.job_post_additional_info_id);
+        addressEditText = (EditText) rootView.findViewById(R.id.job_address_id);
 
         categorySpinner = (Spinner) rootView.findViewById(R.id.spinner_category_id);
         classSpinner = (Spinner) rootView.findViewById(R.id.spinner_class_id);
@@ -155,7 +156,7 @@ public class StudentPostFragment extends Fragment {
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
                 month++;
-                dateToStart = "" + year + "-" + month + "-" + dayOfMonth;
+                dateToStart = "" + dayOfMonth + "-" + month + "-" + year;
                 calenderText.setText(dateToStart);
                 calenderView.setVisibility(View.VISIBLE);
                 calendar.setVisibility(View.GONE);
@@ -192,6 +193,7 @@ public class StudentPostFragment extends Fragment {
                 title = titleEditText.getText().toString();
                 subjects = subjectsEditText.getText().toString();
                 salary = salaryEditText.getText().toString();
+                address = addressEditText.getText().toString();
                 additionalInfo = additionalInfoEditText.getText().toString();
                 if (title.trim().equals("")){
                     titleEditText.setError("Post Title Required!!");
@@ -202,9 +204,15 @@ public class StudentPostFragment extends Fragment {
                 else if (salary.trim().equals("")){
                     salaryEditText.setError("Salary Required!!");
                 }
+                else if (address.trim().equals("")){
+                    addressEditText.setError("Address Required!!");
+                }
 
+                String email;
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                email = preferences.getString(Config.SP_EMAIL, "");
 
-                postStatus("xyz@gmail.com", title, numOfDays, tutorGender, category, courses, subjects, dateToStart, salary, "address", additionalInfo);
+                postStatus(email, title, numOfDays, tutorGender, category, courses, subjects, dateToStart, salary, address, additionalInfo);
 
                 /*Log.v("Fields", " Title : " + title  + " Days : " + numOfDays + " TGender : " + tutorGender + " Category : " + category + " Courses : " + courses + " Sub : " + subjects + " Date : " + dateToStart + " Salary : " + salary + " address : "+ additionalInfo);*/
 
@@ -276,7 +284,7 @@ public class StudentPostFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put(SP_EMAIL, email);
+                params.put(KEY_EMAIL, email);
                 params.put(TITLE, title);
                 params.put(DAYS_IN_WEEK, days_in_week);
                 params.put(PREFERRED_TEACHER_GENDER, preferred_teacher_gender);

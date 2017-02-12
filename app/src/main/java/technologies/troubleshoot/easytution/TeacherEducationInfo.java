@@ -48,10 +48,15 @@ public class TeacherEducationInfo extends Fragment {
 
     Button editEducationInfoBtn, saveEducationInfoBtn;
 
+    String email;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.teacher_educational_info_layout, container, false);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        email = preferences.getString(Config.SP_EMAIL, "");
 
         lastLevelOfStudyEditText = (EditText) rootView.findViewById(R.id.last_level_of_study_edit_view_id);
         majorEditText = (EditText) rootView.findViewById(R.id.major_group_edit_view_id);
@@ -80,7 +85,7 @@ public class TeacherEducationInfo extends Fragment {
             @Override
             public void onClick(View v) {
 
-                updateEducationInfo("mamun@upwork.com", lastLevelOfStudyEditText.getText().toString(), majorEditText.getText().toString(), cgpaEditText.getText().toString(), yearOfPassingEditText.getText().toString(), curriculumEditText.getText().toString(), fromEditText.getText().toString(), toEditText.getText().toString());
+                updateEducationInfo(email, lastLevelOfStudyEditText.getText().toString(), majorEditText.getText().toString(), cgpaEditText.getText().toString(), yearOfPassingEditText.getText().toString(), curriculumEditText.getText().toString(), fromEditText.getText().toString(), toEditText.getText().toString());
                 setEditTextEnableOrDisable(false);
 
             }
@@ -130,9 +135,6 @@ public class TeacherEducationInfo extends Fragment {
 
     private void fetchEducationInfo(){
 
-        String email = "mamun@upwork.com";
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        //email = preferences.getString(SP_EMAIL, "");
         String url = Config.FETCH_EDUCATION_INFO_URL + email;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
@@ -167,14 +169,9 @@ public class TeacherEducationInfo extends Fragment {
             fromEditText.setText(json.getString(FROM_DATE));
             toEditText.setText(json.getString(TO_DATE));
 
-            /*Log.v("Result", " " + additionalNumber);*/
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //set the username -- that is fetched from database
-        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewUserName)).setText(name);*/
 
     }
 

@@ -97,9 +97,19 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(SignupActivity.this, "Successfully Registered", Toast.LENGTH_LONG).show();
-                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(i);
+
+                        if (response.trim().equals("success")) {
+                            SharedPreferences sp = getSharedPreferences("informme", 0);
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putBoolean("isLoggedIn", true);
+                            editor.apply();
+                            openProfile(email);
+                        } else {/*
+                            progressBar.setVisibility(View.GONE);
+                            loginBtn.setVisibility(View.VISIBLE);*/
+                            Toast.makeText(SignupActivity.this, "Invalid email ID already exists", Toast.LENGTH_LONG).show();
+                        }
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -178,4 +188,20 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
                 + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
     }
+
+    private void openProfile(String email) {
+
+        Intent intent = new Intent(this, DashBoard.class);
+        saveUserEmail(email);
+        startActivity(intent);
+    }
+
+    //This method saves user Email address on SharedPreference, for later use on other activity.
+    private void saveUserEmail(String email) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Config.SP_EMAIL, email);
+        editor.apply();
+    }
+
 }

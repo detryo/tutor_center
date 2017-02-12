@@ -8,9 +8,9 @@ public class JobFeedContent {
 
     //All private variables of this class is declared here.
     private int imageResourceId;
-    private String jobTitle, jobContent, salary, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location, postId;
+    private String jobTitle, jobContent, salary, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location, postId, userName, statusTime;
 
-    public JobFeedContent(int imageResourceId, String jobTitle, String  salary, String preferred_medium, String classOfStudent, String daysPerWeek, String dateOfStart, String tutorGenderPref, String subject, String location, String jobContent, String postId){
+    public JobFeedContent(int imageResourceId, String jobTitle, String  salary, String preferred_medium, String classOfStudent, String daysPerWeek, String dateOfStart, String tutorGenderPref, String subject, String location, String jobContent, String postId, String userName, String statusTime){
 
         this.imageResourceId = imageResourceId;
         this.jobTitle = jobTitle;
@@ -24,38 +24,18 @@ public class JobFeedContent {
         this.location = location;
         this.jobContent = jobContent;
         this.postId = postId;
-
-
-    }
-
-    public JobFeedContent(int imageResourceId) {
-
-        this.imageResourceId = imageResourceId;
-    }
-
-    public int getImageRecourseId(){
-
-        return imageResourceId;
+        this.userName = userName;
+        this.statusTime = statusTime;
 
     }
 
-    public String getJobTitle(){
+    public int getImageRecourseId() { return imageResourceId; }
 
-        return jobTitle;
+    public String getJobTitle() { return jobTitle; }
 
-    }
+    public String  getSalary() { return salary; }
 
-    public String  getSalary(){
-
-        return salary;
-
-    }
-
-    public String getJobContent(){
-
-        return jobContent;
-
-    }
+    public String getJobContent() { return jobContent; }
 
     public String getPreferred_medium() {
         return preferred_medium;
@@ -87,5 +67,13 @@ public class JobFeedContent {
 
     public String getPostId() {
         return postId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getStatusTime() {
+        return statusTime;
     }
 }

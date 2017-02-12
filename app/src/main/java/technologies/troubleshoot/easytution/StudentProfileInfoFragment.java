@@ -43,10 +43,15 @@ public class StudentProfileInfoFragment extends Fragment{
 
     Button editStudentInfoBtn, saveStudentInfoBtn;
 
+    String email;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.student_profile_info, container, false);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        email = preferences.getString(Config.SP_EMAIL, "");
 
         refPersonNameEditText = (EditText) rootView.findViewById(R.id.ref_person_name_edit_view_student_id);
         contactNumberEditText = (EditText) rootView.findViewById(R.id.contact_number_edit_view_student_id);
@@ -71,7 +76,7 @@ public class StudentProfileInfoFragment extends Fragment{
             @Override
             public void onClick(View v) {
 
-                updatePersonalInfo("smk@gmail.com", refPersonNameEditText.getText().toString(), contactNumberEditText.getText().toString(), relationEditText.getText().toString());
+                updatePersonalInfo(email, refPersonNameEditText.getText().toString(), contactNumberEditText.getText().toString(), relationEditText.getText().toString());
 
                 setEditTextEnableOrDisable(false);
 
@@ -125,9 +130,6 @@ public class StudentProfileInfoFragment extends Fragment{
 
     private void fetchStudentInfo(){
 
-        String email = "smk@gmail.com";
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        //email = preferences.getString(SP_EMAIL, "");
         String url = Config.FETCH_STUDENT_INFO_URL + email;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override

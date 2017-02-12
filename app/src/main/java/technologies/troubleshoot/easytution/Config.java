@@ -11,6 +11,8 @@ public class Config {
     public static final String FETCH_STUDENT_INFO_URL = "http://tuition.troubleshoot-tech.com/showstudentinfo.php?email=";
     public static final String KEY_NAME = "username";
     public static final String KEY_USERTYPE = "user_type";
+    public static final String SP_EMAIL = "email";
+    public static final String SP_USERTYPE = "user_type";
 
     public static final String JSON_ARRAY = "result";
 }

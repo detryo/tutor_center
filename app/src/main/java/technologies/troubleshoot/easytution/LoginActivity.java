@@ -34,11 +34,9 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
 
     public static final String LOGIN_URL = "http://tuition.troubleshoot-tech.com/login.php";
-    public static final String SP_EMAIL = "email";
     public static final String KEY_EMAIL = "email";
     public static final String SP_USERNAME = "username";
     public static final String KEY_USERNAME = "username";
-    public static final String SP_USERTYPE = "user_type";
     public static final String KEY_USERTYPE = "user_type";
     public static final String KEY_PASSWORD = "password";
 
@@ -116,7 +114,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void openProfile() {
 
-        //getUserDetail();
         Intent intent = new Intent(this, DashBoard.class);
         saveUserEmail();
         startActivity(intent);
@@ -126,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
     private void saveUserEmail() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(SP_EMAIL, email);
+        editor.putString(Config.SP_EMAIL, email);
         editor.apply();
     }
 
@@ -134,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
     private void saveUserType(String userType) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(SP_USERTYPE, userType);
+        editor.putString(Config.KEY_USERTYPE, userType);
         editor.apply();
     }
 
@@ -164,26 +161,4 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-   /* private void showJSON(String response) {
-        String userType = "", userName = "";
-
-        try {
-            JSONObject jsonObject = new JSONObject(response);
-            JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
-            JSONObject json = result.getJSONObject(0);
-            userName = json.getString(KEY_USERNAME);
-            userType = json.getString(KEY_USERTYPE);
-
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(SP_USERNAME, userName);
-            editor.apply();
-
-            saveUserType(userType);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }*/
 }

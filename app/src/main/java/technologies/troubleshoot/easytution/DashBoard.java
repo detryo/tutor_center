@@ -1,6 +1,5 @@
 package technologies.troubleshoot.easytution;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -12,8 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,10 +24,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import static technologies.troubleshoot.easytution.LoginActivity.SP_EMAIL;
-import static technologies.troubleshoot.easytution.LoginActivity.SP_USERNAME;
-import static technologies.troubleshoot.easytution.LoginActivity.SP_USERTYPE;
-
 
 public class DashBoard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -60,28 +53,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        //((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewEmail)).setText(email);
-
-        /*// Find the view pager that will allow the user to swipe between fragments
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-
-        // Create an adapter that knows which fragment should be shown on each page
-        NewsFeedTabAdapter adapter = new NewsFeedTabAdapter(this, getSupportFragmentManager());
-
-        // Set the adapter onto the view pager
-        viewPager.setAdapter(adapter);
-
-        // Find the tab layout that shows the tabs
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-
-        // Connect the tab layout with the view pager. This will
-        //   1. Update the tab layout when the view pager is swiped
-        //   2. Update the view pager when a tab is selected
-        //   3. Set the tab layout's tab names with the view pager's adapter's titles
-        //      by calling onPageTitle()
-        tabLayout.setupWithViewPager(viewPager);
-*/
     }
 
     private void getUserDetail() {
@@ -167,7 +138,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
             String email;
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            email = preferences.getString(SP_EMAIL, "");
+            email = preferences.getString(Config.SP_EMAIL, "");
 
             String url = Config.DATA_URL+email;
             StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
@@ -205,10 +176,14 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             //set the username -- that is fetched from database
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewUserName)).setText(name);
+
             if (userType.equals("teacher"))
-            navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(false);
 
-
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(DashBoard.this);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString(Config.SP_USERTYPE, userType);
+            editor.apply();
 
         }
 
