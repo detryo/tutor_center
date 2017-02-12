@@ -30,6 +30,19 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
     String userType;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        //see if the user is logged in shared memory
+        //then redirect to dashboard
+        if (!(getSharedPreferences("informme", 0).getBoolean("isLoggedIn", false))) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
