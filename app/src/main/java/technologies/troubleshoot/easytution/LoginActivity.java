@@ -1,9 +1,11 @@
 package technologies.troubleshoot.easytution;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -83,14 +85,42 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             progressBar.setVisibility(View.GONE);
                             loginBtn.setVisibility(View.VISIBLE);
-                            Toast.makeText(LoginActivity.this, "Invalid email ID or Password", Toast.LENGTH_LONG).show();
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
+                            builder1.setMessage("Invalid Username or Password");
+                            builder1.setCancelable(true);
+
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                        loginBtn.setVisibility(View.VISIBLE);
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
+                        builder1.setMessage("No Connection");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
                     }
                 }) {
             @Override
