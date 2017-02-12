@@ -17,40 +17,169 @@
             android:layout_gravity="right"
             android:text="Edit"/>
 
-            <EditText
-                android:hint="Last level of study"
-                android:id="@+id/last_level_of_study_edit_view_id"
-                android:layout_width="match_parent"
-                android:inputType="textAutoCorrect"
-                android:layout_height="wrap_content" />
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#eaeaea"
+            android:textColor="#000000"
+            android:text="SSC Information"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-            <EditText
-                android:id="@+id/major_group_edit_view_id"
-                android:layout_width="match_parent"
-                android:hint="Major/Group"
-                android:inputType="textAutoCorrect"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:hint="CGPA"
-                android:id="@+id/cgpa_edit_view_id"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
-                android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <EditText
                 android:hint="Year of passing"
-                android:id="@+id/years_of_passing_edit_view_id"
+                android:id="@+id/ssc_years_of_passing_edit_view_id"
                 android:layout_width="match_parent"
                 android:inputType="date"
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:hint="Curriculam"
-                android:id="@+id/curriculum_edit_view_id"
+                android:id="@+id/ssc_major_group_edit_view_id"
                 android:layout_width="match_parent"
+                android:hint="Group"
                 android:inputType="textAutoCorrect"
                 android:layout_height="wrap_content" />
+
+            <EditText
+                android:hint="GPA"
+                android:id="@+id/ssc_gpa_edit_view_id"
+                android:layout_width="match_parent"
+                android:inputType="numberDecimal"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#eaeaea"
+            android:textColor="#000000"
+            android:text="HSC Information"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <EditText
+                android:hint="Year of passing"
+                android:id="@+id/hsc_years_of_passing_edit_view_id"
+                android:layout_width="match_parent"
+                android:inputType="date"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/hsc_major_group_edit_view_id"
+                android:layout_width="match_parent"
+                android:hint="Group"
+                android:inputType="textAutoCorrect"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:hint="GPA"
+                android:id="@+id/hsc_gpa_edit_view_id"
+                android:layout_width="match_parent"
+                android:inputType="numberDecimal"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#eaeaea"
+            android:textColor="#000000"
+            android:text="Under Grad. Information"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <EditText
+                android:hint="Year of passing"
+                android:id="@+id/under_grad_years_of_passing_edit_view_id"
+                android:layout_width="match_parent"
+                android:inputType="date"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/under_grad_major_group_edit_view_id"
+                android:layout_width="match_parent"
+                android:hint="Major"
+                android:inputType="textAutoCorrect"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:hint="CGPA"
+                android:id="@+id/under_grad_gpa_edit_view_id"
+                android:layout_width="match_parent"
+                android:inputType="numberDecimal"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#eaeaea"
+            android:textColor="#000000"
+            android:text="Masters Information"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <EditText
+                android:hint="Year of passing"
+                android:id="@+id/grad_years_of_passing_edit_view_id"
+                android:layout_width="match_parent"
+                android:inputType="date"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/grad_major_group_edit_view_id"
+                android:layout_width="match_parent"
+                android:hint="Major"
+                android:inputType="textAutoCorrect"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:hint="CGPA"
+                android:id="@+id/grad_gpa_edit_view_id"
+                android:layout_width="match_parent"
+                android:inputType="numberDecimal"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
