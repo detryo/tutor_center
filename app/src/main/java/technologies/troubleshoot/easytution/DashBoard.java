@@ -131,9 +131,13 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             startActivity(intent);
             finish();
 
-        } /*else if (id == R.id.nav_profile_id) {
+        } else if (id == R.id.nav_settings_id) {
 
-        }*/
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_news_feed, new SettingsFragment())
+                    .commit();
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
