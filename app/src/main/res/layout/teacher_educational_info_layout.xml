@@ -17,34 +17,12 @@
             android:layout_gravity="right"
             android:text="Edit"/>
 
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">-->
-
-           <!-- <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Last level of study : " />-->
-
             <EditText
                 android:hint="Last level of study"
                 android:id="@+id/last_level_of_study_edit_view_id"
                 android:layout_width="match_parent"
                 android:inputType="textAutoCorrect"
                 android:layout_height="wrap_content" />
-
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">-->
-
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Major/Group : " />-->
 
             <EditText
                 android:id="@+id/major_group_edit_view_id"
@@ -53,54 +31,12 @@
                 android:inputType="textAutoCorrect"
                 android:layout_height="wrap_content" />
 
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Institute Name : " />
-
-            <EditText
-                android:id="@+id/institute_name_edit_view_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>-->
-
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">-->
-
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CGPA : " />-->
-
             <EditText
                 android:hint="CGPA"
                 android:id="@+id/cgpa_edit_view_id"
                 android:layout_width="match_parent"
                 android:inputType="numberDecimal"
                 android:layout_height="wrap_content" />
-
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">-->
-
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Year of passing : " />-->
 
             <EditText
                 android:hint="Year of passing"
@@ -109,26 +45,12 @@
                 android:inputType="date"
                 android:layout_height="wrap_content" />
 
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">-->
-
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Curriculam : " />-->
-
             <EditText
                 android:hint="Curriculam"
                 android:id="@+id/curriculum_edit_view_id"
                 android:layout_width="match_parent"
                 android:inputType="textAutoCorrect"
                 android:layout_height="wrap_content" />
-
-        <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"

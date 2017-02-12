@@ -22,26 +22,26 @@
 
 
         <EditText
-            android:id="@+id/ref_person_name_edit_view_student_id"
+            android:id="@+id/previous_password_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Previous Password"
-            android:inputType="text" />
+            android:inputType="textPassword" />
 
         <EditText
-            android:id="@+id/contact_number_edit_view_student_id"
+            android:id="@+id/new_passowrd_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="New Password"
-            android:inputType="number" />
+            android:inputType="textPassword" />
 
 
         <EditText
-            android:id="@+id/relation_edit_view_student_id"
+            android:id="@+id/confirm_passwordid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
-            android:inputType="text" />
+            android:inputType="textPassword" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -50,6 +50,7 @@
             android:layout_marginTop="20dp">
 
             <Button
+                android:id="@+id/password_edit_btn_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -57,6 +58,7 @@
                 android:text="Edit" />
 
             <Button
+                android:id="@+id/password_save_btn_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -78,11 +80,11 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
         <EditText
-            android:id="@+id/user_phone_number_change_id"
+            android:id="@+id/user_phone_number_edit_text_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="New number"
-            android:inputType="number" />
+            android:inputType="phone" />
 
 
         <RelativeLayout
@@ -91,6 +93,7 @@
             android:layout_marginTop="20dp">
 
             <Button
+                android:id="@+id/phone_number_edit_btn_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -98,6 +101,7 @@
                 android:text="Edit" />
 
             <Button
+                android:id="@+id/phone_number_save_btn_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

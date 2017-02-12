@@ -1,5 +1,6 @@
 package technologies.troubleshoot.easytution;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -40,7 +43,8 @@ public class JobFeedFragment extends Fragment {
     public static String POST_ID = "post_id";
     public static String ADDITIONAL_INFO = "content";
     public static String DATE_TO_START = "date_to_start";
-
+    public static String ADDRESS = "address";
+    public static String SUBJECT = "subject";
     public static String TITLE = "title";
     public static String DAYS_IN_WEEK = "days_in_week";
     public static String PREFERRED_TEACHER_GENDER = "preferred_teacher_gender";
@@ -50,10 +54,13 @@ public class JobFeedFragment extends Fragment {
 
     private JobAdapter jobAdapter;
 
+    RecyclerView recyclerView;
+
     @Override
     public void onStart() {
         super.onStart();
         getStatus();
+
     }
 
     public JobFeedFragment() {
@@ -85,14 +92,15 @@ public class JobFeedFragment extends Fragment {
 
         int id = item.getItemId();
 
-        if (id == R.id.action_refresh){
+        if (id == R.id.action_refresh) {
+
             getStatus();
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -101,16 +109,17 @@ public class JobFeedFragment extends Fragment {
 
         ArrayList<JobFeedContent> job = new ArrayList<>();
 
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "));
+        job.add(new JobFeedContent(0, " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "));
 
         Drawable dividerDrawable = ContextCompat.getDrawable(getContext(), R.drawable.divider);
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.newsView_newsFeed_RecyclerView_id);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.newsView_newsFeed_RecyclerView_id);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         jobAdapter = new JobAdapter(getActivity(), job);
         recyclerView.setAdapter(jobAdapter);
 
         recyclerView.addItemDecoration(new ItemDecorator(dividerDrawable));
+        recyclerView.setVisibility(View.GONE);
 
         return rootView;
     }
@@ -191,7 +200,10 @@ public class JobFeedFragment extends Fragment {
                 }
 
                 try {
-                    return statusValue(statusStr);
+
+                    if (statusStr != null)
+                        return statusValue(statusStr);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -203,7 +215,6 @@ public class JobFeedFragment extends Fragment {
 
         private JobFeedContent[] statusValue(String response) throws JSONException {
 
-            //Log.v("Response", "value : " + response);
             JSONObject jsonObject = new JSONObject(response);
             JSONArray result = jsonObject.getJSONArray(JSON_ARRAY);
 
@@ -215,8 +226,7 @@ public class JobFeedFragment extends Fragment {
 
                 JSONObject json = result.getJSONObject(i);
 
-                nfc[i] = new JobFeedContent(R.mipmap.ic_launcher, json.optString(TITLE), json.optString(SALARY), json.optString(PREFERRED_MEDIUM), json.optString(CLASS), json.optString(DAYS_IN_WEEK), json.optString(DATE_TO_START), json.optString(PREFERRED_TEACHER_GENDER), "physics", "Dhaka", json.optString(ADDITIONAL_INFO), json.optString(POST_ID));
-
+                nfc[i] = new JobFeedContent(R.mipmap.ic_launcher, json.optString(TITLE), json.optString(SALARY), json.optString(PREFERRED_MEDIUM), json.optString(CLASS), json.optString(DAYS_IN_WEEK), json.optString(DATE_TO_START), json.optString(PREFERRED_TEACHER_GENDER), json.optString(SUBJECT), json.optString(ADDRESS), json.optString(ADDITIONAL_INFO), json.optString(POST_ID), json.optString(USER_NAME), json.optString(STATUS_TIME));
 
             }
 
@@ -226,9 +236,9 @@ public class JobFeedFragment extends Fragment {
 
         @Override
         protected void onPostExecute(JobFeedContent[] result) {
-            
-            if (result != null) {
 
+            if (result != null) {
+                recyclerView.setVisibility(View.VISIBLE);
                 jobAdapter.itemUpdated(result);
 
             }
