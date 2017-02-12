@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -61,11 +60,11 @@ public class TeacherEducationInfo extends Fragment {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         email = preferences.getString(Config.SP_EMAIL, "");
 
-        lastLevelOfStudyEditText = (EditText) rootView.findViewById(R.id.last_level_of_study_edit_view_id);
-        majorEditText = (EditText) rootView.findViewById(R.id.major_group_edit_view_id);
-        cgpaEditText = (EditText) rootView.findViewById(R.id.cgpa_edit_view_id);
-        yearOfPassingEditText = (EditText) rootView.findViewById(R.id.years_of_passing_edit_view_id);
-        curriculumEditText = (EditText) rootView.findViewById(R.id.curriculum_edit_view_id);
+        //lastLevelOfStudyEditText = (EditText) rootView.findViewById(R.id.last_level_of_study_edit_view_id);
+        majorEditText = (EditText) rootView.findViewById(R.id.ssc_major_group_edit_view_id);
+        cgpaEditText = (EditText) rootView.findViewById(R.id.ssc_gpa_edit_view_id);
+        yearOfPassingEditText = (EditText) rootView.findViewById(R.id.ssc_years_of_passing_edit_view_id);
+        //curriculumEditText = (EditText) rootView.findViewById(R.id.curriculum_edit_view_id);
         fromEditText = (EditText) rootView.findViewById(R.id.from_edit_view_id);
         toEditText = (EditText) rootView.findViewById(R.id.to_edit_view_id);
 
@@ -201,11 +200,9 @@ public class TeacherEducationInfo extends Fragment {
             JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
             JSONObject json = result.getJSONObject(0);
 
-            lastLevelOfStudyEditText.setText(json.getString(LAST_LEVEL_OF_STUDY));
             majorEditText.setText(json.getString(MAJOR));
             cgpaEditText.setText(json.getString(CGPA));
             yearOfPassingEditText.setText(json.getString(YEAR_OF_PASSING));
-            curriculumEditText.setText(json.getString(CURRICULUM));
             fromEditText.setText(json.getString(FROM_DATE));
             toEditText.setText(json.getString(TO_DATE));
 
@@ -217,11 +214,9 @@ public class TeacherEducationInfo extends Fragment {
 
     private void setEditTextEnableOrDisable(boolean state){
 
-        lastLevelOfStudyEditText.setEnabled(state);
         majorEditText.setEnabled(state);
         cgpaEditText.setEnabled(state);
         yearOfPassingEditText.setEnabled(state);
-        curriculumEditText.setEnabled(state);
         fromEditText.setEnabled(state);
         toEditText.setEnabled(state);
 
