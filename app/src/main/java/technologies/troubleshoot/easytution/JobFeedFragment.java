@@ -1,5 +1,6 @@
 package technologies.troubleshoot.easytution;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -52,13 +54,12 @@ public class JobFeedFragment extends Fragment {
 
     private JobAdapter jobAdapter;
 
+    RecyclerView recyclerView;
+
     @Override
     public void onStart() {
         super.onStart();
-
-        if (isInternetAvailable()){
-            getStatus();
-        }
+        getStatus();
 
     }
 
@@ -91,26 +92,14 @@ public class JobFeedFragment extends Fragment {
 
         int id = item.getItemId();
 
-        if (id == R.id.action_refresh){
+        if (id == R.id.action_refresh) {
 
-            if (isInternetAvailable()){
-                getStatus();
-            }
+            getStatus();
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public boolean isInternetAvailable() {
-        try {
-            InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
-            return !ipAddr.equals("");
-
-        } catch (Exception e) {
-            return false;
-        }
-
     }
 
     @Override
@@ -120,16 +109,17 @@ public class JobFeedFragment extends Fragment {
 
         ArrayList<JobFeedContent> job = new ArrayList<>();
 
-        job.add(new JobFeedContent(R.mipmap.ic_launcher, " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "));
+        job.add(new JobFeedContent(0, " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "));
 
         Drawable dividerDrawable = ContextCompat.getDrawable(getContext(), R.drawable.divider);
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.newsView_newsFeed_RecyclerView_id);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.newsView_newsFeed_RecyclerView_id);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         jobAdapter = new JobAdapter(getActivity(), job);
         recyclerView.setAdapter(jobAdapter);
 
         recyclerView.addItemDecoration(new ItemDecorator(dividerDrawable));
+        recyclerView.setVisibility(View.GONE);
 
         return rootView;
     }
@@ -210,7 +200,10 @@ public class JobFeedFragment extends Fragment {
                 }
 
                 try {
-                    return statusValue(statusStr);
+
+                    if (statusStr != null)
+                        return statusValue(statusStr);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -243,9 +236,9 @@ public class JobFeedFragment extends Fragment {
 
         @Override
         protected void onPostExecute(JobFeedContent[] result) {
-            
-            if (result != null) {
 
+            if (result != null) {
+                recyclerView.setVisibility(View.VISIBLE);
                 jobAdapter.itemUpdated(result);
 
             }

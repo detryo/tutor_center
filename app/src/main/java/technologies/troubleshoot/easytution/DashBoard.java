@@ -1,5 +1,6 @@
 package technologies.troubleshoot.easytution;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -174,6 +176,8 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Toast.makeText(DashBoard.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+
+
                         }
                     });
 
@@ -208,17 +212,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             editor.putString(Config.SP_USERTYPE, userType);
             editor.apply();
 
-        }
-
-    }
-
-    public boolean isInternetAvailable() {
-        try {
-            InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
-            return !ipAddr.equals("");
-
-        } catch (Exception e) {
-            return false;
         }
 
     }
