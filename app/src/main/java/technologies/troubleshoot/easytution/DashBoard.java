@@ -11,6 +11,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -181,8 +182,20 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(DashBoard.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(DashBoard.this);
+                            builder1.setMessage("No Internet Connection");
+                            builder1.setCancelable(true);
 
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
 
                         }
                     });

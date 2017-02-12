@@ -40,14 +40,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*//see if the user is logged in shared memory
-        //then redirect to dashboard
-        if (getSharedPreferences("informme", 0).getBoolean("isLoggedIn", false)) {
-            Intent intent = new Intent(this, DashBoard.class);
-            startActivity(intent);
-        }*/
-
-        //setContentView(R.layout.activity_login);
         setContentView(R.layout.activity_login);
 
         //Attaching all the widgets to their corresponding view id.
