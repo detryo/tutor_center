@@ -81,7 +81,7 @@ public class TeacherEducationInfo extends Fragment {
 
     ImageView idCardImageView;
 
-    String email, idCardUrl;
+    String email;
 
     View rootView;
 
