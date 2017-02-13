@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn = (Button) findViewById(R.id.loginBtn_id);
         idEditText = (EditText) findViewById(R.id.usernameEditText_id);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText_id);
-        studentSignUpBtn = (Button) findViewById(R.id.newAccountBtn_as_student_id);
-        teacherSignUpBtn = (Button) findViewById(R.id.newAccountBtn_as_teacher_id);
+        studentSignUpBtn = (Button) findViewById(R.id.newAccountBtn_student_id);
+        teacherSignUpBtn = (Button) findViewById(R.id.newAccountBtn_teacher_id);
 
         progressBar = (ProgressBar) findViewById(R.id.login_progress_view_id);
 
