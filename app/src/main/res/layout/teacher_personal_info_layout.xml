@@ -56,7 +56,7 @@
                 android:id="@+id/linked_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Linked ID"
+                android:hint="Linked In ID"
                 android:inputType="text" />
 
 

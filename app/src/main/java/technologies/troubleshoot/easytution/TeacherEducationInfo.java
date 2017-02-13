@@ -1,16 +1,17 @@
 package technologies.troubleshoot.easytution;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * Created by kaizer on 2/6/17.
@@ -48,16 +50,21 @@ public class TeacherEducationInfo extends Fragment {
 
     Button editEducationInfoBtn, saveEducationInfoBtn;
 
+    String email;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.teacher_educational_info_layout, container, false);
 
-        lastLevelOfStudyEditText = (EditText) rootView.findViewById(R.id.last_level_of_study_edit_view_id);
-        majorEditText = (EditText) rootView.findViewById(R.id.major_group_edit_view_id);
-        cgpaEditText = (EditText) rootView.findViewById(R.id.cgpa_edit_view_id);
-        yearOfPassingEditText = (EditText) rootView.findViewById(R.id.years_of_passing_edit_view_id);
-        curriculumEditText = (EditText) rootView.findViewById(R.id.curriculum_edit_view_id);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        email = preferences.getString(Config.SP_EMAIL, "");
+
+        //lastLevelOfStudyEditText = (EditText) rootView.findViewById(R.id.last_level_of_study_edit_view_id);
+        majorEditText = (EditText) rootView.findViewById(R.id.ssc_major_group_edit_view_id);
+        cgpaEditText = (EditText) rootView.findViewById(R.id.ssc_gpa_edit_view_id);
+        yearOfPassingEditText = (EditText) rootView.findViewById(R.id.ssc_years_of_passing_edit_view_id);
+        //curriculumEditText = (EditText) rootView.findViewById(R.id.curriculum_edit_view_id);
         fromEditText = (EditText) rootView.findViewById(R.id.from_edit_view_id);
         toEditText = (EditText) rootView.findViewById(R.id.to_edit_view_id);
 
@@ -80,7 +87,7 @@ public class TeacherEducationInfo extends Fragment {
             @Override
             public void onClick(View v) {
 
-                updateEducationInfo("mamun@upwork.com", lastLevelOfStudyEditText.getText().toString(), majorEditText.getText().toString(), cgpaEditText.getText().toString(), yearOfPassingEditText.getText().toString(), curriculumEditText.getText().toString(), fromEditText.getText().toString(), toEditText.getText().toString());
+                updateEducationInfo(email, lastLevelOfStudyEditText.getText().toString(), majorEditText.getText().toString(), cgpaEditText.getText().toString(), yearOfPassingEditText.getText().toString(), curriculumEditText.getText().toString(), fromEditText.getText().toString(), toEditText.getText().toString());
                 setEditTextEnableOrDisable(false);
 
             }
@@ -97,15 +104,39 @@ public class TeacherEducationInfo extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getContext(), "Successfully Updated", Toast.LENGTH_LONG).show();
-                        /*Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(i);*/
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                        builder1.setMessage("Successfully Updated");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                        builder1.setMessage("No Internet Connection");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
                     }
                 }) {
             @Override
@@ -130,9 +161,6 @@ public class TeacherEducationInfo extends Fragment {
 
     private void fetchEducationInfo(){
 
-        String email = "mamun@upwork.com";
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        //email = preferences.getString(SP_EMAIL, "");
         String url = Config.FETCH_EDUCATION_INFO_URL + email;
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
@@ -143,7 +171,20 @@ public class TeacherEducationInfo extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), "Connection error", Toast.LENGTH_LONG).show();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                        builder1.setMessage("Connection error");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
                     }
                 });
 
@@ -159,32 +200,23 @@ public class TeacherEducationInfo extends Fragment {
             JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
             JSONObject json = result.getJSONObject(0);
 
-            lastLevelOfStudyEditText.setText(json.getString(LAST_LEVEL_OF_STUDY));
             majorEditText.setText(json.getString(MAJOR));
             cgpaEditText.setText(json.getString(CGPA));
             yearOfPassingEditText.setText(json.getString(YEAR_OF_PASSING));
-            curriculumEditText.setText(json.getString(CURRICULUM));
             fromEditText.setText(json.getString(FROM_DATE));
             toEditText.setText(json.getString(TO_DATE));
-
-            /*Log.v("Result", " " + additionalNumber);*/
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //set the username -- that is fetched from database
-        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewUserName)).setText(name);*/
 
     }
 
     private void setEditTextEnableOrDisable(boolean state){
 
-        lastLevelOfStudyEditText.setEnabled(state);
         majorEditText.setEnabled(state);
         cgpaEditText.setEnabled(state);
         yearOfPassingEditText.setEnabled(state);
-        curriculumEditText.setEnabled(state);
         fromEditText.setEnabled(state);
         toEditText.setEnabled(state);
 

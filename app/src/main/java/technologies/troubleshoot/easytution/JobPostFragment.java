@@ -20,11 +20,13 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-import static technologies.troubleshoot.easytution.LoginActivity.SP_EMAIL;
 
 /**
  * Created by kaizer on 2/2/17.
  */
+
+
+/*Might need to delete this class*/
 
 public class JobPostFragment extends Fragment {
 
@@ -81,7 +83,7 @@ public class JobPostFragment extends Fragment {
             }
         });
 
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        /*calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
@@ -91,7 +93,7 @@ public class JobPostFragment extends Fragment {
                 calendar.setVisibility(View.GONE);
 
             }
-        });
+        });*/
 
         return rootView;
     }
@@ -116,7 +118,7 @@ public class JobPostFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put(SP_EMAIL, email);
+                params.put(Config.SP_EMAIL, email);
                 params.put(ADDITIONAL_INFO, content);
                 params.put(TITLE, title);
                 params.put(DAYS_IN_WEEK, days_in_week);

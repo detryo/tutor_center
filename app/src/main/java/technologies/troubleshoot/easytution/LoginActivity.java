@@ -1,18 +1,16 @@
 package technologies.troubleshoot.easytution;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.NavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -23,10 +21,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,12 +28,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
 
     public static final String LOGIN_URL = "http://tuition.troubleshoot-tech.com/login.php";
-    public static final String SP_EMAIL = "email";
     public static final String KEY_EMAIL = "email";
-    public static final String SP_USERNAME = "username";
-    public static final String KEY_USERNAME = "username";
-    public static final String SP_USERTYPE = "user_type";
-    public static final String KEY_USERTYPE = "user_type";
     public static final String KEY_PASSWORD = "password";
 
     Button loginBtn, studentSignUpBtn, teacherSignUpBtn;
@@ -51,14 +40,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //see if the user is logged in shared memory
-        //then redirect to dashboard
-        if (getSharedPreferences("informme", 0).getBoolean("isLoggedIn", false)) {
-            Intent intent = new Intent(this, DashBoard.class);
-            startActivity(intent);
-        }
-
-        //setContentView(R.layout.activity_login);
         setContentView(R.layout.activity_login);
 
         //Attaching all the widgets to their corresponding view id.
@@ -87,23 +68,56 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putBoolean("isLoggedIn", true);
                             editor.apply();
+
+                            progressBar.setVisibility(View.GONE);
+                            loginBtn.setVisibility(View.VISIBLE);
+
                             openProfile();
+                            finish();
                         } else {
                             progressBar.setVisibility(View.GONE);
                             loginBtn.setVisibility(View.VISIBLE);
-                            Toast.makeText(LoginActivity.this, "Invalid email ID or Password", Toast.LENGTH_LONG).show();
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
+                            builder1.setMessage("Invalid Username or Password");
+                            builder1.setCancelable(true);
+
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                        loginBtn.setVisibility(View.VISIBLE);
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
+                        builder1.setMessage("No Connection");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
+                Map<String, String> map = new HashMap<>();
                 map.put(KEY_EMAIL, email);
                 map.put(KEY_PASSWORD, password);
                 return map;
@@ -112,11 +126,11 @@ public class LoginActivity extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+
     }
 
     private void openProfile() {
 
-        //getUserDetail();
         Intent intent = new Intent(this, DashBoard.class);
         saveUserEmail();
         startActivity(intent);
@@ -126,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
     private void saveUserEmail() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(SP_EMAIL, email);
+        editor.putString(Config.SP_EMAIL, email);
         editor.apply();
     }
 
@@ -134,7 +148,7 @@ public class LoginActivity extends AppCompatActivity {
     private void saveUserType(String userType) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(SP_USERTYPE, userType);
+        editor.putString(Config.KEY_USERTYPE, userType);
         editor.apply();
     }
 
@@ -164,26 +178,4 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-   /* private void showJSON(String response) {
-        String userType = "", userName = "";
-
-        try {
-            JSONObject jsonObject = new JSONObject(response);
-            JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
-            JSONObject json = result.getJSONObject(0);
-            userName = json.getString(KEY_USERNAME);
-            userType = json.getString(KEY_USERTYPE);
-
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(SP_USERNAME, userName);
-            editor.apply();
-
-            saveUserType(userType);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }*/
 }

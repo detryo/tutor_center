@@ -1,6 +1,8 @@
 package technologies.troubleshoot.easytution;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +61,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
 
         //Corresponding views are populated
         holder.userImage.setImageResource(item.getImageRecourseId());
+        holder.userName.setText(item.getUserName());
+        holder.statusTime.setText(item.getStatusTime());
         holder.titleTextView.setText(item.getJobTitle());
         holder.salaryTextView.setText(item.getSalary());
         holder.preferred_medium.setText((item.getPreferred_medium()));
@@ -93,7 +97,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
         private View basicInfo;
         private View detailInfo;
         private ImageView userImage, clickIcon;
-        private TextView titleTextView, salaryTextView, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location, additionalInfo;
+        private TextView titleTextView, salaryTextView, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location, additionalInfo, userName, statusTime;
         private Button interestBtn;
         private String postId;
 
@@ -103,6 +107,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
             // Finding  all the View in activity_news_layout.xml with the ID and
             // assigning them to the corresponding view objects
             userImage = (ImageView) listItemView.findViewById(R.id.user_pro_pic_id);
+            userName = (TextView) listItemView.findViewById(R.id.post_user_name_job_feed_id);
+            statusTime = (TextView) listItemView.findViewById(R.id.date_of_job_feed_post_id);
             titleTextView = (TextView) listItemView.findViewById(R.id.title_text_view_id);
             salaryTextView = (TextView) listItemView.findViewById(R.id.salary_text_view_id);
             clickIcon = (ImageView) listItemView.findViewById(R.id.clickButton_id);
@@ -113,7 +119,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
             preferred_medium = (TextView) listItemView.findViewById(R.id.preferred_medium_job_feed_id);
             classOfStudent = (TextView) listItemView.findViewById(R.id.class_of_student_job_feed_id);
             daysPerWeek = (TextView) listItemView.findViewById(R.id.days_per_week_job_feed_id);
-            dateOfStart = (TextView) listItemView.findViewById(R.id.date_of_job_feed_post_id);
+            dateOfStart = (TextView) listItemView.findViewById(R.id.date_job_feed_id);
             tutorGenderPref = (TextView) listItemView.findViewById((R.id.gender_preference_job_feed_id));
             subject = (TextView) listItemView.findViewById(R.id.subject_jod_feed_id);
             location = (TextView) listItemView.findViewById(R.id.location_job_feed_id);
@@ -123,12 +129,13 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
             interestBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String email;
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+                    email = preferences.getString(Config.SP_EMAIL, "");
 
                     clickIcon.setVisibility(View.VISIBLE);
                     detailInfo.setVisibility(View.GONE);
-                    //use sharedpreference for email.
-                    //use sharedpreference for username.
-                    showInterest("xyz@gmail.com", "xyz", postId);
+                    showInterest(email, postId);
 
                 }
             });
@@ -156,12 +163,17 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
 
         }
 
-        private void showInterest(final String email, final String username, final String post_id) {
+        public void setPostId(String postId) {
+            this.postId = postId;
+        }
+
+        private void showInterest(final String email, final String post_id) {
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, INTERESTED_URL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+
                             Toast.makeText(context, "Successfully Requested", Toast.LENGTH_LONG).show();
 
                         }
@@ -169,25 +181,24 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+
                             Toast.makeText(context, "No Internet Connection", Toast.LENGTH_LONG).show();
+
                         }
                     }) {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put(USER_EMAIL, email);
-                    params.put(USER_NAME, username);
                     params.put(POST_ID, post_id);
                     return params;
                 }
 
             };
+
             RequestQueue requestQueue = Volley.newRequestQueue(context);
             requestQueue.add(stringRequest);
-        }
 
-        public void setPostId(String postId) {
-            this.postId = postId;
         }
     }
 }
