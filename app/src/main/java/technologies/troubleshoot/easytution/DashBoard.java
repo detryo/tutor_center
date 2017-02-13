@@ -5,7 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,8 +39,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 
 public class DashBoard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,7 +47,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
     private static final String USER_EMAIL = "email";
     private static final String USER_IMAGE = "profile_pic";
 
-    String userType, userImage;
+    String userType, userImageUrl;
     private Bitmap bitmap;
 
 
@@ -105,7 +104,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         });
 
 
-
     }
 
     private void getUserDetail() {
@@ -126,7 +124,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
     }
 
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -145,19 +142,19 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         } else if (id == R.id.nav_profile_id) {
 
-                if (userType.equals("student")) {
+            if (userType.equals("student")) {
 
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_news_feed, new StudentProfileInfoFragment())
-                            .commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_news_feed, new StudentProfileInfoFragment())
+                        .commit();
 
-                } else if (userType.equals("teacher")) {
+            } else if (userType.equals("teacher")) {
 
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_news_feed, new TeacherProfileFragment())
-                            .commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_news_feed, new TeacherProfileFragment())
+                        .commit();
 
-                }
+            }
 
 
         } else if (id == R.id.nav_log_out_id) {
@@ -177,7 +174,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                     .replace(R.id.content_news_feed, new SettingsFragment())
                     .commit();
 
-        } else if(id == R.id.nav_phone_admin_id){
+        } else if (id == R.id.nav_phone_admin_id) {
 
             String phone = "01776368588";
 
@@ -192,7 +189,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         return true;
     }
 
-    class FetchUserDetail extends AsyncTask<Void, Void, Void>{
+    class FetchUserDetail extends AsyncTask<Void, Void, Void> {
 
         public FetchUserDetail() {
             super();
@@ -205,7 +202,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             email = preferences.getString(Config.SP_EMAIL, "");
 
-            String url = Config.DATA_URL+email;
+            String url = Config.DATA_URL + email;
             StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -244,7 +241,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         }
 
         private void showJSON(String response) throws IOException {
-            String name="";
+            String name = "";
 
             try {
                 JSONObject jsonObject = new JSONObject(response);
@@ -252,7 +249,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                 JSONObject json = result.getJSONObject(0);
                 name = json.getString(Config.KEY_NAME);
                 userType = json.getString(Config.KEY_USERTYPE);
-                userImage = json.getString(USER_IMAGE);
+                userImageUrl = json.getString(USER_IMAGE);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -261,8 +258,11 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewUserName)).setText(name);
 
-            //URL url = new URL(userImage);
-            Picasso.with(DashBoard.this).load(userImage).into(((ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)));
+            //URL url = new URL(userImageUrl);
+
+
+            Picasso.with(DashBoard.this).load(userImageUrl).into(((ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)));
+
 
             //((ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)).setImageBitmap(bitmap);
 
@@ -282,16 +282,16 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && null != data && data.getData() != null){
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && null != data && data.getData() != null) {
             Uri filePath = data.getData();
-            try{
+            try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                 ((ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)).setImageBitmap(bitmap);
 
                 uploadImage();
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
@@ -332,7 +332,7 @@ String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
     }
 
-    public String getStringImage(Bitmap bmp){
+    public String getStringImage(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
@@ -340,21 +340,22 @@ String[] filePathColumn = { MediaStore.Images.Media.DATA };
         return encodedImage;
     }
 
-    public void uploadImage(){
+    public void uploadImage() {
         final String image = getStringImage(bitmap);
-        class UploadImage extends AsyncTask<Void,Void,String> {
+        class UploadImage extends AsyncTask<Void, Void, String> {
             private ProgressDialog loading;
+
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(DashBoard.this,"Please wait...","uploading",false,false);
+                loading = ProgressDialog.show(DashBoard.this, "Please wait...", "uploading", false, false);
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                Toast.makeText(DashBoard.this,s,Toast.LENGTH_LONG).show();
+                Toast.makeText(DashBoard.this, s, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -363,8 +364,8 @@ String[] filePathColumn = { MediaStore.Images.Media.DATA };
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(DashBoard.this);
                 String email = preferences.getString(Config.SP_EMAIL, "");
 
-                HashMap<String,String> param = new HashMap<>();
-                param.put(USER_IMAGE,image);
+                HashMap<String, String> param = new HashMap<>();
+                param.put(USER_IMAGE, image);
                 param.put(USER_EMAIL, email);
                 String result = rh.sendPostRequest(Config.UPDATE_USER_PROFILE_PIC_URL, param);
                 return result;

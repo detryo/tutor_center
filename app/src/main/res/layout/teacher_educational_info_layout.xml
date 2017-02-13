@@ -242,6 +242,7 @@
             <ImageView
                 android:id="@+id/id_card_image_view_id"
                 android:layout_width="0dp"
+                android:src="@drawable/id_card"
                 android:layout_weight="70"
                 android:layout_height="200dp"/>
 

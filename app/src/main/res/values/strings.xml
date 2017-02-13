@@ -19,6 +19,7 @@
     <string name="student_post_btn">POST</string>
 
     <string-array name="gender_type">
+        <item>Select Gender</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>

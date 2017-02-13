@@ -30,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,7 +81,7 @@ public class TeacherEducationInfo extends Fragment {
 
     ImageView idCardImageView;
 
-    String email;
+    String email, idCardUrl;
 
     View rootView;
 
@@ -280,6 +281,8 @@ public class TeacherEducationInfo extends Fragment {
             gradYearOfPassingEditText.setText(json.getString(GRAD_YEAR_OF_PASSING));
             gradMajorEditText.setText(json.getString(GRAD_MAJOR));
             gradCgpaEditText.setText(json.getString(GRAD_CGPA));
+
+            Picasso.with(getContext()).load(json.getString(ID_CARD)).into(idCardImageView);
 
         } catch (JSONException e) {
             e.printStackTrace();
