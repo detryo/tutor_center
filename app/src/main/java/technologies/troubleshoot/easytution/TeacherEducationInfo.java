@@ -34,31 +34,27 @@ import java.util.Map;
 
 public class TeacherEducationInfo extends Fragment {
 
-
     public static final String USER_EMAIL = "email";
 
-    public static final String SSC_YEAR_OF_PASSING = "last_level_study";
-    public static final String SSC_GRUOP = "major_group";
-    public static final String SSC_GPA = "cgpa";
+    public static final String SSC_YEAR_OF_PASSING = "ssc_year_of_passing";
+    public static final String SSC_GRUOP = "ssc_group";
+    public static final String SSC_GPA = "ssc_gpa";
 
-    public static final String HSC_YEAR_OF_PASSING = "last_level_study";
-    public static final String HSC_GRUOP = "major_group";
-    public static final String HSC_GPA = "cgpa";
+    public static final String HSC_YEAR_OF_PASSING = "hsc_year_of_passing";
+    public static final String HSC_GRUOP = "hsc_group";
+    public static final String HSC_GPA = "hsc_gpa";
 
-    public static final String UNDER_GRAD_YEAR_OF_PASSING = "last_level_study";
-    public static final String UNDER_GRAD_MAJOR = "major_group";
-    public static final String UNDER_GRAD_CGPA = "cgpa";
+    public static final String UNDER_GRAD_YEAR_OF_PASSING = "under_grad_year_of_passing";
+    public static final String UNDER_GRAD_MAJOR = "under_grad_major";
+    public static final String UNDER_GRAD_CGPA = "under_grad_cgpa";
 
-    public static final String GRAD_YEAR_OF_PASSING = "last_level_study";
-    public static final String GRAD_MAJOR= "major_group";
-    public static final String GRAD_CGPA = "cgpa";
+    public static final String GRAD_YEAR_OF_PASSING = "grad_year_of_passing";
+    public static final String GRAD_MAJOR= "grad_major";
+    public static final String GRAD_CGPA = "grad_cgpa";
 
     public static final String ID_CARD = "id_card";
-    public static final String FROM_DATE = "year_from";
-    public static final String TO_DATE = "year_to";
 
-
-    EditText sscYearOfPassingEditText, sscGroupEditText, sscGpaEditText, fromEditText, toEditText, hscYearOfPassingEditText, hscGroupEditText, hscGpaEditText, underGradYearOfPassingEditText, underGradMajorEditText, underGradCgpaEditText, gradYearOfPassingEditText, gradMajorEditText, gradCgpaEditText;
+    EditText sscYearOfPassingEditText, sscGroupEditText, sscGpaEditText, hscYearOfPassingEditText, hscGroupEditText, hscGpaEditText, underGradYearOfPassingEditText, underGradMajorEditText, underGradCgpaEditText, gradYearOfPassingEditText, gradMajorEditText, gradCgpaEditText;
 
     Button editEducationInfoBtn, saveEducationInfoBtn;
 
@@ -88,9 +84,6 @@ public class TeacherEducationInfo extends Fragment {
         gradMajorEditText = (EditText) rootView.findViewById(R.id.grad_major_group_edit_view_id);
         gradCgpaEditText = (EditText) rootView.findViewById(R.id.grad_gpa_edit_view_id);
 
-        fromEditText = (EditText) rootView.findViewById(R.id.from_edit_view_id);
-        toEditText = (EditText) rootView.findViewById(R.id.to_edit_view_id);
-
         editEducationInfoBtn = (Button) rootView.findViewById(R.id.edit_education_info_btn_id);
         saveEducationInfoBtn = (Button) rootView.findViewById(R.id.save_education_info_btn_id);
 
@@ -110,7 +103,7 @@ public class TeacherEducationInfo extends Fragment {
             @Override
             public void onClick(View v) {
 
-                updateEducationInfo(email, sscYearOfPassingEditText.getText().toString(), sscGroupEditText.getText().toString(), sscGpaEditText.getText().toString(), hscYearOfPassingEditText.getText().toString(), hscGroupEditText.getText().toString(), hscGpaEditText.getText().toString(), underGradYearOfPassingEditText.getText().toString(), underGradMajorEditText.getText().toString(), underGradCgpaEditText.getText().toString(), gradYearOfPassingEditText.getText().toString(), gradMajorEditText.getText().toString(), gradCgpaEditText.getText().toString(), fromEditText.getText().toString(), toEditText.getText().toString());
+                updateEducationInfo(email, sscYearOfPassingEditText.getText().toString(), sscGroupEditText.getText().toString(), sscGpaEditText.getText().toString(), hscYearOfPassingEditText.getText().toString(), hscGroupEditText.getText().toString(), hscGpaEditText.getText().toString(), underGradYearOfPassingEditText.getText().toString(), underGradMajorEditText.getText().toString(), underGradCgpaEditText.getText().toString(), gradYearOfPassingEditText.getText().toString(), gradMajorEditText.getText().toString(), gradCgpaEditText.getText().toString());
 
                 setEditTextEnableOrDisable(false);
 
@@ -122,7 +115,7 @@ public class TeacherEducationInfo extends Fragment {
 
     }
 
-    private void updateEducationInfo(final String email, final String sscYearOfPassing, final String sscGroup, final String sscGpa, final String hscYearOfPassing, final String hscGroup, final String hscGpa, final String underGradYearOfPassing, final String underGradMajor, final String underGradCgpa, final String gradYearOfPassing, final String gradMajor, final String gradCgpa, final String from_year, final String to_year) {
+    private void updateEducationInfo(final String email, final String sscYearOfPassing, final String sscGroup, final String sscGpa, final String hscYearOfPassing, final String hscGroup, final String hscGpa, final String underGradYearOfPassing, final String underGradMajor, final String underGradCgpa, final String gradYearOfPassing, final String gradMajor, final String gradCgpa) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.UPDATE_TEACHER_EDUCATION_INFO,
                 new Response.Listener<String>() {
@@ -165,7 +158,7 @@ public class TeacherEducationInfo extends Fragment {
                 }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put(USER_EMAIL, email);
 
                 params.put(SSC_YEAR_OF_PASSING, sscYearOfPassing);
@@ -185,8 +178,6 @@ public class TeacherEducationInfo extends Fragment {
                 params.put(GRAD_CGPA, gradCgpa);
 
                 //params.put(ID_CARD, id_card);
-                params.put(FROM_DATE, from_year);
-                params.put(TO_DATE, to_year);
                 return params;
             }
 
@@ -238,9 +229,6 @@ public class TeacherEducationInfo extends Fragment {
 
             sscGroupEditText.setText(json.getString(SSC_GRUOP));
             sscGpaEditText.setText(json.getString(SSC_GPA));
-            fromEditText.setText(json.getString(FROM_DATE));
-            toEditText.setText(json.getString(TO_DATE));
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -264,9 +252,6 @@ public class TeacherEducationInfo extends Fragment {
         gradYearOfPassingEditText.setEnabled(state);
         gradMajorEditText.setEnabled(state);
         gradCgpaEditText.setEnabled(state);
-
-        fromEditText.setEnabled(state);
-        toEditText.setEnabled(state);
 
     }
 
