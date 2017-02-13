@@ -15,6 +15,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ import org.json.JSONObject;
 public class DashBoard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     String userType;
+    ImageView userImage;
 
     @Override
     protected void onStart() {
@@ -72,6 +75,16 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        (navigationView.getHeaderView(0).findViewById(R.id.userImageView)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DashBoard.this, "imageView clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
 
     }
 
