@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -58,6 +60,8 @@ public class TeacherEducationInfo extends Fragment {
 
     Button editEducationInfoBtn, saveEducationInfoBtn;
 
+    ImageView idCardImageView;
+
     String email;
 
     @Nullable
@@ -86,6 +90,15 @@ public class TeacherEducationInfo extends Fragment {
 
         editEducationInfoBtn = (Button) rootView.findViewById(R.id.edit_education_info_btn_id);
         saveEducationInfoBtn = (Button) rootView.findViewById(R.id.save_education_info_btn_id);
+
+        idCardImageView = (ImageView) rootView.findViewById(R.id.id_card_image_view_id);
+
+        idCardImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "id Card image view clicked", Toast.LENGTH_LONG).show();
+            }
+        });
 
         fetchEducationInfo();
         setEditTextEnableOrDisable(false);
@@ -227,8 +240,22 @@ public class TeacherEducationInfo extends Fragment {
             JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
             JSONObject json = result.getJSONObject(0);
 
+            sscYearOfPassingEditText.setText(json.getString(SSC_YEAR_OF_PASSING));
             sscGroupEditText.setText(json.getString(SSC_GRUOP));
             sscGpaEditText.setText(json.getString(SSC_GPA));
+
+            hscYearOfPassingEditText.setText(json.getString(HSC_YEAR_OF_PASSING));
+            hscGroupEditText.setText(json.getString(HSC_GRUOP));
+            hscGpaEditText.setText(json.getString(HSC_GPA));
+
+            underGradYearOfPassingEditText.setText(json.getString(UNDER_GRAD_YEAR_OF_PASSING));
+            underGradMajorEditText.setText(json.getString(UNDER_GRAD_MAJOR));
+            underGradCgpaEditText.setText(json.getString(UNDER_GRAD_CGPA));
+
+            gradYearOfPassingEditText.setText(json.getString(GRAD_YEAR_OF_PASSING));
+            gradMajorEditText.setText(json.getString(GRAD_MAJOR));
+            gradCgpaEditText.setText(json.getString(GRAD_CGPA));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
