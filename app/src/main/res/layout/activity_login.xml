@@ -89,13 +89,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="15dp">
 
             <Button
                 android:id="@+id/newAccountBtn_student_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
                 android:onClick="btnClicked"
                 android:gravity="center"
                 android:textColor="#ffffff"
@@ -108,8 +107,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="OR"
-                android:textColor="#ffffff"
-                android:layout_marginBottom="15dp"/>
+                android:textColor="#ffffff"/>
 
             <Button
                 android:id="@+id/newAccountBtn_teacher_id"
