@@ -7,10 +7,9 @@ package technologies.troubleshoot.easytution;
 public class JobFeedContent {
 
     //All private variables of this class is declared here.
-    private int imageResourceId;
-    private String jobTitle, jobContent, salary, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location, postId, userName, statusTime;
+    private String imageResourceId, jobTitle, jobContent, salary, preferred_medium, classOfStudent, daysPerWeek, dateOfStart, tutorGenderPref, subject, location, postId, userName, statusTime;
 
-    public JobFeedContent(int imageResourceId, String jobTitle, String  salary, String preferred_medium, String classOfStudent, String daysPerWeek, String dateOfStart, String tutorGenderPref, String subject, String location, String jobContent, String postId, String userName, String statusTime){
+    public JobFeedContent(String imageResourceId, String jobTitle, String  salary, String preferred_medium, String classOfStudent, String daysPerWeek, String dateOfStart, String tutorGenderPref, String subject, String location, String jobContent, String postId, String userName, String statusTime){
 
         this.imageResourceId = imageResourceId;
         this.jobTitle = jobTitle;
@@ -29,7 +28,7 @@ public class JobFeedContent {
 
     }
 
-    public int getImageRecourseId() { return imageResourceId; }
+    public String getImageRecourseId() { return imageResourceId; }
 
     public String getJobTitle() { return jobTitle; }
 
