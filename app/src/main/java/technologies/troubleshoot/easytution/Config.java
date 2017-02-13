@@ -16,6 +16,9 @@ public class Config {
     public static final String UPDATE_PERSONAL_INFO_URL = "http://tuition.troubleshoot-tech.com/teacherPersonalInfos.php";
     public static final String UPDATE_STUDENT_INFO_URL = "http://tuition.troubleshoot-tech.com/studentInfo.php";
 
+    public static final String UPDATE_TEACHER_ID_CARD_URL = "http://tuition.troubleshoot-tech.com/idcard.php";
+    public static final String UPDATE_USER_PROFILE_PIC_URL = "http://tuition.troubleshoot-tech.com/upload.php";
+
     public static final String KEY_NAME = "username";
     public static final String KEY_USERTYPE = "user_type";
     public static final String SP_EMAIL = "email";

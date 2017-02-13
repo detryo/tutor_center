@@ -1,12 +1,16 @@
 package technologies.troubleshoot.easytution;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +18,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,15 +30,27 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+
 public class DashBoard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    String userType;
-    ImageView userImage;
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private static final String USER_EMAIL = "email";
+    private static final String USER_IMAGE = "profile_pic";
+
+    String userType, userImage;
+    private Bitmap bitmap;
+
 
     @Override
     protected void onStart() {
@@ -77,10 +94,13 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        (navigationView.getHeaderView(0).findViewById(R.id.userImageView)).setOnClickListener(new View.OnClickListener() {
+        (navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DashBoard.this, "imageView clicked", Toast.LENGTH_LONG).show();
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                // Start the Intent
+                startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
             }
         });
 
@@ -189,7 +209,11 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    showJSON(response);
+                    try {
+                        showJSON(response);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             },
                     new Response.ErrorListener() {
@@ -219,7 +243,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             return null;
         }
 
-        private void showJSON(String response){
+        private void showJSON(String response) throws IOException {
             String name="";
 
             try {
@@ -228,6 +252,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                 JSONObject json = result.getJSONObject(0);
                 name = json.getString(Config.KEY_NAME);
                 userType = json.getString(Config.KEY_USERTYPE);
+                userImage = json.getString(USER_IMAGE);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -235,6 +260,11 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             //set the username -- that is fetched from database
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewUserName)).setText(name);
+
+            //URL url = new URL(userImage);
+            Picasso.with(DashBoard.this).load(userImage).into(((ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)));
+
+            //((ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)).setImageBitmap(bitmap);
 
             if (userType.equals("teacher"))
                 navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(false);
@@ -247,5 +277,102 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         }
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && null != data && data.getData() != null){
+            Uri filePath = data.getData();
+            try{
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                ((ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)).setImageBitmap(bitmap);
+
+                uploadImage();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+        }
+
+        /*try {
+            // When an Image is picked
+            if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                    && null != data) {
+                // Get the Image from data
+
+                Uri selectedImage = data.getData();
+String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+                // Get the cursor
+                Cursor cursor = getContext().getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                // Move to first row
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                imgDecodableString = cursor.getString(columnIndex);
+                cursor.close();
+
+                bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImage);
+                ImageView imgView = (ImageView) rootView.findViewById(R.id.id_card_image_view_id);
+                // Set the Image in ImageView after decoding the String
+                imgView.setImageBitmap(bitmap);
+
+            } else {
+                Toast.makeText(getContext(), "You haven't picked Image",
+                        Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG)
+                    .show();
+        }*/
+
+    }
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+    public void uploadImage(){
+        final String image = getStringImage(bitmap);
+        class UploadImage extends AsyncTask<Void,Void,String> {
+            private ProgressDialog loading;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(DashBoard.this,"Please wait...","uploading",false,false);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(DashBoard.this,s,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                RequestHandler rh = new RequestHandler();
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(DashBoard.this);
+                String email = preferences.getString(Config.SP_EMAIL, "");
+
+                HashMap<String,String> param = new HashMap<>();
+                param.put(USER_IMAGE,image);
+                param.put(USER_EMAIL, email);
+                String result = rh.sendPostRequest(Config.UPDATE_USER_PROFILE_PIC_URL, param);
+                return result;
+            }
+        }
+        UploadImage u = new UploadImage();
+        u.execute();
+    }
+
 
 }

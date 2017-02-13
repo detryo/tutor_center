@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -14,6 +15,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -78,6 +83,8 @@ public class TeacherEducationInfo extends Fragment {
     String email;
 
     View rootView;
+
+    private Bitmap bitmap;
 
     @Nullable
     @Override
@@ -303,14 +310,28 @@ public class TeacherEducationInfo extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        try {
+
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && null != data && data.getData() != null){
+            Uri filePath = data.getData();
+            try{
+                bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), filePath);
+                idCardImageView.setImageBitmap(bitmap);
+                uploadImage();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+        }
+
+        /*try {
             // When an Image is picked
             if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                     && null != data) {
                 // Get the Image from data
 
                 Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
                 // Get the cursor
                 Cursor cursor = getContext().getContentResolver().query(selectedImage,
@@ -321,10 +342,11 @@ public class TeacherEducationInfo extends Fragment {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
+
+                bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImage);
                 ImageView imgView = (ImageView) rootView.findViewById(R.id.id_card_image_view_id);
                 // Set the Image in ImageView after decoding the String
-                imgView.setImageBitmap(BitmapFactory
-                        .decodeFile(imgDecodableString));
+                imgView.setImageBitmap(bitmap);
 
             } else {
                 Toast.makeText(getContext(), "You haven't picked Image",
@@ -333,15 +355,22 @@ public class TeacherEducationInfo extends Fragment {
         } catch (Exception e) {
             Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG)
                     .show();
-        }
+        }*/
 
     }
 
-    /*public void uploadImage(){
-        final String text = editText.getText().toString().trim();
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+    public void uploadImage(){
         final String image = getStringImage(bitmap);
         class UploadImage extends AsyncTask<Void,Void,String> {
-            ProgressDialog loading;
+            private ProgressDialog loading;
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -358,15 +387,15 @@ public class TeacherEducationInfo extends Fragment {
             @Override
             protected String doInBackground(Void... params) {
                 RequestHandler rh = new RequestHandler();
-                HashMap<String,String> param = new HashMap<String,String>();
-                param.put(KEY_TEXT,text);
-                param.put(KEY_IMAGE,image);
-                String result = rh.sendPostRequest(UPLOAD_URL, param);
+                HashMap<String,String> param = new HashMap<>();
+                param.put(ID_CARD,image);
+                param.put(USER_EMAIL, email);
+                String result = rh.sendPostRequest(Config.UPDATE_TEACHER_ID_CARD_URL, param);
                 return result;
             }
         }
         UploadImage u = new UploadImage();
         u.execute();
-    }*/
+    }
 
 }
