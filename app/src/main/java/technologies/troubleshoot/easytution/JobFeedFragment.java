@@ -1,6 +1,5 @@
 package technologies.troubleshoot.easytution;
 
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,14 +26,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class JobFeedFragment extends Fragment {
 
     public static String USER_NAME = "username";
-    public static String IMAGE = "name";
+    public static String USER_IMAGE = "image";
 
     public static final String DATA_URL = "http://tuition.troubleshoot-tech.com/newsfeed.php";
     public static final String JSON_ARRAY = "job_post";
@@ -109,7 +106,7 @@ public class JobFeedFragment extends Fragment {
 
         ArrayList<JobFeedContent> job = new ArrayList<>();
 
-        job.add(new JobFeedContent(0, " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "));
+        job.add(new JobFeedContent(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "));
 
         Drawable dividerDrawable = ContextCompat.getDrawable(getContext(), R.drawable.divider);
 
@@ -226,7 +223,7 @@ public class JobFeedFragment extends Fragment {
 
                 JSONObject json = result.getJSONObject(i);
 
-                nfc[i] = new JobFeedContent(R.mipmap.ic_launcher, json.optString(TITLE), json.optString(SALARY), json.optString(PREFERRED_MEDIUM), json.optString(CLASS), json.optString(DAYS_IN_WEEK), json.optString(DATE_TO_START), json.optString(PREFERRED_TEACHER_GENDER), json.optString(SUBJECT), json.optString(ADDRESS), json.optString(ADDITIONAL_INFO), json.optString(POST_ID), json.optString(USER_NAME), json.optString(STATUS_TIME));
+                nfc[i] = new JobFeedContent(json.getString(USER_IMAGE), json.optString(TITLE), json.optString(SALARY), json.optString(PREFERRED_MEDIUM), json.optString(CLASS), json.optString(DAYS_IN_WEEK), json.optString(DATE_TO_START), json.optString(PREFERRED_TEACHER_GENDER), json.optString(SUBJECT), json.optString(ADDRESS), json.optString(ADDITIONAL_INFO), json.optString(POST_ID), json.optString(USER_NAME), json.optString(STATUS_TIME));
 
             }
 

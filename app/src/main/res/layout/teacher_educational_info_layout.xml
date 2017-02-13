@@ -181,7 +181,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -226,7 +226,7 @@
             </LinearLayout>
 
 
-        </LinearLayout>
+        </LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -240,11 +240,11 @@
                 android:text="Id Card : "/>
 
             <ImageView
+                android:id="@+id/id_card_image_view_id"
                 android:layout_width="0dp"
+                android:src="@drawable/id_card"
                 android:layout_weight="70"
-                android:layout_height="200dp"
-                android:src="@mipmap/ic_launcher"
-                />
+                android:layout_height="200dp"/>
 
         </LinearLayout>
 

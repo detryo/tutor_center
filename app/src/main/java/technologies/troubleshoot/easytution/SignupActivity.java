@@ -79,12 +79,15 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+               if(i != 0)
                 user_gender = (String) adapterView.getItemAtPosition(i);
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                Toast.makeText(SignupActivity.this, "Please select gender", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -223,6 +226,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         Intent intent = new Intent(this, DashBoard.class);
         saveUserEmail(email);
+        finish();
         startActivity(intent);
     }
 

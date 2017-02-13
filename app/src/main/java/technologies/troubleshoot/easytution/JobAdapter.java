@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,7 +61,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
         holder.detailInfo.setVisibility(View.GONE);
 
         //Corresponding views are populated
-        holder.userImage.setImageResource(item.getImageRecourseId());
+        Picasso.with(context).load(item.getImageRecourseId()).into(holder.userImage);
         holder.userName.setText(item.getUserName());
         holder.statusTime.setText(item.getStatusTime());
         holder.titleTextView.setText(item.getJobTitle());

@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="30"
+        android:layout_weight="20"
         android:orientation="vertical">
 
         <TextView
@@ -25,7 +25,7 @@
         android:layout_height="0dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_weight="70"
+        android:layout_weight="80"
         android:gravity="center_horizontal">
 
         <EditText
@@ -59,13 +59,14 @@
                     android:hint="password"
                     android:textColorHint="@color/colorAccent"
                     android:inputType="textPassword"/>
+
             </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Forgot Password"/>
+                android:text="Forgot Password?"/>
         </LinearLayout>
 
         <ProgressBar
@@ -83,43 +84,42 @@
             android:onClick="btnClicked"
             android:background="@drawable/ic_login_button"/>
 
-
-        <Button
-            android:id="@+id/newAccountBtn_as_student_id"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_above="@+id/newAccountBtn_as_teacher_id"
-            android:onClick="btnClicked"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:text="SIGNUP AS STUDENT"
-            android:background="@drawable/singup_student_button"/>
-
-<!--
-        <TextView
-            android:id="@+id/or_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/newAccountBtn_as_teacher_id"
-            android:gravity="center"
-            android:text="OR"
-            android:textColor="#ff4444"
-            android:layout_marginBottom="16dp"/>
--->
-
-
-        <Button
-            android:id="@+id/newAccountBtn_as_teacher_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="btnClicked"
-            android:layout_marginBottom="30dp"
+            android:orientation="vertical"
             android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:background="@drawable/singup_teacher_button"
-            android:text="SIGNUP AS TEACHER" />
+            android:layout_marginBottom="15dp">
+
+            <Button
+                android:id="@+id/newAccountBtn_student_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="btnClicked"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:text="SIGNUP AS STUDENT"
+                android:background="@drawable/singup_student_button"/>
+
+            <TextView
+                android:id="@+id/or_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="OR"
+                android:textColor="#ffffff"/>
+
+            <Button
+                android:id="@+id/newAccountBtn_teacher_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="btnClicked"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:background="@drawable/singup_teacher_button"
+                android:text="SIGNUP AS TEACHER" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 
