@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,8 +32,6 @@ import java.util.Map;
  */
 
 public class StudentProfileInfoFragment extends Fragment{
-
-    private static final String SAVE_STUDENT_INFO_URL = "http://tuition.troubleshoot-tech.com/studentInfo.php";
 
     public static final String USER_EMAIL = "email";
     public static final String REF_PERSON_NAME = "ref_person_name";
@@ -99,7 +96,7 @@ public class StudentProfileInfoFragment extends Fragment{
 
     private void updatePersonalInfo(final String email, final String ref_person_name, final String ref_person_number, final String ref_person_relation) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, SAVE_STUDENT_INFO_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.UPDATE_STUDENT_INFO_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

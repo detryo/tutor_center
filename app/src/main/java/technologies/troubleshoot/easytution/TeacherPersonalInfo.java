@@ -7,13 +7,11 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,8 +33,8 @@ import java.util.Map;
 
 public class TeacherPersonalInfo extends Fragment {
 
-    private static final String SAVE_PERSONAL_INFO_URL = "http://tuition.troubleshoot-tech.com/teacherPersonalInfos.php";
-   // private static final String FETCH_PERSONAL_INFO_URL = "http://tuition.troubleshoot-tech.com/showteacherpersonalinfo.php?email=";
+
+
 
     public static final String ADDITIONAL_NUMBER = "additional_number";
     public static final String USER_EMAIL = "email";
@@ -128,7 +126,7 @@ public class TeacherPersonalInfo extends Fragment {
 
     private void updatePersonalInfo(final String email, final String additional_number, final String detail_address, final String nid_no, final String fb_id, final String linkedin_id, final String father_name, final String mother_name, final String father_number, final String mother_number, final String ref_person_name, final String ref_person_number, final String ref_person_relation) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, SAVE_PERSONAL_INFO_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.UPDATE_PERSONAL_INFO_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

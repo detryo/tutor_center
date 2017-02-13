@@ -223,6 +223,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         Intent intent = new Intent(this, DashBoard.class);
         saveUserEmail(email);
+        finish();
         startActivity(intent);
     }
 
