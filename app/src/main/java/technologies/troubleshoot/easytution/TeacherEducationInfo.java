@@ -216,7 +216,6 @@ public class TeacherEducationInfo extends Fragment {
                 params.put(GRAD_MAJOR, gradMajor);
                 params.put(GRAD_CGPA, gradCgpa);
 
-                //params.put(ID_CARD, id_card);
                 return params;
             }
 

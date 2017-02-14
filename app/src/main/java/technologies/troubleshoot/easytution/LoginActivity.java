@@ -3,14 +3,18 @@ package technologies.troubleshoot.easytution;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,7 +24,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,6 +74,10 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if (response.trim().equals("success")) {
+
+                            FetchUserDetail fetchUserDetail = new FetchUserDetail();
+                            fetchUserDetail.execute();
+
                             SharedPreferences sp = getSharedPreferences("informme", 0);
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putBoolean("isLoggedIn", true);
@@ -173,6 +187,70 @@ public class LoginActivity extends AppCompatActivity {
             loginBtn.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
             userLogin();
+
+        }
+
+    }
+
+    class FetchUserDetail extends AsyncTask<Void, Void, Void> {
+
+        public FetchUserDetail() {
+            super();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            String url = Config.DATA_URL + email;
+            StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        showJSON(response);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
+                            builder1.setMessage("No Internet Connection");
+                            builder1.setCancelable(true);
+
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+
+                        }
+                    });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+
+            return null;
+        }
+
+        private void showJSON(String response) throws IOException {
+
+
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
+                JSONObject json = result.getJSONObject(0);
+                saveUserType(json.getString(Config.KEY_USERTYPE));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
 

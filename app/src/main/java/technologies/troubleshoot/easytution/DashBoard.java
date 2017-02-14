@@ -47,13 +47,12 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
     private static final String USER_EMAIL = "email";
     private static final String USER_IMAGE = "profile_pic";
 
-    String userType, userImageUrl;
+    String userType = "", userImageUrl;
     private Bitmap bitmap;
 
-
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         //see if the user is logged in shared memory
         //then redirect to dashboard
@@ -64,13 +63,8 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             userType = preferences.getString(Config.SP_USERTYPE, "");
+
         }
-
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
         getUserDetail();
 
@@ -90,6 +84,12 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (userType.equals("teacher"))
+            navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(false);
+        else
+            navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(true);
+
+
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -163,6 +163,11 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             SharedPreferences.Editor editor = sp.edit();
             editor.putBoolean("isLoggedIn", false);
             editor.apply();
+
+            /*SharedPreferences preferences = getSharedPreferences(Config.SP_USERTYPE, 0);
+            SharedPreferences.Editor editorUserType = preferences.edit();
+            editorUserType.clear();
+            editorUserType.apply();*/
 
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -258,16 +263,12 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewUserName)).setText(name);
 
-            //URL url = new URL(userImageUrl);
-
-
             Picasso.with(DashBoard.this).load(userImageUrl).into(((ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)));
-
-
-            //((ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)).setImageBitmap(bitmap);
 
             if (userType.equals("teacher"))
                 navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(false);
+            else
+                navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(true);
 
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(DashBoard.this);
             SharedPreferences.Editor editor = preferences.edit();
