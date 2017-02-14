@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -77,10 +78,6 @@ public class StudentPostFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.student_post_layout, container, false);
 
-        /*scrollView = (ScrollView) rootView.findViewById(R.id.scrollView_id);
-
-        scrollView.setAlpha((float) 0.3);*/
-
         titleEditText = (EditText) rootView.findViewById(R.id.post_title_id);
         subjectsEditText = (EditText) rootView.findViewById(R.id.job_post_subject_id);
         salaryEditText = (EditText) rootView.findViewById(R.id.job_post_salary_id);
@@ -108,7 +105,11 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                numOfDays = (String) parent.getItemAtPosition(position);
+                if(position != 0){
+
+                    numOfDays = (String) parent.getItemAtPosition(position);
+
+                }
 
             }
 
@@ -122,7 +123,11 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                tutorGender = (String) parent.getItemAtPosition(position);
+                if(position != 0){
+
+                    tutorGender = (String) parent.getItemAtPosition(position);
+
+                }
 
             }
 
@@ -136,7 +141,11 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                courses = (String) parent.getItemAtPosition(position);
+                if(position != 0){
+
+                    courses = (String) parent.getItemAtPosition(position);
+
+                }
 
             }
 
@@ -180,9 +189,12 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, android.view.View view, int position, long l) {
 
-                categorySpinnerItemSelected(position);
-                category = (String) adapterView.getItemAtPosition(position);
+                if(position != 0){
 
+                    categorySpinnerItemSelected(position);
+                    category = (String) adapterView.getItemAtPosition(position);
+
+                }
             }
 
             @Override
@@ -319,7 +331,20 @@ public class StudentPostFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(getActivity(), "Unable to Post", Toast.LENGTH_LONG).show();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                        builder1.setMessage("Unable to post, please give all required fields");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
                     }
                 }) {
             @Override
