@@ -17,10 +17,8 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,7 +42,6 @@ import java.util.Map;
 
 public class StudentPostFragment extends Fragment {
 
-    public static final String DATA_URL = "http://tuition.troubleshoot-tech.com/post.php";
     /*public static final String JSON_ARRAY = "job_post";*/
     public static String DATE_TO_START = "date_to_start";
     public static String ADDITIONAL_INFO = "content";
@@ -298,7 +295,7 @@ public class StudentPostFragment extends Fragment {
 
     private void postStatus(final String email, final String title, final String days_in_week, final String preferred_teacher_gender, final String preferred_medium, final String student_class, final String studentSubject, final String date_to_start, final String salary, final String address, final String content) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, DATA_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.POST_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

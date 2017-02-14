@@ -7,12 +7,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,10 +43,13 @@ public class LoginActivity extends AppCompatActivity {
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
 
-    Button loginBtn, studentSignUpBtn, teacherSignUpBtn;
+    Button loginBtn, studentSignUpBtn, teacherSignUpBtn, backBtn, sendPassword;
     String email, password;
     EditText idEditText, passwordEditText;
     ProgressBar progressBar;
+    TextView forgotPassword, emailResponse;
+    TextInputLayout passwordHolder;
+    LinearLayout signupBtns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +59,27 @@ public class LoginActivity extends AppCompatActivity {
 
         //Attaching all the widgets to their corresponding view id.
         loginBtn = (Button) findViewById(R.id.loginBtn_id);
+        backBtn = (Button) findViewById(R.id.back_id);
+        sendPassword = (Button) findViewById(R.id.send_password_id);
+
         idEditText = (EditText) findViewById(R.id.usernameEditText_id);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText_id);
         studentSignUpBtn = (Button) findViewById(R.id.newAccountBtn_student_id);
         teacherSignUpBtn = (Button) findViewById(R.id.newAccountBtn_teacher_id);
 
+        forgotPassword = (TextView) findViewById(R.id.forgot_password_text_view_id);
+        emailResponse = (TextView) findViewById(R.id.email_response_id);
+
+        passwordHolder = (TextInputLayout) findViewById(R.id.password_holder_id);
+
         progressBar = (ProgressBar) findViewById(R.id.login_progress_view_id);
 
-        progressBar.setVisibility(View.GONE);
+        signupBtns = (LinearLayout) findViewById(R.id.signupBtn_linear_layout_id);
 
+        progressBar.setVisibility(View.GONE);
+        backBtn.setVisibility(View.GONE);
+        sendPassword.setVisibility(View.GONE);
+        emailResponse.setVisibility(View.GONE);
     }
 
     private void userLogin() {
@@ -187,6 +204,37 @@ public class LoginActivity extends AppCompatActivity {
             loginBtn.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
             userLogin();
+
+        } else if (view == forgotPassword){
+
+            forgotPassword.setVisibility(View.GONE);
+            passwordHolder.setVisibility(View.GONE);
+            loginBtn.setVisibility(View.GONE);
+            backBtn.setVisibility(View.VISIBLE);
+            sendPassword.setVisibility(View.VISIBLE);
+            idEditText.setHint("Enter Email");
+            signupBtns.setVisibility(View.GONE);
+
+        } else if (view == backBtn){
+
+            forgotPassword.setVisibility(View.VISIBLE);
+            passwordHolder.setVisibility(View.VISIBLE);
+            loginBtn.setVisibility(View.VISIBLE);
+            backBtn.setVisibility(View.GONE);
+            sendPassword.setVisibility(View.GONE);
+            idEditText.setHint("Email");
+            signupBtns.setVisibility(View.VISIBLE);
+
+            progressBar.setVisibility(View.GONE);
+            idEditText.setVisibility(View.VISIBLE);
+            emailResponse.setVisibility(View.GONE);
+
+        } else if (view == sendPassword){
+
+            sendPassword.setVisibility(View.GONE);
+            //progressBar.setVisibility(View.VISIBLE);
+            idEditText.setVisibility(View.GONE);
+            emailResponse.setVisibility(View.VISIBLE);
 
         }
 
