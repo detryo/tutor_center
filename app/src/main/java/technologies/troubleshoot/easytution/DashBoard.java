@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,6 +44,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final String USER_EMAIL = "email";
     private static final String USER_IMAGE = "profile_pic";
+    private static final String TAG_JOB_FEED_FRAGMENT = "JOB_FEED_FRAGMENT";
 
     String userType = "", userImageUrl;
     private Bitmap bitmap;
@@ -69,7 +68,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         getUserDetail();
 
         //Default fragment to be called on app start.
-        getSupportFragmentManager().beginTransaction().add(R.id.content_news_feed, new JobFeedFragment())
+        getSupportFragmentManager().beginTransaction().add(R.id.content_news_feed, new JobFeedFragment(), TAG_JOB_FEED_FRAGMENT)
                 .commit();
 
         setContentView(R.layout.activity_nav_drawer_layout);
@@ -92,7 +91,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        (navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)).setOnClickListener(new View.OnClickListener() {
+        (navigationView.getHeaderView(0).findViewById(R.id.user_Image_View_id)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK,
@@ -118,7 +117,16 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+
+            JobFeedFragment jobFeedFragment = (JobFeedFragment) getSupportFragmentManager().findFragmentByTag(TAG_JOB_FEED_FRAGMENT);
+
+            if (jobFeedFragment != null && jobFeedFragment.isVisible())
+                super.onBackPressed();
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_news_feed, new JobFeedFragment(), TAG_JOB_FEED_FRAGMENT)
+                    .commit();
+
+
         }
     }
 
@@ -260,9 +268,9 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             }
             //set the username -- that is fetched from database
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textViewUserName)).setText(name);
+            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.text_View_User_Name_id)).setText(name);
 
-            Picasso.with(DashBoard.this).load(userImageUrl).into(((ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)));
+            Picasso.with(DashBoard.this).load(userImageUrl).into(((ImageView) navigationView.getHeaderView(0).findViewById(R.id.user_Image_View_id)));
 
             if (userType.equals("teacher"))
                 navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(false);
@@ -288,7 +296,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-                ((ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImageView_id)).setImageBitmap(bitmap);
+                ((ImageView) navigationView.getHeaderView(0).findViewById(R.id.user_Image_View_id)).setImageBitmap(bitmap);
 
                 uploadImage();
             } catch (IOException e) {
