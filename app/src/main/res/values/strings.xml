@@ -17,6 +17,13 @@
     <string name="personalInfo">Personal</string>
     <string name="latest_tuition">News Feed</string>
     <string name="student_post_btn">POST</string>
+    <string name="editBtn">Edit</string>
+    <string name="additional_number">Give additional number</string>
+    <string name="detail_address">Give detail address</string>
+    <string name="nid_no_passport_no">Give Nid no/ passport no</string>
+    <string name="facebook_id">Give faceBook ID</string>
+    <string name="linked_in_id">Give linked In ID</string>
+    <string name="parent_s_information">Parent\'s Information</string>
 
     <string-array name="gender_type">
         <item>Select Gender</item>

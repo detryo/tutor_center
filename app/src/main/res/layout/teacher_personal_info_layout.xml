@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -22,41 +22,41 @@
                 android:layout_height="wrap_content"
                 android:background="#33b5e5"
                 android:layout_gravity="right"
-                android:text="Edit"/>
+                android:text="@string/editBtn"/>
 
             <EditText
                 android:id="@+id/additional_number_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Additional number"
+                android:hint="@string/additional_number"
                 android:inputType="number" />
 
             <EditText
                 android:id="@+id/detail_address_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Detail address"
+                android:hint="@string/detail_address"
                 android:inputType="textPostalAddress" />
 
             <EditText
                 android:id="@+id/nid_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nid no/ passport no"
+                android:hint="@string/nid_no_passport_no"
                 android:inputType="text" />
 
             <EditText
                 android:id="@+id/fb_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="FaceBook ID"
+                android:hint="@string/facebook_id"
                 android:inputType="text" />
 
             <EditText
                 android:id="@+id/linked_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Linked In ID"
+                android:hint="@string/linked_in_id"
                 android:inputType="text" />
 
 
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:background="#eaeaea"
             android:textColor="#000000"
-            android:text="Parent's Information"
+            android:text="@string/parent_s_information"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
         <LinearLayout
@@ -83,32 +83,33 @@
                 android:id="@+id/father_name_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Father's name"
+                android:hint="Give father's name"
                 android:inputType="text" />
 
             <EditText
                 android:id="@+id/mother_name_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mother's name"
+                android:hint="Give mother's name"
                 android:inputType="text" />
 
             <EditText
                 android:id="@+id/father_number_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Father's number"
+                android:hint="Give father's number"
                 android:inputType="number" />
 
             <EditText
                 android:id="@+id/mother_number_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mother's number"
+                android:hint="Give mother's number"
                 android:inputType="number" />
 
 
         </LinearLayout>
+
         <TextView
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -130,21 +131,21 @@
                 android:id="@+id/ref_person_name_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ref person name"
+                android:hint="Give Ref person name"
                 android:inputType="text" />
 
             <EditText
                 android:id="@+id/contact_number_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contact number"
+                android:hint="Give contact number"
                 android:inputType="number" />
 
             <EditText
                 android:id="@+id/relation_edit_view_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Relation"
+                android:hint="Give relation with ref person"
                 android:inputType="text" />
 
             <Button

@@ -89,7 +89,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         else
             navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(true);
 
-
         navigationView.setNavigationItemSelectedListener(this);
 
 

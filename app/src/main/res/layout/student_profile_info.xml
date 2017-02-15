@@ -35,7 +35,7 @@
                 android:layout_weight="70"
                 android:layout_height="200dp"
                 android:src="@drawable/id_card"
-                />
+                android:contentDescription="Id card of student" />
 
         </LinearLayout>
 
@@ -51,21 +51,21 @@
             android:id="@+id/ref_person_name_edit_view_student_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ref person name"
+            android:hint="Give ref person name"
             android:inputType="text" />
 
         <EditText
             android:id="@+id/contact_number_edit_view_student_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contact number"
+            android:hint="Give contact number"
             android:inputType="number" />
 
         <EditText
             android:id="@+id/relation_edit_view_student_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Relation"
+            android:hint="Give relation with ref person"
             android:inputType="text" />
 
         <Button
