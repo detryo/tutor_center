@@ -232,9 +232,8 @@ public class LoginActivity extends AppCompatActivity {
         } else if (view == sendPassword){
 
             sendPassword.setVisibility(View.GONE);
-            //progressBar.setVisibility(View.VISIBLE);
-            idEditText.setVisibility(View.GONE);
-            emailResponse.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
+            recoverUserPassword();
 
         }
 
@@ -302,6 +301,80 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    private void recoverUserPassword() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.RECOVER_PASSWORD_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        if (response.trim().equals("success")) {
+
+                            idEditText.setVisibility(View.GONE);
+                            emailResponse.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+
+                        } else {
+
+                            progressBar.setVisibility(View.GONE);
+                            sendPassword.setVisibility(View.VISIBLE);
+
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
+                            builder1.setMessage("Invalid email ID");
+                            builder1.setCancelable(true);
+
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressBar.setVisibility(View.GONE);
+                        sendPassword.setVisibility(View.VISIBLE);
+
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
+                        builder1.setMessage("No Internet Connection");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                /*params.put(KEY_EMAIL, idEditText.getText().toString().trim());*/
+                params.put(KEY_EMAIL, "student@student.com");
+                return params;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
 }

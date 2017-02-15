@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,6 +21,7 @@
 
 
         <EditText
+            android:layout_margin="15dp"
             android:id="@+id/previous_password_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,6 +29,7 @@
             android:inputType="textPassword" />
 
         <EditText
+            android:layout_margin="15dp"
             android:id="@+id/new_passowrd_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,6 +38,7 @@
 
 
         <EditText
+            android:layout_margin="15dp"
             android:id="@+id/confirm_passwordid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,8 +48,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="20dp">
+            android:layout_margin="10dp">
 
             <Button
                 android:id="@+id/password_edit_btn_id"
@@ -80,6 +81,7 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
         <EditText
+            android:layout_margin="15dp"
             android:id="@+id/user_phone_number_edit_text_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,7 +92,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_margin="10dp">
 
             <Button
                 android:id="@+id/phone_number_edit_btn_id"

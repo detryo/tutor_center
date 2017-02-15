@@ -232,6 +232,7 @@ public class StudentProfileInfoFragment extends Fragment{
             contactNumberEditText.setText(json.getString(CONTACT_NUMBER));
             relationEditText.setText(json.getString(RELATION));
 
+            if(!json.getString(ID_CARD).equals(""))
             Picasso.with(getContext()).load(json.getString(ID_CARD)).into(idCardStudentImageView);
 
         } catch (JSONException e) {

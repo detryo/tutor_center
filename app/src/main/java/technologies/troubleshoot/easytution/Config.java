@@ -44,6 +44,8 @@ public class Config {
     public static final String UPDATE_STUDENT_ID_CARD_URL = "http://tuition.tutorcenter-bd.com/idcardstudent.php";
     public static final String UPDATE_USER_PROFILE_PIC_URL = "http://tuition.tutorcenter-bd.com/upload.php";
 
+    public static final String RECOVER_PASSWORD_URL = "http://tuition.tutorcenter-bd.com/email.php";
+
     public static final String KEY_NAME = "username";
     public static final String KEY_USERTYPE = "user_type";
     public static final String SP_EMAIL = "email";

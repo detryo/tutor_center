@@ -116,6 +116,8 @@ public class TeacherEducationInfo extends Fragment {
 
         idCardImageView = (ImageView) rootView.findViewById(R.id.id_card_image_view_id);
 
+        saveEducationInfoBtn.setVisibility(View.GONE);
+
         idCardImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +136,8 @@ public class TeacherEducationInfo extends Fragment {
             public void onClick(View v) {
 
                 setEditTextEnableOrDisable(true);
+                editEducationInfoBtn.setVisibility(View.GONE);
+                saveEducationInfoBtn.setVisibility(View.VISIBLE);
 
             }
         });
@@ -145,6 +149,9 @@ public class TeacherEducationInfo extends Fragment {
                 updateEducationInfo(email, sscYearOfPassingEditText.getText().toString(), sscGroupEditText.getText().toString(), sscGpaEditText.getText().toString(), hscYearOfPassingEditText.getText().toString(), hscGroupEditText.getText().toString(), hscGpaEditText.getText().toString(), underGradYearOfPassingEditText.getText().toString(), underGradMajorEditText.getText().toString(), underGradCgpaEditText.getText().toString(), gradYearOfPassingEditText.getText().toString(), gradMajorEditText.getText().toString(), gradCgpaEditText.getText().toString());
 
                 setEditTextEnableOrDisable(false);
+                editEducationInfoBtn.setVisibility(View.VISIBLE);
+                saveEducationInfoBtn.setVisibility(View.GONE);
+
 
             }
         });
@@ -281,6 +288,7 @@ public class TeacherEducationInfo extends Fragment {
             gradMajorEditText.setText(json.getString(GRAD_MAJOR));
             gradCgpaEditText.setText(json.getString(GRAD_CGPA));
 
+            if(!json.getString(ID_CARD).equals(""))
             Picasso.with(getContext()).load(json.getString(ID_CARD)).into(idCardImageView);
 
         } catch (JSONException e) {

@@ -25,6 +25,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="30"
                 android:layout_gravity="center"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="Id Card : "/>
 
@@ -37,11 +38,6 @@
                 />
 
         </LinearLayout>
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">-->
 
         <TextView
             android:paddingTop="10dp"
@@ -58,35 +54,12 @@
             android:hint="Ref person name"
             android:inputType="text" />
 
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">-->
-
-        <!--<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contact number : " />-->
-
         <EditText
             android:id="@+id/contact_number_edit_view_student_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contact number"
             android:inputType="number" />
-
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">-->
-        <!--<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Relation : " />-->
 
         <EditText
             android:id="@+id/relation_edit_view_student_id"
