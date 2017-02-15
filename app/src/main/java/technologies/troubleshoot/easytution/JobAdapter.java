@@ -1,8 +1,7 @@
 package technologies.troubleshoot.easytution;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.app.Dialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -130,15 +129,40 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
             interestBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String email;
+                    /*String email;
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
                     email = preferences.getString(Config.SP_EMAIL, "");
 
                     clickIcon.setVisibility(View.VISIBLE);
                     detailInfo.setVisibility(View.GONE);
-                    showInterest(email, postId);
+                    showInterest(email, postId);*/
 
+                    // custom_alert_dialog_layout dialog
+                    final Dialog dialog = new Dialog(context);
+                    dialog.setContentView(R.layout.custom_alert_dialog_layout);
+
+                    // set the custom_alert_dialog_layout dialog components - text, image and button
+                    TextView text = (TextView) dialog.findViewById(R.id.text_alert_id);
+                    text.setText("Android custom_alert_dialog_layout dialog example!");
+
+
+                    ImageView image = (ImageView) dialog.findViewById(R.id.image);
+                    image.setImageResource(R.drawable.profile_pic);
+
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                    // if button is clicked, close the custom_alert_dialog_layout dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.show();
                 }
+
+
+
             });
 
             detailInfo.setOnClickListener(new View.OnClickListener() {

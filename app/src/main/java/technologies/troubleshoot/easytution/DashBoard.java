@@ -139,7 +139,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         if (id == R.id.nav_newsFeed_id) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_news_feed, new JobFeedFragment())
+                    .replace(R.id.content_news_feed, new JobFeedFragment(), TAG_JOB_FEED_FRAGMENT)
                     .commit();
         } else if (id == R.id.nav_new_post_id) {
 
@@ -193,6 +193,12 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             Intent callIntent = new Intent(Intent.ACTION_CALL);
             callIntent.setData(Uri.parse("tel:" + phone));
             startActivity(callIntent);
+
+        } else if(id == R.id.nav_payment_id){
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_news_feed, new PaymentFragment())
+                    .commit();
 
         }
 
