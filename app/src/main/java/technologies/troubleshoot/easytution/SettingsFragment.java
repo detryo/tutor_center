@@ -1,17 +1,25 @@
 package technologies.troubleshoot.easytution;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,13 +28,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by kaizer on 2/12/17.
@@ -34,10 +47,15 @@ import java.util.Map;
 
 public class SettingsFragment extends Fragment {
 
-    private static final String UPDATE_URL = "http://tuition.troubleshoot-tech.com/settingsinfo.php";
+
     public static final String USER_EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String PHONE = "phone";
+    private static final String USER_IMAGE = "profile_pic";
+
+    private static final int PICK_IMAGE_REQUEST = 1;
+
+    Bitmap bitmap;
 
 
     EditText currentPasswordEditText, newPasswordEditText, confirmPasswordEditText, phoneNumberEditText;
@@ -45,6 +63,8 @@ public class SettingsFragment extends Fragment {
     Button editPasswordBtn, savePasswordBtn, editPhoneNumberBtn, savePhoneNumberBtn;
 
     String email, currentPassword;
+
+    ImageView profileImage;
 
     @Nullable
     @Override
@@ -63,6 +83,8 @@ public class SettingsFragment extends Fragment {
         savePasswordBtn = (Button) rootView.findViewById(R.id.password_save_btn_id);
         editPhoneNumberBtn = (Button) rootView.findViewById(R.id.phone_number_edit_btn_id);
         savePhoneNumberBtn = (Button) rootView.findViewById(R.id.phone_number_save_btn_id);
+
+        profileImage = (ImageView) rootView.findViewById(R.id.profile_pic_id);
 
         fetchSettingsInfo();
         setEditTextEnableOrDisableForPassword(false);
@@ -118,6 +140,19 @@ public class SettingsFragment extends Fragment {
         });
 
 
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                // Start the Intent
+                startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+
+            }
+        });
+
+
 
         return rootView;
 
@@ -125,7 +160,7 @@ public class SettingsFragment extends Fragment {
 
     private void updateSettingsInfo(final String email, final String password, final String phone) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UPDATE_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.UPDATE_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -199,6 +234,9 @@ public class SettingsFragment extends Fragment {
             currentPassword = json.getString(PASSWORD);
             phoneNumberEditText.setText(json.getString(PHONE));
 
+            if(!json.getString(USER_IMAGE).equals(""))
+                Picasso.with(getContext()).load(json.getString(USER_IMAGE)).into(profileImage);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -218,6 +256,97 @@ public class SettingsFragment extends Fragment {
         confirmPasswordEditText.setEnabled(state);
         phoneNumberEditText.setEnabled(state);
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && null != data && data.getData() != null){
+            Uri filePath = data.getData();
+            try{
+                bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), filePath);
+                profileImage.setImageBitmap(bitmap);
+                uploadImage();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+        }
+
+        /*try {
+            // When an Image is picked
+            if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                    && null != data) {
+                // Get the Image from data
+
+                Uri selectedImage = data.getData();
+String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+                // Get the cursor
+                Cursor cursor = getContext().getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                // Move to first row
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                imgDecodableString = cursor.getString(columnIndex);
+                cursor.close();
+
+                bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImage);
+                ImageView imgView = (ImageView) rootView.findViewById(R.id.id_card_image_view_id);
+                // Set the Image in ImageView after decoding the String
+                imgView.setImageBitmap(bitmap);
+
+            } else {
+                Toast.makeText(getContext(), "You haven't picked Image",
+                        Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG)
+                    .show();
+        }*/
+
+    }
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+    public void uploadImage(){
+        final String image = getStringImage(bitmap);
+        class UploadImage extends AsyncTask<Void,Void,String> {
+            private ProgressDialog loading;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(getContext(),"Please wait...","uploading",false,false);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(getContext(),s,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                RequestHandler rh = new RequestHandler();
+                HashMap<String,String> param = new HashMap<>();
+                param.put(USER_IMAGE,image);
+                param.put(USER_EMAIL, email);
+                String result = rh.sendPostRequest(Config.UPDATE_USER_PROFILE_PIC_URL, param);
+                return result;
+            }
+        }
+        UploadImage u = new UploadImage();
+        u.execute();
     }
 
 }

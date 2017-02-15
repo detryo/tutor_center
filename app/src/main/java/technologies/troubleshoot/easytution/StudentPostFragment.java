@@ -105,7 +105,7 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position != 0){
+                if (position != 0) {
 
                     numOfDays = (String) parent.getItemAtPosition(position);
 
@@ -123,7 +123,7 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position != 0){
+                if (position != 0) {
 
                     tutorGender = (String) parent.getItemAtPosition(position);
 
@@ -141,7 +141,7 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position != 0){
+                if (position != 0) {
 
                     courses = (String) parent.getItemAtPosition(position);
 
@@ -189,7 +189,7 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, android.view.View view, int position, long l) {
 
-                if(position != 0){
+                if (position != 0) {
 
                     categorySpinnerItemSelected(position);
                     category = (String) adapterView.getItemAtPosition(position);
@@ -216,28 +216,25 @@ public class StudentPostFragment extends Fragment {
                 address = addressEditText.getText().toString();
                 additionalInfo = additionalInfoEditText.getText().toString();
 
-                if (title.trim().equals("")){
+                if (title.trim().equals("")) {
 
                     titleEditText.setError("Post Title Required!!");
                     progressBar.setVisibility(View.GONE);
                     postBtn.setVisibility(View.VISIBLE);
 
-                }
-                else if (subjects.trim().equals("")){
+                } else if (subjects.trim().equals("")) {
 
                     subjectsEditText.setError("Subject Name Required!!");
                     progressBar.setVisibility(View.GONE);
                     postBtn.setVisibility(View.VISIBLE);
 
-                }
-                else if (salary.trim().equals("")){
+                } else if (salary.trim().equals("")) {
 
                     salaryEditText.setError("Salary Required!!");
                     progressBar.setVisibility(View.GONE);
                     postBtn.setVisibility(View.VISIBLE);
 
-                }
-                else if (address.trim().equals("")){
+                } else if (address.trim().equals("")) {
 
                     addressEditText.setError("Address Required!!");
                     progressBar.setVisibility(View.GONE);
