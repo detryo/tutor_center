@@ -80,6 +80,8 @@ public class TeacherPersonalInfo extends Fragment {
         editPersonalInfoBtn = (Button) rootView.findViewById(R.id.edit_personal_info_btn_id);
         savePersonalInfoBtn = (Button) rootView.findViewById(R.id.save_personal_info_btn_id);
 
+        savePersonalInfoBtn.setVisibility(View.GONE);
+
         fetchPersonalInfo();
         setEditTextEnableOrDisable(false);
 
@@ -88,6 +90,8 @@ public class TeacherPersonalInfo extends Fragment {
             public void onClick(View v) {
 
                 setEditTextEnableOrDisable(true);
+                editPersonalInfoBtn.setVisibility(View.GONE);
+                savePersonalInfoBtn.setVisibility(View.VISIBLE);
 
             }
         });
@@ -99,6 +103,8 @@ public class TeacherPersonalInfo extends Fragment {
                 updatePersonalInfo(email, additionalNumberEditText.getText().toString(), detailAddressEditText.getText().toString(), nidNoEditText.getText().toString(), fbIdEditText.getText().toString(), linkedIdEditText.getText().toString(), fatherNameEditText.getText().toString(), motherNameEditText.getText().toString(), fatherNumberEditText.getText().toString(), motherNumberEditText.getText().toString(), refPersonNameEditText.getText().toString(), contactNumberEditText.getText().toString(), relationEditText.getText().toString());
 
                 setEditTextEnableOrDisable(false);
+                editPersonalInfoBtn.setVisibility(View.VISIBLE);
+                savePersonalInfoBtn.setVisibility(View.GONE);
 
             }
         });

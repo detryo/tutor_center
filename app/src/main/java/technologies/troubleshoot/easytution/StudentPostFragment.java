@@ -17,7 +17,6 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +43,6 @@ import java.util.Map;
 
 public class StudentPostFragment extends Fragment {
 
-    public static final String DATA_URL = "http://tuition.troubleshoot-tech.com/post.php";
     /*public static final String JSON_ARRAY = "job_post";*/
     public static String DATE_TO_START = "date_to_start";
     public static String ADDITIONAL_INFO = "content";
@@ -80,10 +78,6 @@ public class StudentPostFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.student_post_layout, container, false);
 
-        /*scrollView = (ScrollView) rootView.findViewById(R.id.scrollView_id);
-
-        scrollView.setAlpha((float) 0.3);*/
-
         titleEditText = (EditText) rootView.findViewById(R.id.post_title_id);
         subjectsEditText = (EditText) rootView.findViewById(R.id.job_post_subject_id);
         salaryEditText = (EditText) rootView.findViewById(R.id.job_post_salary_id);
@@ -111,7 +105,11 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                numOfDays = (String) parent.getItemAtPosition(position);
+                if (position != 0) {
+
+                    numOfDays = (String) parent.getItemAtPosition(position);
+
+                }
 
             }
 
@@ -125,7 +123,11 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                tutorGender = (String) parent.getItemAtPosition(position);
+                if (position != 0) {
+
+                    tutorGender = (String) parent.getItemAtPosition(position);
+
+                }
 
             }
 
@@ -139,7 +141,11 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                courses = (String) parent.getItemAtPosition(position);
+                if (position != 0) {
+
+                    courses = (String) parent.getItemAtPosition(position);
+
+                }
 
             }
 
@@ -183,9 +189,12 @@ public class StudentPostFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, android.view.View view, int position, long l) {
 
-                categorySpinnerItemSelected(position);
-                category = (String) adapterView.getItemAtPosition(position);
+                if (position != 0) {
 
+                    categorySpinnerItemSelected(position);
+                    category = (String) adapterView.getItemAtPosition(position);
+
+                }
             }
 
             @Override
@@ -207,28 +216,25 @@ public class StudentPostFragment extends Fragment {
                 address = addressEditText.getText().toString();
                 additionalInfo = additionalInfoEditText.getText().toString();
 
-                if (title.trim().equals("")){
+                if (title.trim().equals("")) {
 
                     titleEditText.setError("Post Title Required!!");
                     progressBar.setVisibility(View.GONE);
                     postBtn.setVisibility(View.VISIBLE);
 
-                }
-                else if (subjects.trim().equals("")){
+                } else if (subjects.trim().equals("")) {
 
                     subjectsEditText.setError("Subject Name Required!!");
                     progressBar.setVisibility(View.GONE);
                     postBtn.setVisibility(View.VISIBLE);
 
-                }
-                else if (salary.trim().equals("")){
+                } else if (salary.trim().equals("")) {
 
                     salaryEditText.setError("Salary Required!!");
                     progressBar.setVisibility(View.GONE);
                     postBtn.setVisibility(View.VISIBLE);
 
-                }
-                else if (address.trim().equals("")){
+                } else if (address.trim().equals("")) {
 
                     addressEditText.setError("Address Required!!");
                     progressBar.setVisibility(View.GONE);
@@ -298,7 +304,7 @@ public class StudentPostFragment extends Fragment {
 
     private void postStatus(final String email, final String title, final String days_in_week, final String preferred_teacher_gender, final String preferred_medium, final String student_class, final String studentSubject, final String date_to_start, final String salary, final String address, final String content) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, DATA_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.POST_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -322,7 +328,20 @@ public class StudentPostFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(getActivity(), "Unable to Post", Toast.LENGTH_LONG).show();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                        builder1.setMessage("Unable to post, please give all required fields");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
                     }
                 }) {
             @Override

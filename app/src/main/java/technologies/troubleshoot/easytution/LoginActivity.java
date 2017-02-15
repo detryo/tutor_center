@@ -3,14 +3,20 @@ package technologies.troubleshoot.easytution;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,7 +26,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,10 +43,13 @@ public class LoginActivity extends AppCompatActivity {
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
 
-    Button loginBtn, studentSignUpBtn, teacherSignUpBtn;
+    Button loginBtn, studentSignUpBtn, teacherSignUpBtn, backBtn, sendPassword;
     String email, password;
     EditText idEditText, passwordEditText;
     ProgressBar progressBar;
+    TextView forgotPassword, emailResponse;
+    TextInputLayout passwordHolder;
+    LinearLayout signupBtns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +59,27 @@ public class LoginActivity extends AppCompatActivity {
 
         //Attaching all the widgets to their corresponding view id.
         loginBtn = (Button) findViewById(R.id.loginBtn_id);
+        backBtn = (Button) findViewById(R.id.back_id);
+        sendPassword = (Button) findViewById(R.id.send_password_id);
+
         idEditText = (EditText) findViewById(R.id.usernameEditText_id);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText_id);
         studentSignUpBtn = (Button) findViewById(R.id.newAccountBtn_student_id);
         teacherSignUpBtn = (Button) findViewById(R.id.newAccountBtn_teacher_id);
 
+        forgotPassword = (TextView) findViewById(R.id.forgot_password_text_view_id);
+        emailResponse = (TextView) findViewById(R.id.email_response_id);
+
+        passwordHolder = (TextInputLayout) findViewById(R.id.password_holder_id);
+
         progressBar = (ProgressBar) findViewById(R.id.login_progress_view_id);
 
-        progressBar.setVisibility(View.GONE);
+        signupBtns = (LinearLayout) findViewById(R.id.signupBtn_linear_layout_id);
 
+        progressBar.setVisibility(View.GONE);
+        backBtn.setVisibility(View.GONE);
+        sendPassword.setVisibility(View.GONE);
+        emailResponse.setVisibility(View.GONE);
     }
 
     private void userLogin() {
@@ -64,6 +91,10 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if (response.trim().equals("success")) {
+
+                            FetchUserDetail fetchUserDetail = new FetchUserDetail();
+                            fetchUserDetail.execute();
+
                             SharedPreferences sp = getSharedPreferences("informme", 0);
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putBoolean("isLoggedIn", true);
@@ -174,8 +205,176 @@ public class LoginActivity extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
             userLogin();
 
+        } else if (view == forgotPassword){
+
+            forgotPassword.setVisibility(View.GONE);
+            passwordHolder.setVisibility(View.GONE);
+            loginBtn.setVisibility(View.GONE);
+            backBtn.setVisibility(View.VISIBLE);
+            sendPassword.setVisibility(View.VISIBLE);
+            idEditText.setHint("Enter Email");
+            signupBtns.setVisibility(View.GONE);
+
+        } else if (view == backBtn){
+
+            forgotPassword.setVisibility(View.VISIBLE);
+            passwordHolder.setVisibility(View.VISIBLE);
+            loginBtn.setVisibility(View.VISIBLE);
+            backBtn.setVisibility(View.GONE);
+            sendPassword.setVisibility(View.GONE);
+            idEditText.setHint("Email");
+            signupBtns.setVisibility(View.VISIBLE);
+
+            progressBar.setVisibility(View.GONE);
+            idEditText.setVisibility(View.VISIBLE);
+            emailResponse.setVisibility(View.GONE);
+
+        } else if (view == sendPassword){
+
+            sendPassword.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+            recoverUserPassword();
+
         }
 
+    }
+
+    class FetchUserDetail extends AsyncTask<Void, Void, Void> {
+
+        public FetchUserDetail() {
+            super();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            String url = Config.DATA_URL + email;
+            StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        showJSON(response);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
+                            builder1.setMessage("No Internet Connection");
+                            builder1.setCancelable(true);
+
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+
+                        }
+                    });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+
+            return null;
+        }
+
+        private void showJSON(String response) throws IOException {
+
+
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
+                JSONObject json = result.getJSONObject(0);
+                saveUserType(json.getString(Config.KEY_USERTYPE));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    private void recoverUserPassword() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.RECOVER_PASSWORD_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        if (response.trim().equals("success")) {
+
+                            idEditText.setVisibility(View.GONE);
+                            emailResponse.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+
+                        } else {
+
+                            progressBar.setVisibility(View.GONE);
+                            sendPassword.setVisibility(View.VISIBLE);
+
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
+                            builder1.setMessage("Invalid email ID");
+                            builder1.setCancelable(true);
+
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressBar.setVisibility(View.GONE);
+                        sendPassword.setVisibility(View.VISIBLE);
+
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
+                        builder1.setMessage("No Internet Connection");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                /*params.put(KEY_EMAIL, idEditText.getText().toString().trim());*/
+                params.put(KEY_EMAIL, "student@student.com");
+                return params;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
 }

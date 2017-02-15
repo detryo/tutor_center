@@ -1,5 +1,6 @@
 package technologies.troubleshoot.easytution;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -92,6 +93,9 @@ public class JobFeedFragment extends Fragment {
         if (id == R.id.action_refresh) {
 
             getStatus();
+
+            Intent intent = new Intent(getContext(), DashBoard.class);
+            startActivity(intent);
 
             return true;
         }

@@ -23,17 +23,6 @@
         app:menu="@menu/activity_nav_drawer_items">
 
 
-
-        <!--<Button
-            android:id="@+id/logoutBtn_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="10dp"
-            android:background="#D50000"
-            android:onClick="onLogout"
-            android:text="@string/LogOut_Button" />-->
-
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
