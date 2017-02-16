@@ -70,6 +70,8 @@ public class StudentProfileInfoFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.student_profile_info, container, false);
 
+        ((DashBoard) getActivity()).setActionBarTitle(getResources().getString(R.string.profile));
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         email = preferences.getString(Config.SP_EMAIL, "");
 

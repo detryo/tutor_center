@@ -5,27 +5,27 @@
         <item
             android:id="@+id/nav_newsFeed_id"
             android:icon="@drawable/news_32"
-            android:title="@string/latest_tuition" />
+            android:title="@string/job_feed" />
 
         <item
             android:id="@+id/nav_new_post_id"
             android:icon="@drawable/post_office_48"
-            android:title="Post new tution" />
+            android:title="@string/job_post" />
 
         <item
             android:id="@+id/nav_profile_id"
             android:icon="@drawable/user_48"
-            android:title="Profile" />
+            android:title="@string/profile" />
 
         <item
             android:id="@+id/nav_settings_id"
             android:icon="@drawable/ic_menu_manage"
-            android:title="@string/dash_board_app_bar_items" />
+            android:title="@string/setting" />
 
         <item
             android:id="@+id/nav_payment_id"
             android:icon="@drawable/payment_icon"
-            android:title="Payment" />
+            android:title="@string/payment" />
 
     </group>
 

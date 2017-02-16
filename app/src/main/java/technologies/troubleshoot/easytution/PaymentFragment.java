@@ -20,6 +20,8 @@ public class PaymentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.payment_fragment_layout, container, false);
 
+        ((DashBoard) getActivity()).setActionBarTitle(getResources().getString(R.string.payment));
+
         return rootView;
     }
 }
