@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -45,12 +46,13 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     public static final String KEY_INSTITUTE = "institute";
     public static final String KEY_PHONE = "phone";
 
-    Button nextBtn;
+    Button createAccountBtn;
     EditText userEditText, emailEditText, passwordEditText, reEnteredPassEditText, phoneNumber,instituteName;
     RequestQueue requestQueue;
     Spinner gender;
     ArrayAdapter spinnerAdapter;
     String user_gender, user_type;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         setContentView(R.layout.activity_signup);
         //Attaching all widgets to their corresponding viewID;
-        nextBtn = (Button) findViewById(R.id.nextToCategoryBtn_id);
+        createAccountBtn = (Button) findViewById(R.id.nextToCategoryBtn_id);
 
         userEditText = (EditText) findViewById(R.id.Signup_Username_EditText_id);
         emailEditText = (EditText) findViewById(R.id.Signup_Email_EditText_id);
@@ -66,6 +68,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         reEnteredPassEditText = (EditText) findViewById(R.id.Signup_Password_ReEnter_EditText_id);
         phoneNumber = (EditText) findViewById(R.id.Signup_Phone_EditText_id);
         instituteName = (EditText) findViewById(R.id.Signup_Institute_EditText_id);
+
+        progressBar = (ProgressBar) findViewById(R.id.sign_up_progress_bar_id);
+
+        progressBar.setVisibility(View.GONE);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         user_type = preferences.getString(Config.SP_USERTYPE, "");
@@ -93,7 +99,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        nextBtn.setOnClickListener(this);
+        createAccountBtn.setOnClickListener(this);
     }
 
     private void registerUser(final String username, final String password, final String email, final String institute, final String phone, final String user_type, final String gender) {
@@ -108,10 +114,31 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putBoolean("isLoggedIn", true);
                             editor.apply();
-                            openProfile(email);
-                        } else {/*
+
+                            createAccountBtn.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.GONE);
-                            loginBtn.setVisibility(View.VISIBLE);*/
+
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(SignupActivity.this);
+                            builder1.setMessage("Account successfully created");
+                            builder1.setCancelable(false);
+
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                            openProfile(email);
+                                        }
+                                    });
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+
+                        } else {
+
+                            createAccountBtn.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+
                             AlertDialog.Builder builder1 = new AlertDialog.Builder(SignupActivity.this);
                             builder1.setMessage("Invalid email ID already exists");
                             builder1.setCancelable(true);
@@ -134,6 +161,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+
+                        createAccountBtn.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(SignupActivity.this);
                         builder1.setMessage("No Internet Connection");
                         builder1.setCancelable(true);
@@ -171,7 +202,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
     @Override
     public void onClick(View v) {
-        if (v == nextBtn) {
+        if (v == createAccountBtn) {
+
+            createAccountBtn.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
 
             String username = userEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
