@@ -119,6 +119,8 @@ public class JobFeedFragment extends Fragment {
             }
         });
 
+        ((DashBoard) getActivity()).setActionBarTitle(getResources().getString(R.string.job_feed));
+
         ArrayList<JobFeedContent> job = new ArrayList<>();
 
         job.add(new JobFeedContent(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "));

@@ -7,7 +7,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="dash_board_app_bar_items">Settings</string>
+    <string name="setting">Settings</string>
     <string name="LogOut_Button">Log Out</string>
     <string name="news">Feed</string>
     <string name="trending">Trending</string>
@@ -15,7 +15,7 @@
     <string name="usertype">User Type</string>
     <string name="eduInfo">Education</string>
     <string name="personalInfo">Personal</string>
-    <string name="latest_tuition">Current tution</string>
+    <string name="job_feed">Current tuition</string>
     <string name="student_post_btn">POST</string>
     <string name="editBtn">Edit</string>
     <string name="additional_number">Give additional number</string>
@@ -24,6 +24,8 @@
     <string name="facebook_id">Give faceBook ID</string>
     <string name="linked_in_id">Give linked In ID</string>
     <string name="parent_s_information">Parent\'s Information</string>
+    <string name="job_post">Post new tuition</string>
+    <string name="payment">Payment</string>
 
     <string-array name="gender_type">
         <item>Select Gender</item>

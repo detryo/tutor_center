@@ -104,6 +104,10 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
     }
 
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
+
     private void getUserDetail() {
 
         FetchUserDetail fetchUserDetail = new FetchUserDetail();

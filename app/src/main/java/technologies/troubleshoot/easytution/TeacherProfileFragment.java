@@ -24,6 +24,7 @@ public class TeacherProfileFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.teacher_profile_tab_layout, container, false);
 
+        ((DashBoard) getActivity()).setActionBarTitle(getResources().getString(R.string.profile));
 
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);

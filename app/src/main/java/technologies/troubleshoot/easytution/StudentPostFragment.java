@@ -82,6 +82,8 @@ public class StudentPostFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.student_post_layout, container, false);
 
+        ((DashBoard) getActivity()).setActionBarTitle(getResources().getString(R.string.job_post));
+
         titleEditText = (EditText) rootView.findViewById(R.id.post_title_id);
         subjectsEditText = (EditText) rootView.findViewById(R.id.job_post_subject_id);
         salaryEditText = (EditText) rootView.findViewById(R.id.job_post_salary_id);
