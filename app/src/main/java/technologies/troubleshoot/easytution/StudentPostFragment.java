@@ -1,9 +1,11 @@
 package technologies.troubleshoot.easytution;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.renderscript.Element;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -33,7 +35,9 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,7 +64,7 @@ public class StudentPostFragment extends Fragment {
     CalendarView calendar;
     Spinner categorySpinner, classSpinner, tutorGenderSpinner, numOfDaysSpinner;
     ArrayList categoryListSpinner, classListSpinner;
-    ArrayAdapter<String> categoryAdapter, classAdapter;
+    ArrayAdapter<String> categoryAdapter, classAdapter, numOfDaysAdapter, tutorGenderAdapter;
     String title, numOfDays, tutorGender, category, courses, subjects, dateToStart, salary, additionalInfo, address;
     EditText titleEditText, subjectsEditText, salaryEditText, additionalInfoEditText, addressEditText;
     LinearLayout calenderView;
@@ -100,6 +104,13 @@ public class StudentPostFragment extends Fragment {
         progressBar.setVisibility(View.GONE);
 
         calendar.setVisibility(View.GONE);
+
+        String[] numOfdaysArray = {"Num of days", "1 day", "2 days", "3 days", "4 days", "5 days", "6 days", "7 days"};
+        String[] tutorGenderArray = {"Tutor gender", "Any", "Male", "Female"};
+
+        String[] classArray = {"Class/Courses"," Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8", "Class 9", "class SSC / O-level", "class HSC / A=level"};
+
+
 
         numOfDaysSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -182,8 +193,19 @@ public class StudentPostFragment extends Fragment {
         classListSpinner = new ArrayList();
 
         categoryListSpinner = getData("category.json");
+
+        numOfDaysAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, numOfdaysArray);
         categoryAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, categoryListSpinner);
+
+        tutorGenderAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, tutorGenderArray);
+
+        classAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, R.id.spinner_item_text, classArray);
+
+
         categorySpinner.setAdapter(categoryAdapter);
+        numOfDaysSpinner.setAdapter(numOfDaysAdapter);
+        tutorGenderSpinner.setAdapter(tutorGenderAdapter);
+        classSpinner.setAdapter(classAdapter);
 
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -308,20 +330,20 @@ public class StudentPostFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                        builder1.setMessage("Your Post is Under Review!");
-                        builder1.setCancelable(true);
+                        final Dialog dialog = new Dialog(getActivity());
+                        dialog.setContentView(R.layout.custom_alert_dialog_layout_underreview
+                        );
 
-                        builder1.setPositiveButton(
-                                "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
+                        Button dialogButton = (Button) dialog.findViewById(R.id.dialog_btn_on_post_id);
+                        // if button is clicked, close the custom_alert_dialog_layout_news_feed dialog
+                        dialogButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
 
-                        AlertDialog alert11 = builder1.create();
-                        alert11.show();
+                        dialog.show();
 
                     }
                 },

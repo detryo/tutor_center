@@ -15,7 +15,7 @@
     <string name="usertype">User Type</string>
     <string name="eduInfo">Education</string>
     <string name="personalInfo">Personal</string>
-    <string name="latest_tuition">News Feed</string>
+    <string name="latest_tuition">Current tution</string>
     <string name="student_post_btn">POST</string>
     <string name="editBtn">Edit</string>
     <string name="additional_number">Give additional number</string>

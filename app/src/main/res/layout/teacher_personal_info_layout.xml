@@ -2,8 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:background="@color/appBackGroundColor"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,16 +14,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <Button
                 android:id="@+id/edit_personal_info_btn_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#33b5e5"
                 android:layout_gravity="right"
-                android:text="@string/editBtn"/>
+                android:background="@color/editBtnBackGround"
+                android:text="@string/editBtn" />
 
             <EditText
                 android:id="@+id/additional_number_edit_view_id"
@@ -63,15 +64,15 @@
         </LinearLayout>
 
         <TextView
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#eaeaea"
-            android:textColor="#000000"
+            android:background="@color/highlightColor"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
             android:text="@string/parent_s_information"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="#000000" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,15 +112,15 @@
         </LinearLayout>
 
         <TextView
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#eaeaea"
-            android:textColor="#000000"
+            android:background="@color/highlightColor"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
             android:text="Reference person"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="#000000" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,11 +152,11 @@
             <Button
                 android:id="@+id/save_personal_info_btn_id"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
-                android:background="#00c851"
                 android:layout_gravity="right"
-                android:text="SAVE"/>
+                android:layout_marginTop="10dp"
+                android:background="@color/saveBtnBackground"
+                android:text="SAVE" />
 
         </LinearLayout>
 

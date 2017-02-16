@@ -5,9 +5,11 @@
     android:id="@+id/content_news_feed"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="dsd.informme.com.helpblox.DashBoard"
-    tools:showIn="@layout/app_bar_dash_board"
-    android:orientation="vertical">
+    tools:showIn="@layout/app_bar_dash_board">
+
+
 
 </LinearLayout>

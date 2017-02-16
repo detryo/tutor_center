@@ -260,6 +260,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         private void showJSON(String response) throws IOException {
             String name = "";
+            String email = "";
 
             try {
                 JSONObject jsonObject = new JSONObject(response);
@@ -268,6 +269,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                 name = json.getString(Config.KEY_NAME);
                 userType = json.getString(Config.KEY_USERTYPE);
                 userImageUrl = json.getString(USER_IMAGE);
+                email = json.getString((USER_EMAIL));
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -275,7 +277,10 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             //set the username -- that is fetched from database
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             ((TextView) navigationView.getHeaderView(0).findViewById(R.id.text_View_User_Name_id)).setText(name);
+            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.user_email_text_view_id)).setText(email);
+            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.user_type_text_view_id)).setText(userType);
 
+            if(!userImageUrl.equals(""))
             Picasso.with(DashBoard.this).load(userImageUrl).into(((ImageView) navigationView.getHeaderView(0).findViewById(R.id.user_Image_View_id)));
 
             if (userType.equals("teacher"))

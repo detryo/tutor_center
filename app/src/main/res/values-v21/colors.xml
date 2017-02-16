@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="appBackGroundColor">#E3F2FD</color>
+    <color name="highlightColor">#80CBC4</color>
+    <color name="editBtnBackGround">#33b5e5</color>
+    <color name="saveBtnBackground">#00c851</color>
+</resources>

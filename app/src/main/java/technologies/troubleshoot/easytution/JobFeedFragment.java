@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,7 +36,7 @@ public class JobFeedFragment extends Fragment {
     public static String USER_NAME = "username";
     public static String USER_IMAGE = "image";
 
-    public static final String DATA_URL = "http://tuition.troubleshoot-tech.com/newsfeed.php";
+
     public static final String JSON_ARRAY = "job_post";
     public static String STATUS_TIME = "date_time";
     public static String POST_ID = "post_id";
@@ -53,6 +54,7 @@ public class JobFeedFragment extends Fragment {
     private JobAdapter jobAdapter;
 
     RecyclerView recyclerView;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onStart() {
@@ -92,8 +94,6 @@ public class JobFeedFragment extends Fragment {
 
         if (id == R.id.action_refresh) {
 
-            getStatus();
-
             Intent intent = new Intent(getContext(), DashBoard.class);
             startActivity(intent);
 
@@ -107,6 +107,17 @@ public class JobFeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.dash_board_job_feed_layout, container, false);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_down_to_refresh_job_feed_id);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                getStatus();
+
+            }
+        });
 
         ArrayList<JobFeedContent> job = new ArrayList<>();
 
@@ -123,6 +134,7 @@ public class JobFeedFragment extends Fragment {
         recyclerView.setVisibility(View.GONE);
 
         return rootView;
+
     }
 
     class FetchStatus extends AsyncTask<String, Void, JobFeedContent[]> {
@@ -150,7 +162,7 @@ public class JobFeedFragment extends Fragment {
                 // Possible parameters are avaiable at OWM's forecast API page, at
                 // http://openweathermap.org/API#forecast
 
-                Uri builtUri = Uri.parse(DATA_URL).buildUpon()
+                Uri builtUri = Uri.parse(Config.JOB_FEED_URL).buildUpon()
                         .build();
 
                 URL url = new URL(builtUri.toString());
@@ -238,6 +250,7 @@ public class JobFeedFragment extends Fragment {
         @Override
         protected void onPostExecute(JobFeedContent[] result) {
 
+            swipeRefreshLayout.setRefreshing(false);
             if (result != null) {
                 recyclerView.setVisibility(View.VISIBLE);
                 jobAdapter.itemUpdated(result);

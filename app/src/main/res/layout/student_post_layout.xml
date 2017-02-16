@@ -3,6 +3,7 @@
     android:id="@+id/scrollView_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/appBackGroundColor"
     android:padding="10dp">
 
     <LinearLayout
@@ -33,7 +34,6 @@
                     android:id="@+id/numOfDays_job_post_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/days_in_a_week"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp" />
 
@@ -41,17 +41,8 @@
                     android:id="@+id/spinner_category_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/preferred_medium"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp" />
-
-                <!--<Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:entries="@array/preferred_medium"
-                    android:prompt="@string/usertype" />-->
 
             </LinearLayout>
 
@@ -64,7 +55,7 @@
                 <Spinner
                     android:id="@+id/tutor_gender_job_post_id"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:entries="@array/preferred_teacher_gender"
+                    android:layout_height="wrap_content"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp" />
 
@@ -72,17 +63,8 @@
                     android:id="@+id/spinner_class_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/class_of_student"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp" />
-
-                <!--<Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:entries="@array/account_type_spinner"
-                    android:prompt="@string/usertype" />-->
 
             </LinearLayout>
 
@@ -150,13 +132,15 @@
             android:inputType="textShortMessage" />
 
         <Button
+            android:layout_marginTop="15dp"
             android:id="@+id/job_post_btn_id"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:background="#0f53c1"
+            android:background="@color/saveBtnBackground"
             android:padding="10dp"
             android:text="@string/student_post_btn"
+            android:textColor="#fff"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
         <ProgressBar

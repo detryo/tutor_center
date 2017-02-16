@@ -36,7 +36,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     /*
      * All Variables are declared here.
      */
-    private static final String REGISTER_URL = "http://tuition.troubleshoot-tech.com/signup.php";
+
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_EMAIL = "email";
@@ -68,7 +68,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         instituteName = (EditText) findViewById(R.id.Signup_Institute_EditText_id);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        user_type = preferences.getString(KEY_USERTYPE, "");
+        user_type = preferences.getString(Config.SP_USERTYPE, "");
 
         gender = (Spinner) findViewById(R.id.Signup_UserType_Spinner_id);
 
@@ -98,7 +98,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     private void registerUser(final String username, final String password, final String email, final String institute, final String phone, final String user_type, final String gender) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.SIGN_UP_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

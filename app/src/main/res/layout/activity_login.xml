@@ -14,9 +14,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="@string/app_name"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:gravity="center"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
     </RelativeLayout>
 
@@ -32,26 +32,25 @@
             android:id="@+id/email_response_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:gravity="center"
-            android:text="Email successfully send"/>
+            android:text="Email successfully send"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
         <EditText
             android:id="@+id/usernameEditText_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:inputType="textEmailAddress"
             android:hint="Email"
+            android:inputType="textEmailAddress"
             android:textColorHint="@color/colorAccent" />
 
-        <LinearLayout
-            android:id="@+id/passwordEditText_linear_layout_id"
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/passwordEditText_linear_layout_id"
             android:layout_width="match_parent"
-            android:layout_below="@+id/usernameEditText_id"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/usernameEditText_id"
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
@@ -62,12 +61,12 @@
                 app:passwordToggleEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
-                    android:layout_width="match_parent"
                     android:id="@+id/passwordEditText_id"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="password"
-                    android:textColorHint="@color/colorAccent"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/colorAccent" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -75,9 +74,9 @@
                 android:id="@+id/send_password_id"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:text="Send Password"
+                android:background="@drawable/ic_login_button"
                 android:onClick="btnClicked"
-                android:background="@drawable/ic_login_button"/>
+                android:text="Send Password" />
 
             <TextView
                 android:id="@+id/forgot_password_text_view_id"
@@ -85,41 +84,41 @@
                 android:layout_height="wrap_content"
                 android:onClick="btnClicked"
                 android:padding="10dp"
-                android:text="Forgot Password?"/>
+                android:text="Forgot Password?" />
         </LinearLayout>
 
         <ProgressBar
             android:id="@+id/login_progress_view_id"
             android:layout_width="match_parent"
-            android:layout_below="@+id/passwordEditText_linear_layout_id"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/passwordEditText_linear_layout_id" />
 
         <Button
             android:id="@+id/loginBtn_id"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_below="@+id/passwordEditText_linear_layout_id"
-            android:text="Login"
+            android:background="@drawable/ic_login_button"
             android:onClick="btnClicked"
-            android:background="@drawable/ic_login_button"/>
+            android:text="Login" />
 
         <LinearLayout
             android:id="@+id/signupBtn_linear_layout_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp">
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/newAccountBtn_student_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="btnClicked"
+                android:background="@drawable/singup_student_button"
                 android:gravity="center"
-                android:textColor="#ffffff"
+                android:onClick="btnClicked"
                 android:text="SIGNUP AS STUDENT"
-                android:background="@drawable/singup_student_button"/>
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/or_id"
@@ -127,17 +126,17 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="OR"
-                android:textColor="#ffffff"/>
+                android:textColor="#ffffff" />
 
             <Button
                 android:id="@+id/newAccountBtn_teacher_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="btnClicked"
-                android:gravity="center"
-                android:textColor="#ffffff"
                 android:background="@drawable/singup_teacher_button"
-                android:text="SIGNUP AS TEACHER" />
+                android:gravity="center"
+                android:onClick="btnClicked"
+                android:text="SIGNUP AS TEACHER"
+                android:textColor="#ffffff" />
 
         </LinearLayout>
 
@@ -147,9 +146,9 @@
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="15dp"
-            android:text="Back"
+            android:background="@drawable/ic_login_button"
             android:onClick="btnClicked"
-            android:background="@drawable/ic_login_button"/>
+            android:text="Back" />
 
     </RelativeLayout>
 

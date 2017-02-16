@@ -19,8 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Full Name"
-            android:maxLength="29"
             android:inputType="text"
+            android:maxLength="29"
             android:paddingBottom="16dp"
             android:paddingTop="16dp" />
 
@@ -30,8 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/Signup_Username_EditText_id"
             android:hint="Phone Number"
-            android:maxLength="29"
             android:inputType="number"
+            android:maxLength="29"
             android:paddingBottom="16dp" />
 
 
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/Signup_Institute_EditText_id"
             android:layout_marginTop="16dp"
-            android:entries="@array/gender_type"/>
+            android:entries="@array/gender_type" />
 
     </RelativeLayout>
 

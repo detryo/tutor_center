@@ -1,5 +1,6 @@
 package technologies.troubleshoot.easytution;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,12 +15,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -84,6 +87,9 @@ public class SettingsFragment extends Fragment {
         editPhoneNumberBtn = (Button) rootView.findViewById(R.id.phone_number_edit_btn_id);
         savePhoneNumberBtn = (Button) rootView.findViewById(R.id.phone_number_save_btn_id);
 
+        savePasswordBtn.setVisibility(View.GONE);
+        savePhoneNumberBtn.setVisibility(View.GONE);
+
         profileImage = (ImageView) rootView.findViewById(R.id.profile_pic_id);
 
         fetchSettingsInfo();
@@ -95,6 +101,8 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
 
                 setEditTextEnableOrDisableForPassword(true);
+                editPasswordBtn.setVisibility(View.GONE);
+                savePasswordBtn.setVisibility(View.VISIBLE);
 
             }
         });
@@ -116,7 +124,8 @@ public class SettingsFragment extends Fragment {
                 }
 
                 setEditTextEnableOrDisableForPassword(false);
-
+                editPasswordBtn.setVisibility(View.VISIBLE);
+                savePasswordBtn.setVisibility(View.GONE);
             }
         });
 
@@ -125,6 +134,8 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
 
                 setEditTextEnableOrDisableForPhoneNumber(true);
+                editPhoneNumberBtn.setVisibility(View.GONE);
+                savePhoneNumberBtn.setVisibility(View.VISIBLE);
 
             }
         });
@@ -135,6 +146,8 @@ public class SettingsFragment extends Fragment {
 
                 updateSettingsInfo(email, currentPasswordEditText.getText().toString(), phoneNumberEditText.getText().toString());
                 setEditTextEnableOrDisableForPhoneNumber(false);
+                editPhoneNumberBtn.setVisibility(View.VISIBLE);
+                savePhoneNumberBtn.setVisibility(View.GONE);
 
             }
         });
@@ -164,9 +177,20 @@ public class SettingsFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getContext(), "Successfully Updated", Toast.LENGTH_LONG).show();
-                        /*Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(i);*/
+
+                        final Dialog dialog = new Dialog(getContext());
+                        dialog.setContentView(R.layout.custom_alert_dialog_layout_updated);
+
+                        Button dialogButton = (Button) dialog.findViewById(R.id.dialog_updated_btn_id);
+                        // if button is clicked, close the custom_alert_dialog_layout_news_feed dialog
+                        dialogButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        dialog.show();
                     }
                 },
                 new Response.ErrorListener() {

@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@color/appBackGroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,26 +10,26 @@
         android:orientation="vertical">
 
         <Button
-            android:layout_marginTop="15dp"
             android:id="@+id/edit_education_info_btn_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#33b5e5"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
             android:layout_gravity="right"
-            android:text="Edit"/>
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/editBtnBackGround"
+            android:text="Edit" />
 
         <TextView
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#eaeaea"
-            android:textColor="#000000"
+            android:background="@color/highlightColor"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
             android:text="SSC Information"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="#000000" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,38 +38,39 @@
             android:padding="15dp">
 
             <EditText
-                android:hint="Year of passing"
                 android:id="@+id/ssc_years_of_passing_edit_view_id"
                 android:layout_width="match_parent"
-                android:inputType="date"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="Year of passing"
+                android:inputType="date" />
 
             <EditText
                 android:id="@+id/ssc_major_group_edit_view_id"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="Group"
-                android:inputType="textAutoCorrect"
-                android:layout_height="wrap_content" />
+                android:inputType="textAutoCorrect" />
 
             <EditText
-                android:hint="GPA"
                 android:id="@+id/ssc_gpa_edit_view_id"
                 android:layout_width="match_parent"
-                android:inputType="numberDecimal"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="GPA"
+                android:inputType="numberDecimal" />
 
 
         </LinearLayout>
+
         <TextView
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#eaeaea"
-            android:textColor="#000000"
+            android:background="@color/highlightColor"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
             android:text="HSC Information"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="#000000" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,39 +79,39 @@
             android:padding="15dp">
 
             <EditText
-                android:hint="Year of passing"
                 android:id="@+id/hsc_years_of_passing_edit_view_id"
                 android:layout_width="match_parent"
-                android:inputType="date"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="Year of passing"
+                android:inputType="date" />
 
             <EditText
                 android:id="@+id/hsc_major_group_edit_view_id"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="Group"
-                android:inputType="textAutoCorrect"
-                android:layout_height="wrap_content" />
+                android:inputType="textAutoCorrect" />
 
             <EditText
-                android:hint="GPA"
                 android:id="@+id/hsc_gpa_edit_view_id"
                 android:layout_width="match_parent"
-                android:inputType="numberDecimal"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="GPA"
+                android:inputType="numberDecimal" />
 
 
         </LinearLayout>
 
         <TextView
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#eaeaea"
-            android:textColor="#000000"
+            android:background="@color/highlightColor"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
             android:text="Under Grad. Information"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="#000000" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,39 +120,39 @@
             android:padding="15dp">
 
             <EditText
-                android:hint="Year of passing"
                 android:id="@+id/under_grad_years_of_passing_edit_view_id"
                 android:layout_width="match_parent"
-                android:inputType="date"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="Year of passing"
+                android:inputType="date" />
 
             <EditText
                 android:id="@+id/under_grad_major_group_edit_view_id"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="Major"
-                android:inputType="textAutoCorrect"
-                android:layout_height="wrap_content" />
+                android:inputType="textAutoCorrect" />
 
             <EditText
-                android:hint="CGPA"
                 android:id="@+id/under_grad_gpa_edit_view_id"
                 android:layout_width="match_parent"
-                android:inputType="numberDecimal"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="CGPA"
+                android:inputType="numberDecimal" />
 
 
         </LinearLayout>
 
         <TextView
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#eaeaea"
-            android:textColor="#000000"
+            android:background="@color/highlightColor"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
             android:text="Masters Information"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="#000000" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -160,25 +161,25 @@
             android:padding="15dp">
 
             <EditText
-                android:hint="Year of passing"
                 android:id="@+id/grad_years_of_passing_edit_view_id"
                 android:layout_width="match_parent"
-                android:inputType="date"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="Year of passing"
+                android:inputType="date" />
 
             <EditText
                 android:id="@+id/grad_major_group_edit_view_id"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="Major"
-                android:inputType="textAutoCorrect"
-                android:layout_height="wrap_content" />
+                android:inputType="textAutoCorrect" />
 
             <EditText
-                android:hint="CGPA"
                 android:id="@+id/grad_gpa_edit_view_id"
                 android:layout_width="match_parent"
-                android:inputType="numberDecimal"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="CGPA"
+                android:inputType="numberDecimal" />
 
 
         </LinearLayout>
@@ -190,29 +191,29 @@
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="30"
-                android:layout_gravity="center"
-                android:textStyle="bold"
                 android:layout_height="wrap_content"
-                android:text="Id Card : "/>
+                android:layout_gravity="center"
+                android:layout_weight="30"
+                android:text="Id Card : "
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/id_card_image_view_id"
                 android:layout_width="0dp"
-                android:src="@drawable/id_card"
+                android:layout_height="200dp"
                 android:layout_weight="70"
-                android:layout_height="200dp"/>
+                android:src="@drawable/id_card" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/save_education_info_btn_id"
             android:layout_width="match_parent"
-            android:layout_margin="10dp"
             android:layout_height="wrap_content"
-            android:background="#00c851"
             android:layout_gravity="right"
-            android:text="SAVE"/>
+            android:layout_margin="10dp"
+            android:background="@color/saveBtnBackground"
+            android:text="SAVE" />
 
     </LinearLayout>
 

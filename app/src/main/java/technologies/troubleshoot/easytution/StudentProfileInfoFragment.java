@@ -1,5 +1,6 @@
 package technologies.troubleshoot.easytution;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,13 +15,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -81,6 +82,8 @@ public class StudentProfileInfoFragment extends Fragment{
 
         idCardStudentImageView = (ImageView) rootView.findViewById(R.id.student_id_card_image_view_id);
 
+        saveStudentInfoBtn.setVisibility(View.GONE);
+
         idCardStudentImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +104,8 @@ public class StudentProfileInfoFragment extends Fragment{
             public void onClick(View v) {
 
                 setEditTextEnableOrDisable(true);
+                editStudentInfoBtn.setVisibility(View.GONE);
+                saveStudentInfoBtn.setVisibility(View.VISIBLE);
 
             }
         });
@@ -112,6 +117,8 @@ public class StudentProfileInfoFragment extends Fragment{
                 updatePersonalInfo(email, refPersonNameEditText.getText().toString(), contactNumberEditText.getText().toString(), relationEditText.getText().toString());
 
                 setEditTextEnableOrDisable(false);
+                editStudentInfoBtn.setVisibility(View.VISIBLE);
+                saveStudentInfoBtn.setVisibility(View.GONE);
 
             }
         });
@@ -134,20 +141,19 @@ public class StudentProfileInfoFragment extends Fragment{
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                        builder1.setMessage("Successfully Updated");
-                        builder1.setCancelable(true);
+                        final Dialog dialog = new Dialog(getContext());
+                        dialog.setContentView(R.layout.custom_alert_dialog_layout_updated);
 
-                        builder1.setPositiveButton(
-                                "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
+                        Button dialogButton = (Button) dialog.findViewById(R.id.dialog_updated_btn_id);
+                        // if button is clicked, close the custom_alert_dialog_layout_news_feed dialog
+                        dialogButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
 
-                        AlertDialog alert11 = builder1.create();
-                        alert11.show();
+                        dialog.show();
                     }
                 },
                 new Response.ErrorListener() {
