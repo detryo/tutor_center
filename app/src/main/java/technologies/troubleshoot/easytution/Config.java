@@ -29,6 +29,12 @@ public class Config {
 
     public static final String DATA_URL = "http://tuition.tutorcenter-bd.com/user.php?email=";
 
+    public static final String LOGIN_URL = "http://tuition.tutorcenter-bd.com/login.php";
+
+    public static final String SIGN_UP_URL = "http://tuition.tutorcenter-bd.com/signup.php";
+
+    public static final String JOB_FEED_URL = "http://tuition.tutorcenter-bd.com/newsfeed.php";
+
     public static final String POST_URL = "http://tuition.tutorcenter-bd.com/post.php";
 
     public static final String FETCH_PERSONAL_INFO_URL = "http://tuition.tutorcenter-bd.com/showteacherpersonalinfo.php?email=";

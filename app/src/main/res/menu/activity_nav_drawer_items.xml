@@ -10,7 +10,7 @@
         <item
             android:id="@+id/nav_new_post_id"
             android:icon="@drawable/post_office_48"
-            android:title="New Post" />
+            android:title="Post new tution" />
 
         <item
             android:id="@+id/nav_profile_id"
@@ -36,12 +36,6 @@
                 android:id="@+id/nav_phone_admin_id"
                 android:icon="@drawable/phone_call"
                 android:title="01521498113" />
-
-        </menu>
-    </item>
-
-    <item android:title="">
-        <menu>
 
             <item
                 android:id="@+id/nav_log_out_id"

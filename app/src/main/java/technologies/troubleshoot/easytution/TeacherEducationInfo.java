@@ -1,12 +1,11 @@
 package technologies.troubleshoot.easytution;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -37,12 +37,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.R.attr.bitmap;
 import static android.app.Activity.RESULT_OK;
 
 
@@ -167,20 +165,19 @@ public class TeacherEducationInfo extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                        builder1.setMessage("Successfully Updated");
-                        builder1.setCancelable(true);
+                        final Dialog dialog = new Dialog(getActivity());
+                        dialog.setContentView(R.layout.custom_alert_dialog_layout_updated);
 
-                        builder1.setPositiveButton(
-                                "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
+                        Button dialogButton = (Button) dialog.findViewById(R.id.dialog_updated_btn_id);
+                        // if button is clicked, close the custom_alert_dialog_layout_news_feed dialog
+                        dialogButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
 
-                        AlertDialog alert11 = builder1.create();
-                        alert11.show();
+                        dialog.show();
                     }
                 },
                 new Response.ErrorListener() {

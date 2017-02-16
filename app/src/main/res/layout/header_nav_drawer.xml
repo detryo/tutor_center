@@ -14,39 +14,40 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_Image_View_id"
         android:layout_width="100dp"
-        android:layout_gravity="center"
         android:layout_height="100dp"
-        android:src="@drawable/profile_pic"
-        app:border_width="2dp"
-        />
-
-    <TextView
-        android:id="@+id/user_email_text_view_id"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:text="user email"
+        android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:textColor="@android:color/white"/>
+        android:src="@drawable/profile_pic"
+        app:border_width="2dp" />
 
     <TextView
         android:id="@+id/text_View_User_Name_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="user name"
         android:textAllCaps="true"
-        android:layout_marginTop="10dp"
         android:textColor="@android:color/white" />
 
     <TextView
+        android:id="@+id/user_email_text_view_id"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="user email"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/user_type_text_view_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
         android:text="user type"
         android:textAllCaps="true"
-        android:id="@+id/user_type_text_view_id"
-        android:layout_marginTop="10dp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

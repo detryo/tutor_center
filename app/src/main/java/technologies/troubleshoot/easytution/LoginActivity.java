@@ -39,7 +39,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static final String LOGIN_URL = "http://tuition.troubleshoot-tech.com/login.php";
+
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
 
@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         email = idEditText.getText().toString().trim();
         password = passwordEditText.getText().toString().trim();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.LOGIN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -179,7 +179,7 @@ public class LoginActivity extends AppCompatActivity {
     private void saveUserType(String userType) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(Config.KEY_USERTYPE, userType);
+        editor.putString(Config.SP_USERTYPE, userType);
         editor.apply();
     }
 

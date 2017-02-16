@@ -1,5 +1,6 @@
 package technologies.troubleshoot.easytution;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -136,20 +138,19 @@ public class TeacherPersonalInfo extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                        builder1.setMessage("Successfully Updated");
-                        builder1.setCancelable(true);
+                        final Dialog dialog = new Dialog(getContext());
+                        dialog.setContentView(R.layout.custom_alert_dialog_layout_updated);
 
-                        builder1.setPositiveButton(
-                                "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
+                        Button dialogButton = (Button) dialog.findViewById(R.id.dialog_updated_btn_id);
+                        // if button is clicked, close the custom_alert_dialog_layout_news_feed dialog
+                        dialogButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
 
-                        AlertDialog alert11 = builder1.create();
-                        alert11.show();
+                        dialog.show();
 
                     }
                 },

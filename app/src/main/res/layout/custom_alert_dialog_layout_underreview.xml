@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="200dp"
+    android:minWidth="300dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SUCCESS"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:background="@color/colorPrimaryDark"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="You have posts that are currently being reviewed"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <Button
+        android:id="@+id/dialog_btn_on_post_id"
+        android:padding="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:background="@color/editBtnBackGround"
+        android:layout_gravity="center"/>
+
+
+</LinearLayout>
