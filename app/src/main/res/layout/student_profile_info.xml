@@ -31,15 +31,27 @@
                 android:text="Id Card : "
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/student_id_card_image_view_id"
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="200dp"
-                android:layout_weight="70"
-                android:contentDescription="Id card of student"
-                android:src="@drawable/id_card" />
+                android:layout_weight="70">
+
+                <ImageView
+                    android:id="@+id/student_id_card_image_view_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/id_card"/>
+
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_backup_black_48dp"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -77,7 +89,7 @@
 
         <Button
             android:id="@+id/save_student_info_btn_id"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_margin="15dp"

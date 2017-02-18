@@ -137,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:background="@color/saveBtnBackground"
+            android:background="@drawable/post_button_background"
             android:padding="10dp"
             android:text="@string/student_post_btn"
             android:textColor="#fff"
