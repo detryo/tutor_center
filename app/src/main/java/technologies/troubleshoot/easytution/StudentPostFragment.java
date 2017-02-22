@@ -61,6 +61,8 @@ public class StudentPostFragment extends Fragment {
     public static String ADDRESS = "address";
     public static String SALARY = "salary";
 
+    private static final String TAG_JOB_FEED_FRAGMENT = "JOB_FEED_FRAGMENT";
+
     CalendarView calendar;
     Spinner categorySpinner, classSpinner, tutorGenderSpinner, numOfDaysSpinner;
     ArrayList categoryListSpinner, classListSpinner;
@@ -336,12 +338,15 @@ public class StudentPostFragment extends Fragment {
                         dialog.setContentView(R.layout.custom_alert_dialog_layout_underreview
                         );
 
+                        dialog.setCancelable(false);
                         Button dialogButton = (Button) dialog.findViewById(R.id.dialog_btn_on_post_id);
                         // if button is clicked, close the custom_alert_dialog_layout_news_feed dialog
                         dialogButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 dialog.dismiss();
+                                getFragmentManager().beginTransaction().replace(R.id.content_news_feed, new JobFeedFragment(), TAG_JOB_FEED_FRAGMENT)
+                                        .commit();
                             }
                         });
 
