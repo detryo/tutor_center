@@ -31,24 +31,12 @@
                 android:text="Your ID Card : "
                 android:textStyle="bold" />
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_weight="70">
-
                 <ImageView
                     android:id="@+id/student_id_card_image_view_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="70"
                     android:src="@drawable/id_card"/>
-
-                <ImageView
-                    android:layout_centerInParent="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_backup_black_48dp"/>
-
-            </RelativeLayout>
 
         </LinearLayout>
 

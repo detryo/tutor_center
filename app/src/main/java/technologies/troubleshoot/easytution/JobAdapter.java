@@ -109,6 +109,9 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
         public JobAdapterHolder(View listItemView) {
             super(listItemView);
 
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+            String userType = preferences.getString(Config.SP_USERTYPE, "");
+
             // Finding  all the View in activity_news_layout.xml with the ID and
             // assigning them to the corresponding view objects
             userImage = (ImageView) listItemView.findViewById(R.id.user_pro_pic_id);
@@ -130,6 +133,16 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
             location = (TextView) listItemView.findViewById(R.id.location_job_feed_id);
             additionalInfo = (TextView) listItemView.findViewById(R.id.additional_info_job_feed_id);
             interestBtn = (Button) listItemView.findViewById(R.id.interest_btn_id);
+
+            if (userType.equals("student")) {
+
+                interestBtn.setVisibility(View.GONE);
+
+            } else if (userType.equals("teacher")) {
+
+                interestBtn.setVisibility(View.VISIBLE);
+
+            }
 
             interestBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
