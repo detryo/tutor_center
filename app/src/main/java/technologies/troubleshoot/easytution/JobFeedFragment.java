@@ -39,7 +39,7 @@ public class JobFeedFragment extends Fragment {
 
     public static final String JSON_ARRAY = "job_post";
     public static String STATUS_TIME = "date_time";
-    public static String POST_ID = "post_id";
+    public static String POST_ID = "id";
     public static String ADDITIONAL_INFO = "content";
     public static String DATE_TO_START = "date_to_start";
     public static String ADDRESS = "address";

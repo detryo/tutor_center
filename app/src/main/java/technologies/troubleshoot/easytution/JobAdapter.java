@@ -2,8 +2,10 @@ package technologies.troubleshoot.easytution;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,7 +34,6 @@ import java.util.Map;
 
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder> {
 
-    private static final String INTERESTED_URL = "http://tuition.troubleshoot-tech.com/interestedList.php";
     public static final String USER_EMAIL = "email";
     public static final String USER_NAME = "username";
     public static final String POST_ID = "post_id";
@@ -109,6 +110,9 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
         public JobAdapterHolder(View listItemView) {
             super(listItemView);
 
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+            String userType = preferences.getString(Config.SP_USERTYPE, "");
+
             // Finding  all the View in activity_news_layout.xml with the ID and
             // assigning them to the corresponding view objects
             userImage = (ImageView) listItemView.findViewById(R.id.user_pro_pic_id);
@@ -130,6 +134,16 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
             location = (TextView) listItemView.findViewById(R.id.location_job_feed_id);
             additionalInfo = (TextView) listItemView.findViewById(R.id.additional_info_job_feed_id);
             interestBtn = (Button) listItemView.findViewById(R.id.interest_btn_id);
+
+            if (userType.equals("student")) {
+
+                interestBtn.setVisibility(View.GONE);
+
+            } else if (userType.equals("teacher")) {
+
+                interestBtn.setVisibility(View.VISIBLE);
+
+            }
 
             interestBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -177,34 +191,51 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobAdapterHolder
 
         private void showInterest(final String email, final String post_id) {
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, INTERESTED_URL,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.INTERESTED_URL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
 
-                            // custom_alert_dialog_layout_news_feed dialog
-                            final Dialog dialog = new Dialog(context);
-                            dialog.setContentView(R.layout.custom_alert_dialog_layout_news_feed);
+                            if (response.trim().equals("success")) {
+                                final Dialog dialog = new Dialog(context);
+                                dialog.setContentView(R.layout.custom_alert_dialog_layout_news_feed);
 
-                            Button dialogButton = (Button) dialog.findViewById(R.id.dialog_btn_id);
-                            // if button is clicked, close the custom_alert_dialog_layout_news_feed dialog
-                            dialogButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-                                }
-                            });
+                                Button dialogButton = (Button) dialog.findViewById(R.id.dialog_btn_id);
+                                // if button is clicked, close the custom_alert_dialog_layout_news_feed dialog
+                                dialogButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                    }
+                                });
 
-                            dialog.show();
+                                dialog.show();
+
+                            } else {
+                                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                                builder1.setMessage("You have already applied on this job");
+                                builder1.setCancelable(true);
+
+                                builder1.setPositiveButton(
+                                        "OK",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
+
+                                AlertDialog alert11 = builder1.create();
+                                alert11.show();
+
+                            }
 
                         }
+
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-
-                            Toast.makeText(context, "No Internet Connection", Toast.LENGTH_LONG).show();
-
+                            Toast.makeText(context, " " + error, Toast.LENGTH_LONG).show();
                         }
                     }) {
                 @Override
