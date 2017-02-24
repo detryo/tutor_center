@@ -192,7 +192,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         } else if (id == R.id.nav_phone_admin_id) {
 
-            String phone = "01521498113";
+            String phone = "01707703703";
 
             Intent callIntent = new Intent(Intent.ACTION_CALL);
             callIntent.setData(Uri.parse("tel:" + phone));
@@ -202,6 +202,12 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_news_feed, new PaymentFragment())
+                    .commit();
+
+        } else if(id == R.id.nav_about_id){
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_news_feed, new AboutFragment())
                     .commit();
 
         }

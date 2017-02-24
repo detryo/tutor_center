@@ -3,6 +3,7 @@ package technologies.troubleshoot.easytution;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -207,13 +208,18 @@ public class LoginActivity extends AppCompatActivity {
 
         } else if (view == forgotPassword){
 
-            forgotPassword.setVisibility(View.GONE);
+            /*forgotPassword.setVisibility(View.GONE);
             passwordHolder.setVisibility(View.GONE);
             loginBtn.setVisibility(View.GONE);
             backBtn.setVisibility(View.VISIBLE);
             sendPassword.setVisibility(View.VISIBLE);
             idEditText.setHint("Enter Email");
-            signupBtns.setVisibility(View.GONE);
+            signupBtns.setVisibility(View.GONE);*/
+
+            String url = "http://tutorcenter-bd.com/password/reset";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
 
         } else if (view == backBtn){
 
@@ -304,7 +310,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void recoverUserPassword() {
-
+        email = idEditText.getText().toString().trim();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.RECOVER_PASSWORD_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -368,7 +374,7 @@ public class LoginActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 /*params.put(KEY_EMAIL, idEditText.getText().toString().trim());*/
-                params.put(KEY_EMAIL, "student@student.com");
+                params.put(KEY_EMAIL, email);
                 return params;
             }
 
