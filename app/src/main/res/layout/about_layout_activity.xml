@@ -10,16 +10,22 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Troubleshoot "
+        android:text="Troubleshoot Technologies"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
+    <ImageView
+        android:id="@+id/ttimage"
+        android:layout_width="140dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ttlogo" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:text="chnologies started it's journey With a bunch of dedicated tech person in 2016 to deliver digital services. We deliver Home &amp; Office Automation System Design, Installation; Electrical Safety System Design &amp; Installation; IT Infrastructure Planing &amp; Implementation and many others."
+        android:text="Troubleshoot Technologies started it's journey With a bunch of dedicated tech person in 2016 to deliver digital services. We deliver Home &amp; Office Automation System Design, Installation; Electrical Safety System Design &amp; Installation; IT Infrastructure Planing &amp; Implementation and many others."
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
     <TextView

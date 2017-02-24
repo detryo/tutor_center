@@ -36,6 +36,7 @@ public class AboutFragment extends Fragment {
                 startActivity(i);
             }
         });
+        ((DashBoard) getActivity()).setActionBarTitle("About");
 
         return rootView;
     }
