@@ -48,6 +48,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
     String userType = "", userImageUrl;
     private Bitmap bitmap;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             startActivity(intent);
         } else {
 
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             userType = preferences.getString(Config.SP_USERTYPE, "");
 
         }
@@ -226,9 +227,9 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         @Override
         protected Void doInBackground(Void... params) {
 
-            String email;
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            email = preferences.getString(Config.SP_EMAIL, "");
+            final String email;
+            final SharedPreferences[] preferences = {PreferenceManager.getDefaultSharedPreferences(getApplicationContext())};
+            email = preferences[0].getString(Config.SP_EMAIL, "");
 
             String url = Config.DATA_URL + email;
             StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
@@ -244,6 +245,14 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+
+                            preferences[0] = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.user_type_text_view_id)).setText(preferences[0].getString(Config.SP_USERTYPE, ""));
+
+                            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.user_email_text_view_id)).setText(preferences[0].getString(Config.SP_EMAIL, ""));
+
                             AlertDialog.Builder builder1 = new AlertDialog.Builder(DashBoard.this);
                             builder1.setMessage("No Internet Connection");
                             builder1.setCancelable(true);
