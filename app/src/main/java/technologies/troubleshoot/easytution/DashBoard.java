@@ -18,6 +18,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,13 +47,15 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
     private static final String USER_IMAGE = "profile_pic";
     private static final String TAG_JOB_FEED_FRAGMENT = "JOB_FEED_FRAGMENT";
 
-    String userType = "", userImageUrl;
+    String userType = "";
     private Bitmap bitmap;
     SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        preferences = getSharedPreferences("informme", 0);
 
         //see if the user is logged in shared memory
         //then redirect to dashboard
@@ -61,12 +64,9 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             startActivity(intent);
         } else {
 
-            preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             userType = preferences.getString(Config.SP_USERTYPE, "");
 
         }
-
-        getUserDetail();
 
         //Default fragment to be called on app start.
         getSupportFragmentManager().beginTransaction().add(R.id.content_news_feed, new JobFeedFragment(), TAG_JOB_FEED_FRAGMENT)
@@ -84,6 +84,13 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.user_type_text_view_id)).setText(preferences.getString(Config.SP_USERTYPE, ""));
+
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.user_email_text_view_id)).setText(preferences.getString(Config.SP_EMAIL, ""));
+
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.text_View_User_Name_id)).setText(preferences.getString(Config.SP_NAME, ""));
+
         if (userType.equals("teacher"))
             navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(false);
         else
@@ -107,13 +114,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
-    }
-
-    private void getUserDetail() {
-
-        FetchUserDetail fetchUserDetail = new FetchUserDetail();
-        fetchUserDetail.execute();
-
     }
 
     @Override
@@ -171,15 +171,14 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
         } else if (id == R.id.nav_log_out_id) {
 
-            SharedPreferences sp = getSharedPreferences("informme", 0);
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putBoolean("isLoggedIn", false);
-            editor.apply();
+            preferences = getSharedPreferences("informme", 0);
+            SharedPreferences.Editor editor = preferences.edit();
 
-            /*SharedPreferences preferences = getSharedPreferences(Config.SP_USERTYPE, 0);
-            SharedPreferences.Editor editorUserType = preferences.edit();
-            editorUserType.clear();
-            editorUserType.apply();*/
+            editor.putBoolean("isLoggedIn", false);
+            editor.putString(Config.SP_EMAIL, "");
+            editor.putString(Config.SP_NAME, "");
+            editor.putString(Config.SP_USERTYPE, "");
+            editor.apply();
 
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -216,104 +215,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    class FetchUserDetail extends AsyncTask<Void, Void, Void> {
-
-        public FetchUserDetail() {
-            super();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-
-            final String email;
-            final SharedPreferences[] preferences = {PreferenceManager.getDefaultSharedPreferences(getApplicationContext())};
-            email = preferences[0].getString(Config.SP_EMAIL, "");
-
-            String url = Config.DATA_URL + email;
-            StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        showJSON(response);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-                            preferences[0] = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-                            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-                            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.user_type_text_view_id)).setText(preferences[0].getString(Config.SP_USERTYPE, ""));
-
-                            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.user_email_text_view_id)).setText(preferences[0].getString(Config.SP_EMAIL, ""));
-
-                            AlertDialog.Builder builder1 = new AlertDialog.Builder(DashBoard.this);
-                            builder1.setMessage("No Internet Connection");
-                            builder1.setCancelable(true);
-
-                            builder1.setPositiveButton(
-                                    "OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    });
-
-                            AlertDialog alert11 = builder1.create();
-                            alert11.show();
-
-                        }
-                    });
-
-            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-            requestQueue.add(stringRequest);
-
-            return null;
-        }
-
-        private void showJSON(String response) throws IOException {
-            String name = "";
-            String email = "";
-
-            try {
-                JSONObject jsonObject = new JSONObject(response);
-                JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
-                JSONObject json = result.getJSONObject(0);
-                name = json.getString(Config.KEY_NAME);
-                userType = json.getString(Config.KEY_USERTYPE);
-                userImageUrl = json.getString(USER_IMAGE);
-                email = json.getString((USER_EMAIL));
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            //set the username -- that is fetched from database
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.text_View_User_Name_id)).setText(name);
-            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.user_email_text_view_id)).setText(email);
-            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.user_type_text_view_id)).setText(userType);
-
-            if(!userImageUrl.equals(""))
-            Picasso.with(DashBoard.this).load(userImageUrl).into(((ImageView) navigationView.getHeaderView(0).findViewById(R.id.user_Image_View_id)));
-
-            if (userType.equals("teacher"))
-                navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(false);
-            else
-                navigationView.getMenu().findItem(R.id.nav_new_post_id).setVisible(true);
-
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(DashBoard.this);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(Config.SP_USERTYPE, userType);
-            editor.apply();
-
-        }
-
     }
 
     @Override
@@ -372,7 +273,7 @@ String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
     public String getStringImage(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bmp.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;

@@ -127,7 +127,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
                                             dialog.cancel();
-                                            openProfile(email);
+                                            openProfile(email, username);
                                         }
                                     });
 
@@ -256,19 +256,29 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
     }
 
-    private void openProfile(String email) {
+    private void openProfile(String email, String userName) {
 
         Intent intent = new Intent(this, DashBoard.class);
         saveUserEmail(email);
+        saveUserName(userName);
         finish();
         startActivity(intent);
     }
 
     //This method saves user Email address on SharedPreference, for later use on other activity.
     private void saveUserEmail(String email) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);*/
+        SharedPreferences preferences = getSharedPreferences("informme", 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(Config.SP_EMAIL, email);
+        editor.apply();
+    }
+
+    private void saveUserName(String userName) {
+        /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);*/
+        SharedPreferences preferences = getSharedPreferences("informme", 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Config.SP_NAME, userName);
         editor.apply();
     }
 

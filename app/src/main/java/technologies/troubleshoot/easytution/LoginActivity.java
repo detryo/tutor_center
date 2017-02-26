@@ -11,6 +11,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -93,19 +94,19 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         if (response.trim().equals("success")) {
 
-                            FetchUserDetail fetchUserDetail = new FetchUserDetail();
-                            fetchUserDetail.execute();
+                            userDetail();
 
                             SharedPreferences sp = getSharedPreferences("informme", 0);
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putBoolean("isLoggedIn", true);
                             editor.apply();
 
+                            openProfile();
                             progressBar.setVisibility(View.GONE);
                             loginBtn.setVisibility(View.VISIBLE);
 
-                            openProfile();
                             finish();
+
                         } else {
                             progressBar.setVisibility(View.GONE);
                             loginBtn.setVisibility(View.VISIBLE);
@@ -166,11 +167,13 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DashBoard.class);
         saveUserEmail();
         startActivity(intent);
+        android.os.SystemClock.sleep(1000);
     }
 
     //This method saves user Email address on SharedPreference, for later use on other activity.
     private void saveUserEmail() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);*/
+        SharedPreferences preferences = getSharedPreferences("informme", 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(Config.SP_EMAIL, email);
         editor.apply();
@@ -178,10 +181,21 @@ public class LoginActivity extends AppCompatActivity {
 
     //This method saves user Type (Student/Teacher)on SharedPreference, for later use on other activity/fragment.
     private void saveUserType(String userType) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);*/
+        SharedPreferences preferences = getSharedPreferences("informme", 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(Config.SP_USERTYPE, userType);
         editor.apply();
+
+    }
+
+    private void saveUserName(String userName) {
+        /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);*/
+        SharedPreferences preferences = getSharedPreferences("informme", 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Config.SP_NAME, userName);
+        editor.apply();
+
     }
 
     public void btnClicked(View view) {
@@ -245,67 +259,58 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    class FetchUserDetail extends AsyncTask<Void, Void, Void> {
+    private void showJSON(String response) throws IOException {
 
-        public FetchUserDetail() {
-            super();
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
+            JSONObject json = result.getJSONObject(0);
+            saveUserType(json.getString(Config.KEY_USERTYPE));
+            saveUserName(json.getString(Config.KEY_NAME));
+            saveUserEmail();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        @Override
-        protected Void doInBackground(Void... params) {
+    }
 
-            String url = Config.DATA_URL + email;
-            StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        showJSON(response);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+    private void userDetail(){
+
+        String url = Config.DATA_URL + email;
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    showJSON(response);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
-                            builder1.setMessage("No Internet Connection");
-                            builder1.setCancelable(true);
-
-                            builder1.setPositiveButton(
-                                    "OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    });
-
-                            AlertDialog alert11 = builder1.create();
-                            alert11.show();
-
-                        }
-                    });
-
-            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-            requestQueue.add(stringRequest);
-
-            return null;
-        }
-
-        private void showJSON(String response) throws IOException {
-
-
-            try {
-                JSONObject jsonObject = new JSONObject(response);
-                JSONArray result = jsonObject.getJSONArray(Config.JSON_ARRAY);
-                JSONObject json = result.getJSONObject(0);
-                saveUserType(json.getString(Config.KEY_USERTYPE));
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
+                        builder1.setMessage("No Internet Connection");
+                        builder1.setCancelable(true);
 
-        }
+                        builder1.setPositiveButton(
+                                "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
 
     }
 
