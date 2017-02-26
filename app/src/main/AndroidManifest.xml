@@ -14,16 +14,20 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/LoginTheme">
+            android:theme="@style/LoginTheme"
+            android:screenOrientation="portrait">
+
 
         </activity>
         <activity
             android:name=".SignupActivity"
-            android:theme="@style/SignupTheme" />
+            android:theme="@style/SignupTheme"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DashBoard"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
