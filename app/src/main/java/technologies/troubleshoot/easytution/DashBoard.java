@@ -62,6 +62,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         if (!(getSharedPreferences("informme", 0).getBoolean("isLoggedIn", false))) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
         } else {
 
             userType = preferences.getString(Config.SP_USERTYPE, "");
