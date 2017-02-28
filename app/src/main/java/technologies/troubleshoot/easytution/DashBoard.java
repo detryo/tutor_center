@@ -173,7 +173,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
 
             preferences = getSharedPreferences("informme", 0);
             SharedPreferences.Editor editor = preferences.edit();
-
             editor.putBoolean("isLoggedIn", false);
             editor.putString(Config.SP_EMAIL, "");
             editor.putString(Config.SP_NAME, "");
