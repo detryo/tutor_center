@@ -16,12 +16,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -47,11 +49,11 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     public static final String KEY_PHONE = "phone";
 
     Button createAccountBtn;
-    EditText userEditText, emailEditText, passwordEditText, reEnteredPassEditText, phoneNumber,instituteName;
+    EditText userEditText, emailEditText, passwordEditText, reEnteredPassEditText, phoneNumber, instituteName;
     RequestQueue requestQueue;
     Spinner gender;
     ArrayAdapter spinnerAdapter;
-    String user_gender, user_type;
+    String user_gender = "", user_type;
     ProgressBar progressBar;
 
     @Override
@@ -86,14 +88,14 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-               if(i != 0)
-                user_gender = (String) adapterView.getItemAtPosition(i);
+                if (i != 0)
+                    user_gender = (String) adapterView.getItemAtPosition(i);
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(SignupActivity.this, "Please select gender", Toast.LENGTH_LONG).show();
+                //Toast.makeText(SignupActivity.this, "Please select gender", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -181,8 +183,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         alert11.show();
 
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -200,6 +201,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
     @Override
     public void onClick(View v) {
         if (v == createAccountBtn) {
@@ -215,38 +217,58 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             String phone = phoneNumber.getText().toString().trim();
 
             //condition for validation error message;
-            if (username.trim().equals("")){
+            if (username.trim().equals("")) {
+
                 userEditText.setError("username required!");
-            }
-            else if(!isValidEmaillId(email.toString().trim())){
-                //Toast.makeText(getApplicationContext(), "Valid Email Address.", Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getApplicationContext(), "InValid Email Address.", Toast.LENGTH_SHORT).show();
+                createAccountBtn.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
+            } else if (!isValidEmaillId(email.toString().trim())) {
+
                 emailEditText.setError("Invalid Email Address");
-            }
-            else if(email.trim().equals("")){
+                createAccountBtn.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
+            } else if (email.trim().equals("")) {
+
                 emailEditText.setError("email is missing!");
-                //Toast.makeText(SignupActivity.this, "email is missing!", Toast.LENGTH_SHORT).show();
-            }
-            else if(password.trim().equals("") || password.length()<5){
+                createAccountBtn.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
+            } else if (password.trim().equals("") || password.length() < 5) {
+
                 passwordEditText.setError("password length should be greater than 4 or can't be blank");
-                //Toast.makeText(SignupActivity.this, "password length should be greater than 4 or can't be blank", Toast.LENGTH_SHORT).show();
-            }
-            else if (rePass.trim().equals("")){
+                createAccountBtn.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
+            } else if (rePass.trim().equals("")) {
+
                 reEnteredPassEditText.setError("can't be blank");
-                //Toast.makeText(SignupActivity.this, "can't be blank", Toast.LENGTH_SHORT).show();
-            }
-            else if(!password.equals(rePass)){
+                createAccountBtn.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
+            } else if (!password.equals(rePass)) {
+
                 reEnteredPassEditText.setError("password doesn't matched");
-                //Toast.makeText(SignupActivity.this, "Password Doesn't Match", Toast.LENGTH_LONG).show();
-            }
-            else
+                createAccountBtn.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
+            } else if (user_gender.equals("")) {
+
+                createAccountBtn.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(SignupActivity.this, "Please select gender", Toast.LENGTH_LONG).show();
+
+            } else
+
                 registerUser(username, password, email, institute, phone, user_type, user_gender);
+
         }
 
     }
 
     //function for email validation;
-    private boolean isValidEmaillId(String email){
+    private boolean isValidEmaillId(String email) {
 
         return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
                 + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
