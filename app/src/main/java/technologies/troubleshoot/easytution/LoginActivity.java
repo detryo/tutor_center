@@ -4,22 +4,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -28,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -133,7 +126,8 @@ public class LoginActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         loginBtn.setVisibility(View.VISIBLE);
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
-                        builder1.setMessage("No Connection");
+                        /*builder1.setMessage("No Connection");*/
+                        builder1.setMessage("Error : " + error);
                         builder1.setCancelable(true);
 
                         builder1.setPositiveButton(

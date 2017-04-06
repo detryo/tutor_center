@@ -111,7 +111,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onResponse(String response) {
 
-                        if (response.trim().equals("success")) {
+                        if (!response.trim().equals("failure")) {
                             SharedPreferences sp = getSharedPreferences("informme", 0);
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putBoolean("isLoggedIn", true);
@@ -168,7 +168,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         progressBar.setVisibility(View.GONE);
 
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(SignupActivity.this);
-                        builder1.setMessage("No Internet Connection");
+                        /*builder1.setMessage("No Internet Connection");*/
+                        builder1.setMessage("Error : " + error);
                         builder1.setCancelable(true);
 
                         builder1.setPositiveButton(
