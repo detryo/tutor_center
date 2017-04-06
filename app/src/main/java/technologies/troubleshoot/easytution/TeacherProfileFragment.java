@@ -9,13 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.net.InetAddress;
-
 /**
  * Created by kaizer on 2/6/17.
  */
-
-
 
 public class TeacherProfileFragment extends Fragment{
 
